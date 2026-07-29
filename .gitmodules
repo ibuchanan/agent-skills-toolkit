@@ -7,3 +7,6 @@
 [submodule "vendor/knowledge-catalog"]
 	path = vendor/knowledge-catalog
 	url = https://github.com/GoogleCloudPlatform/knowledge-catalog.git
+[submodule "vendor/forge-rovo-metaprompting"]
+	path = vendor/forge-rovo-metaprompting
+	url = https://github.com/ibuchanan/forge-rovo-metaprompting.git
