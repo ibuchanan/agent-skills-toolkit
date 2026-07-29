@@ -9,12 +9,14 @@
     "Dataplex",
     "evals",
     "frontmatter",
+    "NFKC",
     "ORCID",
     "ORCIDs",
     "orcid",
     "projen",
     "promptfoo",
     "promptlint",
+    "realpath",
     "rovo"
   ]
 }

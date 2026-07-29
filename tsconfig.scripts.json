@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./scripts",
+    "rootDir": "./src/scripts",
+    "module": "esnext",
+    "declaration": false
+  },
+  "include": ["src/scripts"],
+  "exclude": ["test", "node_modules"]
+}
