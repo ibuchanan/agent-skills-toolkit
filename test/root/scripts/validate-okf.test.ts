@@ -1,10 +1,11 @@
-describe("validate-okf script"
+import { describe } from "vitest";
 
-describe("valid OKF frontmatter"
+import { defineSkippedFrontmatterContract } from "./shared/frontmatter-contract";
 
-describe("valid frontmatter"
-it("parses valid frontmatter"
-it("rejects missing frontmatter"
-it("rejects unclosed frontmatter"
-it("rejects invalid yaml"
-it("rejects non-mapping frontmatter"
+describe("validate-okf script", () => {
+  describe("valid OKF frontmatter", () => {
+    describe("valid frontmatter", () => {
+      defineSkippedFrontmatterContract();
+    });
+  });
+});

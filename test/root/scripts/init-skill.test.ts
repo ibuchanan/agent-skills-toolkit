@@ -1,23 +1,30 @@
-describe("init-skill script"
+import { describe, it } from "vitest";
 
-describe("skill"
-it("creates skill directory"
-it("initializes valid SKILL.md"
+describe("init-skill script", () => {
+  describe("skill", () => {
+    it.skip("creates skill directory", () => {});
+    it.skip("initializes valid SKILL.md", () => {});
+  });
 
-describe("scripts"
-it("creates subdirectory: scripts"
-it("initializes valid todo.sh"
+  describe("scripts", () => {
+    it.skip("creates subdirectory: scripts", () => {});
+    it.skip("initializes valid todo.sh", () => {});
+  });
 
-describe("assets"
-it("creates subdirectory: assets"
-it("initializes valid todo.md"
+  describe("assets", () => {
+    it.skip("creates subdirectory: assets", () => {});
+    it.skip("initializes valid todo.md", () => {});
+  });
 
-describe("evals"
-it("creates subdirectory: evals"
-it("initializes promptfoo eval.yaml"
-it("initializes README.md about evals"
+  describe("evals", () => {
+    it.skip("creates subdirectory: evals", () => {});
+    it.skip("initializes promptfoo eval.yaml", () => {});
+    it.skip("initializes README.md about evals", () => {});
+  });
 
-describe("references"
-it("initializes valid CITATION.cff"
-it("creates subdirectory: references"
-it("initializes valid todo.md"
+  describe("references", () => {
+    it.skip("initializes valid CITATION.cff", () => {});
+    it.skip("creates subdirectory: references", () => {});
+    it.skip("initializes valid todo.md", () => {});
+  });
+});
