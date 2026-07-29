@@ -1,0 +1,9 @@
+[submodule "vendor/agentskills"]
+	path = vendor/agentskills
+	url = https://github.com/agentskills/agentskills.git
+[submodule "vendor/citation-file-format"]
+	path = vendor/citation-file-format
+	url = https://github.com/citation-file-format/citation-file-format.git
+[submodule "vendor/knowledge-catalog"]
+	path = vendor/knowledge-catalog
+	url = https://github.com/GoogleCloudPlatform/knowledge-catalog.git

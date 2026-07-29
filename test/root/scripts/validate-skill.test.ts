@@ -1,0 +1,36 @@
+describe("validate-skill script"
+
+describe("valid SKILL.md"
+it("reports a missing SKILL.md"
+it("prefers uppercase SKILL.md over lowercase skill.md"
+it("accepts lowercase skill.md when uppercase is missing"
+
+describe("valid SKILL.md frontmatter"
+
+describe("valid frontmatter"
+it("parses valid frontmatter"
+it("rejects missing frontmatter"
+it("rejects unclosed frontmatter"
+it("rejects invalid yaml"
+it("rejects non-mapping frontmatter"
+
+describe("valid SKILL.md fields: name"
+it("accepts i18n lowercase names"
+it("accepts NFKC-normalized matching names"
+it("rejects uppercase in names"
+it("rejects i18n uppercase names"
+it("rejects names that are too long"
+it("rejects names with leading hyphens"
+it("rejects names with consecutive hyphens"
+it("rejects names with invalid characters"
+it("rejects directory name mismatch"
+
+describe("valid SKILL.md fields: description"
+it("rejects descriptions that are too long"
+
+describe("valid SKILL.md fields: other"
+it("accepts allowed-tools"
+it("accepts compatibility"
+it("rejects compatibility that is too long"
+it("rejects unexpected fields"
+it("reads valid skill properties including metadata and allowed-tools"
