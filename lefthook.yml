@@ -5,15 +5,14 @@ output:
   - failure
 
 lint:
+  parallel: true
   commands:
-    prelint:
-      run: npm run lint:prelint
     biome:
-      run: npm run lint:check
-    forge:
-      run: npm run lint:forge
-    typecheck:
-      run: npm run typecheck
+      run: npm run lint:biome
+    markdown:
+      run: npm run lint:markdown
+    spell:
+      run: npm run lint:spell
 
 pre-commit:
   parallel: true
