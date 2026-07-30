@@ -17,11 +17,14 @@
     "orcid",
     "projen",
     "promptfoo",
+    "promptfooconfig",
     "promptlint",
     "realpath",
     "rovo",
+    "Subdirs",
     "Valliani",
     "worktree",
+    "worktrees",
     "Zentennial"
   ]
 }
