@@ -105,61 +105,66 @@ export async function validateSkill(
   }
 
   // Validate required fields
-  if (!fm.name || typeof fm.name !== "string") {
+  const name = fm["name"];
+  const description = fm["description"];
+
+  if (!name || typeof name !== "string") {
     throw new ValidationError("Frontmatter must include 'name' field (string)");
   }
 
-  if (!fm.description || typeof fm.description !== "string") {
+  if (!description || typeof description !== "string") {
     throw new ValidationError(
       "Frontmatter must include 'description' field (string)",
     );
   }
 
   // Validate name
-  const nameValidation = validateSkillName(fm.name);
+  const nameValidation = validateSkillName(name);
   if (!nameValidation.valid) {
     throw new ValidationError(nameValidation.error || "Invalid skill name");
   }
 
   // Validate name matches directory
   const dirName = basename(skillDir);
-  if (!validateSkillNameMatches(fm.name, dirName)) {
+  if (!validateSkillNameMatches(name, dirName)) {
     throw new ValidationError(
-      `Skill name '${fm.name}' does not match directory name '${dirName}'`,
+      `Skill name '${name}' does not match directory name '${dirName}'`,
     );
   }
 
   // Validate description
-  const descValidation = validateDescriptionLength(fm.description);
+  const descValidation = validateDescriptionLength(description);
   if (!descValidation.valid) {
     throw new ValidationError(descValidation.error || "Invalid description");
   }
 
   // Validate optional fields
   let allowedTools: string[] | undefined;
-  if (fm["allowed-tools"] !== undefined) {
-    if (!Array.isArray(fm["allowed-tools"])) {
+  const allowedToolsValue = fm["allowed-tools"];
+  if (allowedToolsValue !== undefined) {
+    if (!Array.isArray(allowedToolsValue)) {
       throw new ValidationError("'allowed-tools' must be an array");
     }
-    allowedTools = fm["allowed-tools"].map(String);
+    allowedTools = allowedToolsValue.map(String);
   }
 
   let compatibility: string | undefined;
-  if (fm.compatibility !== undefined) {
-    if (typeof fm.compatibility !== "string") {
+  const compatibilityValue = fm["compatibility"];
+  if (compatibilityValue !== undefined) {
+    if (typeof compatibilityValue !== "string") {
       throw new ValidationError("'compatibility' must be a string");
     }
-    if (fm.compatibility.length > 256) {
+    if (compatibilityValue.length > 256) {
       throw new ValidationError(
-        `'compatibility' exceeds 256 character limit (${fm.compatibility.length} characters)`,
+        `'compatibility' exceeds 256 character limit (${compatibilityValue.length} characters)`,
       );
     }
-    compatibility = fm.compatibility;
+    compatibility = compatibilityValue;
   }
 
   return {
-    name: fm.name,
-    description: fm.description,
+    name,
+    description,
     ...(allowedTools && { allowedTools }),
     ...(compatibility && { compatibility }),
   };

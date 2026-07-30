@@ -36,7 +36,10 @@ class YamlParser {
   }
 
   private skipEmpty(lineIdx: number): number {
-    while (lineIdx < this.lines.length && this.lines[lineIdx].trim() === "") {
+    while (
+      lineIdx < this.lines.length &&
+      (this.lines[lineIdx]?.trim() ?? "") === ""
+    ) {
       lineIdx++;
     }
     return lineIdx;
@@ -50,6 +53,10 @@ class YamlParser {
     }
 
     const line = this.lines[lineIdx];
+    if (!line) {
+      return { value: null, nextLineIdx: lineIdx + 1 };
+    }
+
     const indent = this.getIndent(line);
     const content = line.trim();
 
@@ -69,10 +76,19 @@ class YamlParser {
 
   private parseMapping(lineIdx: number, baseIndent: number): ParseResult {
     const result: Record<string, unknown> = {};
-    const firstIndent = this.getIndent(this.lines[lineIdx]);
+    const firstLine = this.lines[lineIdx];
+    if (!firstLine) {
+      return { value: result, nextLineIdx: lineIdx };
+    }
+    const firstIndent = this.getIndent(firstLine);
 
     while (lineIdx < this.lines.length) {
       const line = this.lines[lineIdx];
+      if (!line) {
+        lineIdx++;
+        continue;
+      }
+
       const indent = this.getIndent(line);
       const content = line.trim();
 
@@ -112,10 +128,19 @@ class YamlParser {
 
   private parseSequence(lineIdx: number, baseIndent: number): ParseResult {
     const result: unknown[] = [];
-    const firstIndent = this.getIndent(this.lines[lineIdx]);
+    const firstLine = this.lines[lineIdx];
+    if (!firstLine) {
+      return { value: result, nextLineIdx: lineIdx };
+    }
+    const firstIndent = this.getIndent(firstLine);
 
     while (lineIdx < this.lines.length) {
       const line = this.lines[lineIdx];
+      if (!line) {
+        lineIdx++;
+        continue;
+      }
+
       const indent = this.getIndent(line);
       const content = line.trim();
 

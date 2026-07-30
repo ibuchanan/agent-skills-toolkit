@@ -2,8 +2,8 @@
   "name": "agent-skills-toolkit",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "license": "Apache-2.0",
+  "type": "module",
   "scripts": {
     "build": "npm run build:scripts",
     "build:scripts": "tsc --project tsconfig.scripts.json && chmod +x scripts/*.js",

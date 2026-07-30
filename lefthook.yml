@@ -13,10 +13,17 @@ lint:
       run: npm run lint:markdown
     spell:
       run: npm run lint:spell
+    typecheck:
+      run: npm run typecheck
 
 pre-commit:
   parallel: true
   commands:
+    build:
+      run: npm run build
+    format:
+      run: npm run format
+      stage_fixed: true
     gitleaks:
       run: |
         command -v gitleaks >/dev/null 2>&1 || {
@@ -24,9 +31,6 @@ pre-commit:
           exit 1
         }
         gitleaks git --pre-commit --staged
-    format:
-      run: npm run format
-      stage_fixed: true
 
 pre-push:
   commands:

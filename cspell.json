@@ -5,16 +5,17 @@
   "ignorePaths": ["vendor/**", "node_modules/**", "dist/**", "coverage/**"],
   "words": [
     "agentskills",
+    "alnum",
     "cffconvert",
     "Dataplex",
+    "dedented",
     "evals",
     "frontmatter",
     "Jamil",
     "metaprompting",
     "NFKC",
-    "ORCID",
-    "ORCIDs",
     "orcid",
+    "ORCIDs",
     "projen",
     "promptfoo",
     "promptfooconfig",
@@ -25,6 +26,7 @@
     "Valliani",
     "worktree",
     "worktrees",
-    "Zentennial"
+    "Zentennial",
+    "ΑΒΓΔ"
   ]
 }
