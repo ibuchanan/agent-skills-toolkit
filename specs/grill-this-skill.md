@@ -62,13 +62,73 @@ under `specs/`.
 
 ### Evaluation plan
 
-Every approved specification includes a lean evaluation plan that identifies:
-
-- the behavior or decision an evaluation should distinguish;
-- at least two realistic scenario types, including a near miss when relevant;
-- the evidence source for expected behavior;
-- whether checks can be objective or need human review; and
-- whether additional research is required before evaluation design can proceed.
+- **Behavior to distinguish**:
+  given a skill idea, an existing skill, or an existing specification,
+  does the skill correctly follow its own discovery sequence —
+  inspecting existing context first,
+  resolving the 8 core decisions one at a time,
+  building a lean evaluation plan,
+  recording open items honestly,
+  presenting before publishing —
+  and, critically,
+  does it correctly detect when a specification already exists
+  and ask only about what's stale, missing, or contradictory
+  rather than restarting the full interview?
+- **Design pattern**:
+  Process-leaning — a complex, multi-step discovery workflow,
+  not a single bounded operation.
+  Favor `trajectory:tool-sequence`/`trajectory:step-count` assertions
+  on the interview sequence over a single final-output check;
+  pair with `llm-rubric` for whether the resulting proposed specification
+  is actually well-formed.
+- **Scenario types**:
+  (1) revising an existing spec with one stale or missing section:
+  expect only that section to be questioned,
+  not a full restart of the 8-decision interview
+  (dogfooded twice this session,
+  revising `specs/develop-skill-evals.md` and `specs/describe-skill.md`);
+  (2) no spec exists yet for a skill idea:
+  expect the full one-at-a-time interview across all 8 decisions,
+  ending in a proposed specification where Evaluation plan and References
+  are present, not optional;
+  (3) near miss:
+  a bounded mechanical edit request (a typo fix, a metadata-only change)
+  with no behavior-change implication:
+  expect a decline/no-trigger, per the explicit non-trigger boundary;
+  (4) scope-boundary near miss:
+  the user asks it to write or overwrite the specification file,
+  or to jump to authoring `SKILL.md`/running evaluations,
+  before explicit approval:
+  expect a decline, staying within discovery and proposal only;
+  (5) baseline comparison:
+  the structured one-at-a-time interview
+  vs. an unaided "help me write a skill spec" prompt
+  on the same skill idea —
+  tests whether the interview structure produces a more complete,
+  traceable specification
+  (Evaluation plan and References genuinely present
+  and grounded in discovery, not invented)
+  than unaided rewriting would.
+- **Evidence source**:
+  the actual repository state —
+  the target skill's `SKILL.md` (if one exists),
+  any existing `specs/<skill>.md`, `specs/references/`,
+  and conversation history —
+  is ground truth for what's already known;
+  scenarios must not assume facts the skill couldn't have discovered.
+- **Judging**:
+  sequence correctness
+  (steps followed in order,
+  stale-vs-fresh detection correct,
+  non-trigger and write-before-approval boundaries respected)
+  is objectively checkable per test case,
+  largely via `trajectory:*` assertions on the conversation transcript.
+  The resulting specification's content quality
+  (are the decisions sound,
+  is the Evaluation plan genuinely useful, not just present)
+  needs human or LLM-judge review.
+  The baseline scenario is judged by the completeness/traceability delta
+  between the structured and unaided outputs, not a per-case pass/fail.
 
 The skill does not write Promptfoo artifacts or run evaluations unless the user
 explicitly asks. Detailed evaluation work is handed off to
@@ -76,15 +136,8 @@ explicitly asks. Detailed evaluation work is handed off to
 
 ## Open decisions
 
-An open decision is acceptable only when it records:
-
-- the unanswered question;
-- why it matters;
-- what it blocks: authoring, evaluation design, or later refinement; and
-- the next owner or handoff.
-
-The specification is not ready for authoring when an unresolved decision changes
-the objective, core trigger behavior, or safety boundaries.
+None.
+All core decisions are resolved.
 
 ## References
 
