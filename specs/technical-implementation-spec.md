@@ -7,10 +7,11 @@ Organized by concern to enable consistent implementation across current and futu
 
 ### Runtime & Environment
 
-- **Runtime**: Node.js 24.x (from `package.json` engines field)
-- **Language**: TypeScript, compiled to JavaScript
-- **Execution Model**: Standalone Node.js scripts, no shell scripts
-- **Shell Integration**: Use `zx` library for subprocess composition when needed
+- **Runtime**: Bun (from `package.json` engines field)
+- **Language**: TypeScript, executed directly by Bun (no separate compile step for development)
+- **Execution Model**: Standalone Bun scripts, no shell scripts
+- **Shell Integration**: Use the built-in [Bun Shell](https://bun.sh/docs/runtime/shell) (`Bun.$`) for subprocess composition when needed — a cross-platform, bash-like template-tag API with no external dependency, no separate `zx` install, and safe quoting/escaping by default
+- **Distribution**: Each CLI entry point is compiled with `Bun.build({ compile: true })` into a standalone, dependency-free native executable (see `src/scripts/build.ts`) — end users run the binary directly without installing Bun, Node, or any package manager
 
 ### Design Principle: One Script, One Job
 
@@ -50,9 +51,9 @@ Scripts with no parameters:
   - Why not `js-yaml`: Better Unicode/i18n support (normalization form KC)
   - Why not `yq` subprocess: Sub-1ms parsing, no shell escaping complexity, no subprocess mocking in tests
 
-- **`zx`** (^8.8) — Shell command composition (already in devDependencies)
+- **Bun Shell** (`Bun.$`, built into the Bun runtime — no dependency to add)
   - Use for: Running `git rev-parse` commands (get repository root), complex shell one-liners
-  - Rationale: Readable subprocess API, zx templates handle quoting/escaping safely
+  - Rationale: Readable subprocess API with template-tag quoting/escaping, cross-platform (works the same on Linux/macOS/Windows), zero install and zero transitive dependencies since it ships with Bun
 
 ### Dependency Constraints
 
@@ -60,7 +61,6 @@ Scripts with no parameters:
 - **No Runtime Dependencies**: All external packages in `devDependencies` only
 - **Leaf Packages Only**: Avoid packages with deep transitive dependency trees
   - `yaml`: Zero transitive dependencies ✓
-  - `zx`: Minimal transitive dependencies ✓
 
 ## 3. Input Rules & Validation
 
@@ -292,7 +292,7 @@ Error: SKILL.md validation failed
 
 - Relative to repository root
 - No leading `./`
-- Unix-style `/` separators (zx handles cross-platform)
+- Unix-style `/` separators (Bun Shell handles cross-platform)
 - Lexicographically sorted (use `.localeCompare()` with `{ numeric: true }`)
 
 **Example** (`find-skills`):
@@ -557,9 +557,9 @@ await readFile("/path", mockFs);
 - Create temporary `.git/` directories in test fixtures
 - Assert that script finds correct root
 
-### Subprocess Testing (zx)
+### Subprocess Testing (Bun Shell)
 
-- Mock `$` calls where used (e.g., `git rev-parse` for root directory)
+- Mock `Bun.$` calls where used (e.g., `git rev-parse` for root directory)
 - Or: create real `.git/` in fixtures and verify actual subprocess works
 
 ---
@@ -582,7 +582,7 @@ if (process.env.DEBUG === "toolkit:*") {
 }
 ```
 
-**Usage**: `DEBUG=toolkit:* npm test` — set at top level of your environment
+**Usage**: `DEBUG=toolkit:* bun test` — set at top level of your environment
 
 ---
 
@@ -630,7 +630,8 @@ test/root/scripts/
 ## References
 
 - **yaml npm package**: [yaml npm package documentation](https://eemeli.org/yaml/)
-- **zx**: [google/zx](https://github.com/google/zx)
+- **Bun Shell**: [bun.sh/docs/runtime/shell](https://bun.sh/docs/runtime/shell)
+- **Bun.build (compile to executable)**: [bun.sh/docs/bundler/executables](https://bun.sh/docs/bundler/executables)
 - **Node.js fs/promises**: [nodejs.org/api/fs.html#promises-api](https://nodejs.org/api/fs.html#promises-api)
 - **Unicode normalization**: [unicode.org/reports/tr15/](https://unicode.org/reports/tr15/)
 - **POSIX path semantics**: POSIX.1-2017
