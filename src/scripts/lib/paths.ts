@@ -1,4 +1,4 @@
-import { stat } from "node:fs/promises";
+import { realpath, stat } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { cwd } from "node:process";
 
@@ -90,7 +90,6 @@ export async function isPathInsideRepository(
   repoRoot: string,
 ): Promise<boolean> {
   try {
-    const { realpath } = await import("node:fs/promises");
     const resolved = await realpath(testPath);
     const resolvedRepoRoot = await realpath(repoRoot);
 

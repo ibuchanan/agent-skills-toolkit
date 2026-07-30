@@ -1,5 +1,13 @@
-import { mkdir, readFile, writeFile, rm, realpath } from "node:fs/promises";
-import { join, resolve } from "node:path";
+import {
+  lstat,
+  mkdir,
+  readFile,
+  realpath,
+  rm,
+  symlink,
+  writeFile,
+} from "node:fs/promises";
+import { join } from "node:path";
 
 /**
  * Error class for file system operations.
@@ -198,8 +206,8 @@ export async function resolveSymlink(linkPath: string): Promise<string> {
  */
 export async function symlinkExists(path: string): Promise<boolean> {
   try {
-    const stat = await import("node:fs/promises").then((m) => m.lstat(path));
-    return stat.isSymbolicLink();
+    const stats = await lstat(path);
+    return stats.isSymbolicLink();
   } catch {
     return false;
   }
@@ -226,7 +234,6 @@ export async function replaceWithSymlink(
     }
 
     // Create symlink
-    const { symlink } = await import("node:fs/promises");
     await symlink(source, target);
   } catch (error) {
     const err = error as NodeJS.ErrnoException;

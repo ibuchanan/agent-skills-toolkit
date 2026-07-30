@@ -5,7 +5,7 @@
  * with minimal configuration and templates.
  */
 
-import { mkdir, readFile, writeFile, stat } from "node:fs/promises";
+import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
 /**
@@ -44,7 +44,7 @@ export async function initSkillEval(skillDir: string): Promise<void> {
   const skillMdPath = join(skillDir, "SKILL.md");
   try {
     await readFile(skillMdPath, "utf8");
-  } catch (error) {
+  } catch {
     throw new Error(`SKILL.md not found in ${skillDir}`);
   }
 
@@ -61,30 +61,21 @@ export async function initSkillEval(skillDir: string): Promise<void> {
     // ENOENT is expected (directory doesn't exist yet)
   }
 
-  // Create directories and files
-  try {
-    // Create directory structure
-    await mkdir(join(evalDefaultDir, "prompts"), { recursive: true });
-    await mkdir(join(evalDefaultDir, "tests"), { recursive: true });
+  // Create directory structure
+  await mkdir(join(evalDefaultDir, "prompts"), { recursive: true });
+  await mkdir(join(evalDefaultDir, "tests"), { recursive: true });
 
-    // Create promptfooconfig.yaml
-    const config = generatePromptfooConfig();
-    await writeFile(
-      join(evalDefaultDir, "promptfooconfig.yaml"),
-      config,
-      "utf8",
-    );
+  // Create promptfooconfig.yaml
+  const config = generatePromptfooConfig();
+  await writeFile(join(evalDefaultDir, "promptfooconfig.yaml"), config, "utf8");
 
-    // Create minimal prompt template
-    const promptTemplate = generatePromptTemplate();
-    await writeFile(
-      join(evalDefaultDir, "prompts", "main.txt"),
-      promptTemplate,
-      "utf8",
-    );
-  } catch (error) {
-    throw error;
-  }
+  // Create minimal prompt template
+  const promptTemplate = generatePromptTemplate();
+  await writeFile(
+    join(evalDefaultDir, "prompts", "main.txt"),
+    promptTemplate,
+    "utf8",
+  );
 }
 
 /**

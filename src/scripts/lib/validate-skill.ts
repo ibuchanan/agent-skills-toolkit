@@ -15,13 +15,13 @@
 
 import { readFile, stat } from "node:fs/promises";
 import { basename, join } from "node:path";
-import { parseYaml } from "./yaml-parser.js";
 import {
+  ValidationError,
+  validateDescriptionLength,
   validateSkillName,
   validateSkillNameMatches,
-  validateDescriptionLength,
-  ValidationError,
 } from "./validation.js";
+import { parseYaml } from "./yaml-parser.js";
 
 export interface SkillValidationResult {
   name: string;
@@ -71,8 +71,8 @@ export async function validateSkill(
     }
   }
 
-  // Parse frontmatter and body
-  const { frontmatter, body } = parseFrontmatter(skillContent);
+  // Parse frontmatter
+  const { frontmatter } = parseFrontmatter(skillContent);
 
   if (!frontmatter) {
     throw new ValidationError("SKILL.md must include frontmatter");
@@ -82,9 +82,9 @@ export async function validateSkill(
   let parsedFm: unknown;
   try {
     parsedFm = parseYaml(frontmatter);
-  } catch (error) {
+  } catch (e) {
     throw new ValidationError(
-      `Invalid YAML in frontmatter: ${error instanceof Error ? error.message : String(error)}`,
+      `Invalid YAML in frontmatter: ${e instanceof Error ? e.message : String(e)}`,
     );
   }
 

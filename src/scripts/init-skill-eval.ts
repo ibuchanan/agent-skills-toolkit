@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 
 /**
  * init-skill-eval: Initialize an evaluation suite for a skill.
@@ -21,8 +21,8 @@
  * - 2: Usage error (invalid arguments)
  */
 
-import { argv } from "node:process";
 import { isAbsolute, resolve } from "node:path";
+import { argv } from "node:process";
 import { initSkillEval } from "./lib/init-skill-eval.js";
 
 async function main() {

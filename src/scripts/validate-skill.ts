@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 
 /**
  * validate-skill: Validate a skill's SKILL.md file and structure.
@@ -20,8 +20,8 @@
  * - 2: Usage error (invalid arguments)
  */
 
-import { argv } from "node:process";
 import { isAbsolute, resolve } from "node:path";
+import { argv } from "node:process";
 import { validateSkill } from "./lib/validate-skill.js";
 import { ValidationError } from "./lib/validation.js";
 

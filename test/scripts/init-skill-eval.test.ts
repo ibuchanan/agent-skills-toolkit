@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { mkdir, rm, writeFile, readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { afterEach, beforeEach, describe, expect, it } from "bun:test";
+import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { initSkillEval } from "../../src/scripts/lib/init-skill-eval.js";
 
 let testDir: string;
@@ -93,7 +93,7 @@ describe("init-skill-eval script", () => {
       try {
         await initSkillEval(skillDir);
         expect.fail("Should have thrown an error");
-      } catch (error) {
+      } catch {
         const currentConfig = await readFile(
           join(evalDir, "promptfooconfig.yaml"),
           "utf8",
@@ -116,11 +116,9 @@ describe("init-skill-eval script", () => {
       await initSkillEval(skillDir);
 
       const evalDir = join(skillDir, "evals", "default");
-      const stat = await import("node:fs/promises").then((m) =>
-        m.stat(evalDir).catch(() => null),
-      );
-      expect(stat).not.toBeNull();
-      expect(stat?.isDirectory()).toBe(true);
+      const evalDirStat = await stat(evalDir).catch(() => null);
+      expect(evalDirStat).not.toBeNull();
+      expect(evalDirStat?.isDirectory()).toBe(true);
     });
 
     it("writes a promptfooconfig.yaml with the Promptfoo schema directive", async () => {
@@ -156,10 +154,8 @@ describe("init-skill-eval script", () => {
       await initSkillEval(skillDir);
 
       const promptDir = join(skillDir, "evals", "default", "prompts");
-      const stat = await import("node:fs/promises").then((m) =>
-        m.stat(promptDir).catch(() => null),
-      );
-      expect(stat?.isDirectory()).toBe(true);
+      const promptDirStat = await stat(promptDir).catch(() => null);
+      expect(promptDirStat?.isDirectory()).toBe(true);
     });
 
     it("creates a file-based test directory", async () => {
@@ -174,10 +170,8 @@ describe("init-skill-eval script", () => {
       await initSkillEval(skillDir);
 
       const testDir_ = join(skillDir, "evals", "default", "tests");
-      const stat = await import("node:fs/promises").then((m) =>
-        m.stat(testDir_).catch(() => null),
-      );
-      expect(stat?.isDirectory()).toBe(true);
+      const testDirStat = await stat(testDir_).catch(() => null);
+      expect(testDirStat?.isDirectory()).toBe(true);
     });
 
     it("configures Promptfoo to load prompts and tests from those directories", async () => {

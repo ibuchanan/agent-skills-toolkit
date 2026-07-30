@@ -57,7 +57,6 @@ class YamlParser {
       return { value: null, nextLineIdx: lineIdx + 1 };
     }
 
-    const indent = this.getIndent(line);
     const content = line.trim();
 
     // Mapping (object)

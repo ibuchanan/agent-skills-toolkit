@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 
 /**
  * init-skill: Initialize a new skill with directory structure and SKILL.md template.
@@ -16,11 +16,11 @@
  * - 2: Usage error (invalid arguments)
  */
 
-import { argv } from "node:process";
 import { join } from "node:path";
-import { validateSkillName } from "./lib/validation.js";
+import { argv } from "node:process";
 import { createSkillDirectory, FileSystemError } from "./lib/io.js";
 import { findRepositoryRoot } from "./lib/paths.js";
+import { validateSkillName } from "./lib/validation.js";
 
 async function main() {
   const skillName = argv[2];

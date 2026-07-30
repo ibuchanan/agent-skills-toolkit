@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { mkdir, rm, readFile } from "fs/promises";
-import { join } from "path";
-import { tmpdir } from "os";
+import { afterEach, beforeEach, describe, expect, it } from "bun:test";
+import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { parse as parseYaml } from "yaml";
 import { createSkillDirectory } from "../../src/scripts/lib/io.js";
 import { validateSkillName } from "../../src/scripts/lib/validation.js";
@@ -51,9 +51,7 @@ describe("init-skill script", () => {
       // Pre-create the skill directory
       await mkdir(skillDir, { recursive: true });
       const markerFile = join(skillDir, "MARKER.txt");
-      await import("fs/promises").then((m) =>
-        m.writeFile(markerFile, "preserved"),
-      );
+      await writeFile(markerFile, "preserved");
 
       // Attempt to create should fail
       try {
@@ -63,9 +61,7 @@ describe("init-skill script", () => {
       }
 
       // Verify that skill directory was cleaned up entirely (atomic failure)
-      const exists = await import("fs/promises").then((m) =>
-        m.stat(skillDir).catch(() => null),
-      );
+      const exists = await stat(skillDir).catch(() => null);
       expect(exists).toBeNull();
     });
   });
@@ -78,8 +74,8 @@ describe("init-skill script", () => {
       await createSkillDirectory(skillName, skillsDir);
 
       const skillDir = join(skillsDir, skillName);
-      const stat = await import("fs/promises").then((m) => m.stat(skillDir));
-      expect(stat.isDirectory()).toBe(true);
+      const skillStat = await stat(skillDir);
+      expect(skillStat.isDirectory()).toBe(true);
     });
 
     it("writes YAML frontmatter followed by Markdown instructions", async () => {
@@ -165,8 +161,8 @@ describe("init-skill script", () => {
       await createSkillDirectory(skillName, skillsDir);
 
       const scriptsDir = join(skillsDir, skillName, "scripts");
-      const stat = await import("fs/promises").then((m) => m.stat(scriptsDir));
-      expect(stat.isDirectory()).toBe(true);
+      const scriptsStat = await stat(scriptsDir);
+      expect(scriptsStat.isDirectory()).toBe(true);
     });
 
     it("creates the assets directory", async () => {
@@ -176,8 +172,8 @@ describe("init-skill script", () => {
       await createSkillDirectory(skillName, skillsDir);
 
       const assetsDir = join(skillsDir, skillName, "assets");
-      const stat = await import("fs/promises").then((m) => m.stat(assetsDir));
-      expect(stat.isDirectory()).toBe(true);
+      const assetsStat = await stat(assetsDir);
+      expect(assetsStat.isDirectory()).toBe(true);
     });
 
     it("creates the references directory", async () => {
@@ -187,10 +183,8 @@ describe("init-skill script", () => {
       await createSkillDirectory(skillName, skillsDir);
 
       const referencesDir = join(skillsDir, skillName, "references");
-      const stat = await import("fs/promises").then((m) =>
-        m.stat(referencesDir),
-      );
-      expect(stat.isDirectory()).toBe(true);
+      const referencesStat = await stat(referencesDir);
+      expect(referencesStat.isDirectory()).toBe(true);
     });
 
     it("creates the evals directory", async () => {
@@ -200,8 +194,8 @@ describe("init-skill script", () => {
       await createSkillDirectory(skillName, skillsDir);
 
       const evalsDir = join(skillsDir, skillName, "evals");
-      const stat = await import("fs/promises").then((m) => m.stat(evalsDir));
-      expect(stat.isDirectory()).toBe(true);
+      const evalsStat = await stat(evalsDir);
+      expect(evalsStat.isDirectory()).toBe(true);
     });
   });
 });
