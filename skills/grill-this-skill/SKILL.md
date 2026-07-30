@@ -1,6 +1,6 @@
 ---
 name: grill-this-skill
-description: Interview users to define or substantially revise an agent skill before authoring. Use when a skill idea or existing skill has an unclear objective, trigger behavior, boundaries, provenance needs, or evaluation plan; also use when the user asks to grill, stress-test, or clarify a skill.
+description: Interview users to define or revise an agent skill before authoring. Use when a skill idea or existing skill lacks a clear objective, triggers, boundaries, provenance, or evaluation plan; also use when asked to grill, stress-test, or clarify a skill.
 ---
 
 # Grill This Skill
