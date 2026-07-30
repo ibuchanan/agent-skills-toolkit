@@ -9,7 +9,7 @@
     "module": "CommonJS",
     "moduleResolution": "bundler",
     "lib": ["ES2022"],
-    "types": ["node"],
+    "types": ["bun"],
 
     /* Standard Defaults: These are typical for Forge apps but not strictly enforced */
     "strict": true,

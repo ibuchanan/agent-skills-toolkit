@@ -1,4 +1,4 @@
-import { it } from "vitest";
+import { it } from "bun:test";
 
 export function defineSkippedFrontmatterContract() {
   it.skip("parses valid frontmatter", () => {});

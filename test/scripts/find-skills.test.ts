@@ -1,4 +1,4 @@
-import { describe, it } from "vitest";
+import { describe, it } from "bun:test";
 
 describe("find-skills script", () => {
   it.skip("lists every SKILL.md file recursively from the repository root", () => {});

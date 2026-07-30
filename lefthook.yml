@@ -8,21 +8,21 @@ lint:
   parallel: true
   commands:
     biome:
-      run: npm run lint:biome
+      run: bun run lint:biome
     markdown:
-      run: npm run lint:markdown
+      run: bun run lint:markdown
     spell:
-      run: npm run lint:spell
+      run: bun run lint:spell
     typecheck:
-      run: npm run typecheck
+      run: bun run typecheck
 
 pre-commit:
   parallel: true
   commands:
     build:
-      run: npm run build
+      run: bun run build
     format:
-      run: npm run format
+      run: bun run format
       stage_fixed: true
     gitleaks:
       run: |
@@ -35,8 +35,8 @@ pre-commit:
 pre-push:
   commands:
     format:
-      run: npm run format:check
+      run: bun run format:check
     lint:
-      run: npm run lint
+      run: bun run lint
     test:
-      run: npm run test
+      run: bun run test

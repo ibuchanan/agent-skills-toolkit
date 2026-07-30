@@ -1,4 +1,4 @@
-import { describe } from "vitest";
+import { describe } from "bun:test";
 
 import { defineSkippedFrontmatterContract } from "./shared/frontmatter-contract";
 

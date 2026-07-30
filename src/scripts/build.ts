@@ -1,11 +1,11 @@
-import { readdirSync } from "fs";
-import { join } from "path";
+import { join } from "node:path";
 
 // Find all CLI entry points (*.ts in src/scripts/ root, not in lib/)
 const scriptsDir = "src/scripts";
-const files = readdirSync(scriptsDir);
-const entrypoints = files
-  .filter((f) => f.endsWith(".ts") && !f.includes("build"))
+const glob = new Bun.Glob("*.ts");
+const entrypoints = Array.from(glob.scanSync(scriptsDir))
+  .filter((f) => f !== "build.ts")
+  .sort()
   .map((f) => join(scriptsDir, f));
 
 console.log(
@@ -25,7 +25,9 @@ for (const entrypoint of entrypoints) {
 
   if (!result.success) {
     console.error(`Build failed for ${entrypoint}:`);
-    result.logs.forEach((log) => console.error(`  ${log}`));
+    for (const log of result.logs) {
+      console.error(`  ${log}`);
+    }
     process.exit(1);
   }
 

@@ -1,4 +1,4 @@
-import { describe, it } from "vitest";
+import { describe, it } from "bun:test";
 
 describe("validate-references script", () => {
   describe("reference documents", () => {

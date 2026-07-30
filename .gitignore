@@ -220,5 +220,6 @@ $RECYCLE.BIN/
 /.cocoindex_code/
 
 package-lock.json
+bun.lock
 /scripts/
 .scratch/
