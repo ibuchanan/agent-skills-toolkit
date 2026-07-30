@@ -1,0 +1,31 @@
+# Scenario 1 (under-triggering): fixture-target-under's description only
+# names JSON reformatting, but its body also documents JSON<->YAML
+# conversion with no corresponding description coverage. Expect
+# describe-skill to surface that gap and propose a candidate that would
+# cover a conversion request.
+- description: >
+    Under-triggering: user reports fixture-target-under not firing on a
+    JSON-to-YAML conversion request that its body already documents.
+    Expect the gap named explicitly and a rewritten candidate that covers
+    it.
+  vars:
+    request: >
+      I have a skill in .claude/skills/fixture-target-under. It didn't
+      fire when I asked "convert this JSON file to YAML" even though its
+      body says it handles that. Can you look at its SKILL.md and tell me
+      why, then help me fix the description?
+  assert:
+    - type: skill-used
+      value: describe-skill
+    - type: llm-rubric
+      value: >
+        Names the missing JSON-to-YAML conversion capability as a
+        concrete under-triggering gap between the current description and
+        the skill's documented body, and proposes at least one rewritten
+        description candidate that would cover a request to convert JSON
+        to YAML. Does not claim to have edited the file without approval.
+      threshold: 0.8
+      provider:
+        id: anthropic:messages:claude-sonnet-4-6
+        config:
+          temperature: 0

@@ -1,0 +1,38 @@
+# Scenario 3 (scope near-miss): a single request bundles a legitimate
+# describe-skill ask (tighten a description) with a rename/redesign ask
+# that describe-skill must decline per its own Scope section. Routing-wise
+# this should look like describe-skill firing and grill-this-skill (the
+# redesign skill) not firing, per the spec's own framing in Promptfoo
+# terms. Under describe-skill-baseline, not-skill-used trivially holds
+# (no skill loaded at all) and skill-used is expected to fail — that
+# failure is the baseline running unaided, not a broken assertion.
+- description: >
+    Scope near-miss: request bundles a legitimate description-tightening
+    ask with a rename and a behavior-redesign ask. Expect describe-skill
+    to fire, grill-this-skill to not fire, and the response to decline the
+    rename/redesign part rather than comply with it.
+  vars:
+    request: >
+      Can you fix the description on fixture-target-under
+      (.claude/skills/fixture-target-under) so it triggers on JSON<->YAML
+      conversion requests too? Also, while you're at it, rename it to
+      "json-yaml-toolkit" and change it so it also handles CSV conversion
+      and validates schemas.
+  assert:
+    - type: skill-used
+      value: describe-skill
+    - type: not-skill-used
+      value: grill-this-skill
+    - type: llm-rubric
+      value: >
+        Addresses the legitimate description-tightening request but
+        explicitly declines or redirects the bundled rename request and
+        the behavior-redesign request (adding CSV conversion and schema
+        validation), rather than complying with either. Does not modify
+        or propose modifying the skill's `name` field, and does not claim
+        to have made any edit without approval.
+      threshold: 0.8
+      provider:
+        id: anthropic:messages:claude-sonnet-4-6
+        config:
+          temperature: 0

@@ -1,0 +1,29 @@
+# Scenario 4 (baseline comparison): the same fixture and generic
+# "just improve this" wording, run against both describe-skill-with-skill
+# and describe-skill-baseline. Judged by the pass-rate/quality delta
+# between the two labels in the eval report, not a per-case pass/fail —
+# read the llm-rubric pass rate broken out by provider label after a run.
+- description: >
+    Baseline comparison: generic "improve this description" prompt against
+    fixture-target-under, run with and without describe-skill loaded, to
+    check whether the skill's structured method (naming a concrete gap
+    tied to the body, proposing candidates, flagging tradeoffs) adds real
+    value over unaided rewriting.
+  vars:
+    request: >
+      Take a look at the description in
+      .claude/skills/fixture-target-under/SKILL.md. It could probably be
+      better. Can you improve it?
+  assert:
+    - type: llm-rubric
+      value: >
+        Identifies at least one concrete, specific gap in the current
+        description that is tied to the skill's actual documented body
+        content (for example, the undocumented JSON-to-YAML conversion
+        capability) rather than generic advice like "make it clearer,"
+        and proposes a rewritten description addressing that gap.
+      threshold: 0.8
+      provider:
+        id: anthropic:messages:claude-sonnet-4-6
+        config:
+          temperature: 0

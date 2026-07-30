@@ -1,7 +1,45 @@
 $schema: https://promptfoo.dev/config-schema.json
 
+description: >
+  describe-skill scenario coverage: under-triggering diagnosis,
+  over-triggering diagnosis, a rename/redesign scope near-miss, and a
+  with/without-skill baseline comparison. Providers share one fixture
+  project so skill-used/not-skill-used routing checks and content
+  rubrics see the same target skills. skill-used/not-skill-used checks
+  are expected to fail under the describe-skill-baseline label by
+  design — that provider never discovers any skill, so the failure
+  confirms the baseline ran unaided rather than indicating a broken
+  assertion.
+
+providers:
+  - id: anthropic:claude-agent-sdk
+    label: describe-skill-with-skill
+    config:
+      model: claude-sonnet-4-6
+      working_dir: ./fixtures/project
+      setting_sources: ['project']
+      skills: ['describe-skill']
+      append_allowed_tools: ['Read']
+  - id: anthropic:claude-agent-sdk
+    label: describe-skill-baseline
+    config:
+      model: claude-sonnet-4-6
+      working_dir: ./fixtures/project
+      append_allowed_tools: ['Read']
+
 prompts:
   - file:///prompts/*.txt
+
+defaultTest:
+  assert:
+    - type: javascript
+      value: |
+        return typeof output === 'string' && output.trim().length > 0;
+    - type: javascript
+      value: |
+        const text = String(output || '').toLowerCase();
+        const claimsUnapprovedWrite = /i(?:'|)ve (?:updated|edited|written|saved|applied) (?:the )?(?:skill\.md|frontmatter|description field)/.test(text);
+        return !claimsUnapprovedWrite;
 
 tests:
   - file:///tests/*.yaml

@@ -1,0 +1,35 @@
+# Scenario 2 (over-triggering): fixture-target-over's description is broad
+# enough ("anything related to API design", "writing endpoints", "general
+# backend development questions") to false-fire on a new-API-design
+# request that belongs to a different skill (design-api-first) and has
+# nothing to do with this skill's actual narrow job of polishing existing
+# OpenAPI description text. Expect the over-fire named and a candidate
+# with explicit skip language.
+- description: >
+    Over-triggering: user reports fixture-target-over firing on requests
+    outside its actual scope. Expect the near-miss named explicitly and a
+    rewritten candidate that adds skip/non-trigger language for it.
+  vars:
+    request: >
+      My skill fixture-target-over (.claude/skills/fixture-target-over)
+      keeps firing on things it shouldn't, like "help me design a new
+      REST API for this service from scratch". Can you check its SKILL.md
+      and tighten the description so it stops doing that?
+  assert:
+    - type: skill-used
+      value: describe-skill
+    - type: llm-rubric
+      value: >
+        Names the over-triggering near-miss explicitly: the current
+        description's broad wording ("anything related to API design",
+        "writing endpoints", or "general backend development questions")
+        would wrongly catch a request to design a new API from scratch,
+        which belongs to a different skill. Proposes at least one
+        rewritten description candidate that adds explicit skip/
+        non-trigger language for that case. Does not claim to have edited
+        the file without approval.
+      threshold: 0.8
+      provider:
+        id: anthropic:messages:claude-sonnet-4-6
+        config:
+          temperature: 0
