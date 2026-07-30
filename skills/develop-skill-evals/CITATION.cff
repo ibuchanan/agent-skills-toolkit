@@ -1,0 +1,66 @@
+cff-version: 1.2.0
+message: "If you use this skill, please cite it and the upstream sources it draws on."
+title: "develop-skill-evals (Agent Skills Toolkit)"
+type: software
+authors:
+  - family-names: Buchanan
+    given-names: Ian
+    email: ibuchanan@atlassian.com
+references:
+  - type: software
+    title: "Skill Judge"
+    url: "https://github.com/softaworks/agent-toolkit/blob/3027f20f3181758385a1bb8c022d4041dfb4de84/skills/skill-judge/README.md"
+    authors:
+      - name: "softaworks"
+    scope: >-
+      Static SKILL.md-quality-scoring framework mined for transferable
+      eval-design lessons (freedom calibration, design pattern, triggering
+      as a failure mode) in references/skill-judge-lessons.md; the
+      framework itself is not adopted, see references/skill-judge/README.md.
+  - type: software
+    title: "agent-skills-eval"
+    url: "https://github.com/darkrishabh/agent-skills-eval/tree/b60eebe3c6edaa917a284e13b9b0e9fa00f1c957"
+    authors:
+      - name: "darkrishabh"
+    scope: >-
+      Reference implementation of the native agentskills.io evals/evals.json
+      methodology (README.md, src/types.ts, src/provider.ts, src/config.ts)
+      mined for transferable eval-design patterns in
+      references/agent-skills-native-evals.md; not a target format for
+      this skill, see references/agent-skills-eval/.
+  - type: website
+    title: "agentskills.io documentation"
+    url: "https://github.com/agentskills/agentskills/tree/38a2ff82958afee88dadf4831509e6f7e9d8ef4e/docs"
+    authors:
+      - name: "agentskills"
+    scope: >-
+      General agentskills.io documentation tree indexed in
+      references/SUMMARY.md.
+  - type: website
+    title: "Evaluating skill output quality"
+    url: "https://github.com/agentskills/agentskills/blob/38a2ff82958afee88dadf4831509e6f7e9d8ef4e/docs/skill-creation/evaluating-skills.mdx"
+    authors:
+      - name: "agentskills"
+    scope: >-
+      Canonical agentskills.io guide to eval-driven skill iteration,
+      condensed in references/agent-skills-native-evals.md and
+      references/agentskills/evaluating-skills.md.
+  - type: website
+    title: "Promptfoo Documentation"
+    url: "https://www.promptfoo.dev/docs/"
+    authors:
+      - name: "Promptfoo"
+    scope: >-
+      Target eval framework for this skill's authored artifacts. Cited
+      pages: Test Agent Skills guide, Deterministic Metrics, LLM Rubric,
+      Search-Rubric, and the Javascript custom-provider reference,
+      condensed in references/promptfoo-agent-skill-testing.md with
+      full-fidelity captures under references/promptfoo/.
+  - type: generic
+    title: "How to test multi-turn conversations with tool calls?"
+    url: "https://github.com/promptfoo/promptfoo/issues/5174"
+    authors:
+      - name: "Promptfoo"
+    scope: >-
+      Source for the custom-provider fallback's known multi-turn
+      round-trip limitation, noted in references/promptfoo-agent-skill-testing.md.

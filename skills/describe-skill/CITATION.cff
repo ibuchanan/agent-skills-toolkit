@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this skill, please cite it and the upstream sources it draws on."
+title: "describe-skill (Agent Skills Toolkit)"
+type: software
+authors:
+  - family-names: Buchanan
+    given-names: Ian
+    email: ibuchanan@atlassian.com
+references:
+  - type: standard
+    title: "Agent Skills Specification"
+    url: "https://github.com/agentskills/agentskills/blob/38a2ff82958afee88dadf4831509e6f7e9d8ef4e/docs/specification.mdx"
+    authors:
+      - name: "agentskills"
+    scope: >-
+      Normative source for the SKILL.md frontmatter contract
+      (references/skill-format.md) and the skills-ref validation command
+      (references/validation.md) this skill relies on when critiquing or
+      rewriting a description field.
+  - type: website
+    title: "Skills | Agent Skills"
+    url: "https://zed.dev/docs/assistant/prompting"
+    authors:
+      - name: "Zed Industries"
+    scope: >-
+      Source for the progressive-disclosure and trigger/skip phrasing
+      conventions summarized in references/skill-composition.md.

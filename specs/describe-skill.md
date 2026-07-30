@@ -84,10 +84,21 @@ and the updated SKILL.md frontmatter
 - **Behavior to distinguish**:
   given a skill's body and current `description`,
   does the skill correctly diagnose the gap type
-  (under-triggering vs over-triggering)
-  and stay in scope
+  (under-triggering vs over-triggering),
+  stay in scope
   (never touches `name`,
-  never writes without approval)?
+  never writes without approval,
+  declines rename/redesign requests),
+  and does invoking the skill produce a measurably better result
+  than the model unaided?
+- **Design pattern**:
+  Tool-leaning — the output is a precise, bounded thing
+  (a rewritten `description` string with structural constraints:
+  character limits, `name` untouched),
+  not a multi-turn or creative task.
+  Favor deterministic checks for structure,
+  paired with `llm-rubric` for rewrite quality;
+  routing/trajectory assertions are secondary here.
 - **Scenario types**:
   (1) an under-triggering description missing a legitimate use case:
   expect the gap surfaced and trigger coverage added;
@@ -96,14 +107,27 @@ and the updated SKILL.md frontmatter
   (3) near-miss scope test:
   user also asks it to rename the skill or redesign its behavior —
   expect a decline/redirect rather than compliance.
+  In Promptfoo terms, this is a routing-boundary case:
+  `skill-used` on `describe-skill`, `not-skill-used` on `grill-this-skill`;
+  (4) baseline comparison:
+  `describe-skill` invoked vs. an unaided "just improve this description"
+  prompt on the same input —
+  tests whether the skill's structured method
+  (naming concrete failure modes, proposing 1-3 candidates,
+  flagging safety-coverage tradeoffs on safety-relevant skills)
+  adds real value over unaided rewriting,
+  not just whether it produces *a* rewrite.
 - **Evidence source**:
   the target skill's own SKILL.md body is ground truth for "what it actually does";
   scenarios must not be invented independent of it.
 - **Judging**:
   gap-type diagnosis and scope adherence
-  (name untouched, no unapproved write)
-  are objectively checkable.
+  (name untouched, no unapproved write, correct routing on the
+  rename/redesign near-miss)
+  are objectively checkable per test case.
   Rewritten-description quality needs human or LLM-judge review.
+  The baseline scenario is judged by the pass-rate/quality delta between
+  with- and without-skill runs, not a per-case pass/fail.
 
 ## Open decisions
 
