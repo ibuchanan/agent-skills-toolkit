@@ -53,7 +53,7 @@ describe("init-skill-eval script", () => {
         "utf8",
       );
 
-      const evalDir = join(skillDir, "evals", "default");
+      const evalDir = join(skillDir, "evals");
       await mkdir(evalDir, { recursive: true });
       await writeFile(
         join(evalDir, "promptfooconfig.yaml"),
@@ -81,7 +81,7 @@ describe("init-skill-eval script", () => {
         "utf8",
       );
 
-      const evalDir = join(skillDir, "evals", "default");
+      const evalDir = join(skillDir, "evals");
       await mkdir(evalDir, { recursive: true });
       const originalConfig = "original config that should not change\n";
       await writeFile(
@@ -104,6 +104,23 @@ describe("init-skill-eval script", () => {
   });
 
   describe("evaluation suite", () => {
+    it("initializes over an empty evals/ directory left by skill scaffolding", async () => {
+      const skillDir = join(testDir, "scaffolded-skill");
+      await mkdir(skillDir, { recursive: true });
+      await writeFile(
+        join(skillDir, "SKILL.md"),
+        "---\nname: scaffolded-skill\n---\n# Scaffolded Skill\n",
+        "utf8",
+      );
+      await mkdir(join(skillDir, "evals"), { recursive: true });
+
+      await initSkillEval(skillDir);
+
+      const configPath = join(skillDir, "evals", "promptfooconfig.yaml");
+      const content = await readFile(configPath, "utf8");
+      expect(content).toContain("$schema");
+    });
+
     it("creates the canonical evaluation suite directory under evals", async () => {
       const skillDir = join(testDir, "fresh-skill");
       await mkdir(skillDir, { recursive: true });
@@ -115,7 +132,7 @@ describe("init-skill-eval script", () => {
 
       await initSkillEval(skillDir);
 
-      const evalDir = join(skillDir, "evals", "default");
+      const evalDir = join(skillDir, "evals");
       const evalDirStat = await stat(evalDir).catch(() => null);
       expect(evalDirStat).not.toBeNull();
       expect(evalDirStat?.isDirectory()).toBe(true);
@@ -132,12 +149,7 @@ describe("init-skill-eval script", () => {
 
       await initSkillEval(skillDir);
 
-      const configPath = join(
-        skillDir,
-        "evals",
-        "default",
-        "promptfooconfig.yaml",
-      );
+      const configPath = join(skillDir, "evals", "promptfooconfig.yaml");
       const content = await readFile(configPath, "utf8");
       expect(content).toContain("$schema");
     });
@@ -153,7 +165,7 @@ describe("init-skill-eval script", () => {
 
       await initSkillEval(skillDir);
 
-      const promptDir = join(skillDir, "evals", "default", "prompts");
+      const promptDir = join(skillDir, "evals", "prompts");
       const promptDirStat = await stat(promptDir).catch(() => null);
       expect(promptDirStat?.isDirectory()).toBe(true);
     });
@@ -169,7 +181,7 @@ describe("init-skill-eval script", () => {
 
       await initSkillEval(skillDir);
 
-      const testDir_ = join(skillDir, "evals", "default", "tests");
+      const testDir_ = join(skillDir, "evals", "tests");
       const testDirStat = await stat(testDir_).catch(() => null);
       expect(testDirStat?.isDirectory()).toBe(true);
     });
@@ -185,12 +197,7 @@ describe("init-skill-eval script", () => {
 
       await initSkillEval(skillDir);
 
-      const configPath = join(
-        skillDir,
-        "evals",
-        "default",
-        "promptfooconfig.yaml",
-      );
+      const configPath = join(skillDir, "evals", "promptfooconfig.yaml");
       const content = await readFile(configPath, "utf8");
       expect(content).toContain("prompts:");
       expect(content).toContain("tests:");
@@ -209,13 +216,7 @@ describe("init-skill-eval script", () => {
 
       await initSkillEval(skillDir);
 
-      const promptPath = join(
-        skillDir,
-        "evals",
-        "default",
-        "prompts",
-        "main.txt",
-      );
+      const promptPath = join(skillDir, "evals", "prompts", "main.txt");
       const content = await readFile(promptPath, "utf8");
       // Verify it's a minimal template
       expect(content.length).toBeGreaterThan(0);
@@ -233,12 +234,7 @@ describe("init-skill-eval script", () => {
 
       await initSkillEval(skillDir);
 
-      const configPath = join(
-        skillDir,
-        "evals",
-        "default",
-        "promptfooconfig.yaml",
-      );
+      const configPath = join(skillDir, "evals", "promptfooconfig.yaml");
       const content = await readFile(configPath, "utf8");
       // Should not specify a provider
       expect(content).not.toContain("provider:");

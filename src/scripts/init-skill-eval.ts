@@ -5,7 +5,7 @@
  *
  * Usage: init-skill-eval <skill-directory>
  *
- * Creates an evaluation suite under skills/<skill-name>/evals/default/ with:
+ * Creates an evaluation suite under skills/<skill-name>/evals/ with:
  * - promptfooconfig.yaml (Promptfoo configuration)
  * - prompts/ directory with main.txt template
  * - tests/ directory (empty, ready for test cases)
@@ -13,7 +13,7 @@
  * Validates:
  * - Skill directory exists
  * - SKILL.md exists
- * - evals/default does not already exist
+ * - evals/ does not already exist
  *
  * Exit codes:
  * - 0: Success
@@ -42,7 +42,7 @@ async function main() {
     // Initialize evaluation suite
     await initSkillEval(skillDir);
 
-    console.log(`Created evaluation suite: ${skillDir}/evals/default`);
+    console.log(`Created evaluation suite: ${skillDir}/evals`);
     console.log(`  - promptfooconfig.yaml`);
     console.log(`  - prompts/main.txt`);
     console.log(`  - tests/ (empty)`);
