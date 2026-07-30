@@ -10,3 +10,6 @@
 [submodule "vendor/forge-rovo-metaprompting"]
 	path = vendor/forge-rovo-metaprompting
 	url = https://github.com/ibuchanan/forge-rovo-metaprompting.git
+[submodule "vendor/agent-skills-eval"]
+	path = vendor/agent-skills-eval
+	url = https://github.com/darkrishabh/agent-skills-eval.git
