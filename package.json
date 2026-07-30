@@ -6,11 +6,10 @@
   "type": "module",
   "scripts": {
     "build": "npm run build:scripts",
-    "build:scripts": "tsc --project tsconfig.scripts.json && chmod +x scripts/*.js",
+    "build:scripts": "bun run src/scripts/build.ts",
     "changelog": "git cliff",
     "check": "lefthook run pre-push --force",
     "clean": "rm -rf ./node_modules && rm -f package-lock.json && rm -rf ./dist && rm -rf ./scripts",
-    "dev": "tsdown --watch",
     "format": "biome format --write",
     "format:check": "biome format",
     "lint": "lefthook run lint",
