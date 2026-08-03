@@ -1,5 +1,5 @@
 ---
-okf_version: '0.2.0'
+okf_version: "0.2.0"
 type: Web Scrape
 title: "Deterministic Metrics for LLM Output Validation (Promptfoo docs, full page capture)"
 description: "Full-fidelity firecrawl capture of promptfoo's deterministic/trajectory/trace/skill-used assertion reference. Authoritative verbatim source; see references/promptfoo-agent-skill-testing.md for the condensed digest agents should load by default."
@@ -7,11 +7,11 @@ sources:
   - id: promptfoo-deterministic-metrics
     resource: "https://www.promptfoo.dev/docs/configuration/expected-outputs/deterministic/"
     title: "Deterministic Metrics for LLM Output Validation"
-    last_modified: '2026-07-30'
+    last_modified: "2026-07-30"
     author: "org:Promptfoo"
 generated:
   by: firecrawl-cli/scrape
-  at: '2026-07-30T12:39:00Z'
+  at: "2026-07-30T12:39:00Z"
 ---
 
 These metrics are created by logical tests that are run on LLM output.

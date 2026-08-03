@@ -25,7 +25,7 @@ Promptfoo can answer both questions by running the same tasks against each versi
 
 For a bundle with neighboring skills, add one more question:
 
-3. Does the agent avoid the nearby skill when the task belongs somewhere else?
+1. Does the agent avoid the nearby skill when the task belongs somewhere else?
 
 ## Start With One Comparison [​](https://www.promptfoo.dev/docs/guides/test-agent-skills/#start-with-one-comparison "Direct link to Start With One Comparison")
 

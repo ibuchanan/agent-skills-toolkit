@@ -3,6 +3,10 @@ globs:
 ignores:
   - "vendor/**"
   - "node_modules/**"
+  - ".agents/**"
+  - ".claude/**"
 config:
   MD013: false
   MD033: false
+  MD025:
+    front_matter_title: ""

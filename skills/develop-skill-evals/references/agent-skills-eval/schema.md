@@ -1,5 +1,5 @@
 ---
-okf_version: '0.2.0'
+okf_version: "0.2.0"
 type: Git Submodule
 title: "agent-skills-eval TypeScript schema (evals.json, config, providers)"
 description: "Verbatim TypeScript interfaces defining the evals/evals.json eval-case shape (including deterministic tool_assertions), the YAML/JSON config shape, and the Provider interface. Authoritative field-by-field reference beyond what the README's prose and examples show — parallels the nested-type detail promptfoo/configuration-reference.md provides for Promptfoo."
@@ -18,7 +18,7 @@ sources:
     author: "human:darkrishabh"
 generated:
   by: agent:claude
-  at: '2026-07-30T13:14:29Z'
+  at: "2026-07-30T13:14:29Z"
 ---
 
 # agent-skills-eval TypeScript schema
@@ -62,12 +62,37 @@ into the parsed arguments object, e.g. `"command"`, `"input.command"`,
 
 ```typescript
 export type ToolAssertion =
-  | { type: "tool-called";       name: string;                                                description?: string }
-  | { type: "tool-not-called";   name: string;                                                description?: string }
-  | { type: "tool-arg-equals";   name: string; path: string; value: unknown;                  description?: string }
-  | { type: "tool-arg-contains"; name: string; path: string; value: string;                   description?: string }
-  | { type: "tool-arg-matches";  name: string; path: string; pattern: string; flags?: string; description?: string }
-  | { type: "tool-call-count";   name?: string; min?: number; max?: number;                   description?: string };
+  | { type: "tool-called"; name: string; description?: string }
+  | { type: "tool-not-called"; name: string; description?: string }
+  | {
+      type: "tool-arg-equals";
+      name: string;
+      path: string;
+      value: unknown;
+      description?: string;
+    }
+  | {
+      type: "tool-arg-contains";
+      name: string;
+      path: string;
+      value: string;
+      description?: string;
+    }
+  | {
+      type: "tool-arg-matches";
+      name: string;
+      path: string;
+      pattern: string;
+      flags?: string;
+      description?: string;
+    }
+  | {
+      type: "tool-call-count";
+      name?: string;
+      min?: number;
+      max?: number;
+      description?: string;
+    };
 ```
 
 ## Result and benchmark shapes (from `src/types.ts`)
@@ -188,11 +213,13 @@ export interface AgentSkillsEvalConfig {
   concurrency?: number;
   strict?: boolean;
   layout?: WorkspaceLayout;
-  report?: boolean | {
-    enabled?: boolean;
-    title?: string;
-    output?: string;
-  };
+  report?:
+    | boolean
+    | {
+        enabled?: boolean;
+        title?: string;
+        output?: string;
+      };
   logging?: {
     format?: LogFormat;
     verbose?: boolean;

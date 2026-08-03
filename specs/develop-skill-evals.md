@@ -48,6 +48,7 @@ Trigger for: authoring or updating Promptfoo test artifacts for a skill whose
 `specs/<skill>.md` already contains a lean evaluation plan.
 
 Do not trigger, and redirect instead, when:
+
 - no spec or lean evaluation plan exists yet for the target skill → redirect
   to `grill-this-skill` first; do not improvise scenarios.
 - the request is about generic Promptfoo work unrelated to an agent skill
@@ -156,6 +157,7 @@ already reserves this directory).
 ## References
 
 **Target format — read by default:**
+
 - `references/promptfoo-agent-skill-testing.md` — provider setup (native
   agent-SDK routing + custom-provider fallback), `skill-used`/`trajectory:*`/
   `trace-*` assertions, `llm-rubric`/`search-rubric` judging, baseline
@@ -168,6 +170,7 @@ already reserves this directory).
 
 **Pattern sources — mined for transferable lessons, never adopted as a second
 target format:**
+
 - `references/agent-skills-native-evals.md` — the agentskills.io project's own
   `evals/evals.json` methodology (`with_skill`/`without_skill` baseline
   comparison, good-vs-weak assertion guidance, deterministic
@@ -178,6 +181,7 @@ target format:**
   failure mode). Backed by `references/skill-judge/README.md`.
 
 **Pruned, deliberately not kept here:**
+
 - Generic Promptfoo config schema, prompt-template syntax, and the
   deterministic assertion-type index — hand off to `promptfoo-evals` instead;
   see `references/promptfoo/SUMMARY.md`'s Pruned table for exactly where each

@@ -1,5 +1,5 @@
 ---
-okf_version: '0.2.0'
+okf_version: "0.2.0"
 type: Web Scrape
 title: "Promptfoo Agent Skill Testing (providers, skill-used/trajectory, judging, fallback)"
 description: "Condensed, token-efficient digest of how to test an agent skill invocation with promptfoo: native skill-used/trajectory:* support via the Claude Agent SDK, OpenAI Codex SDK, or OpenCode SDK providers; llm-rubric/search-rubric for judging output quality; and a custom-provider fallback with its known multi-turn round-trip limitation. Supersedes the ad-hoc custom-provider workaround for the multi-turn/agentic representation question specs/develop-skill-evals.md flags as an open decision."
@@ -7,32 +7,32 @@ sources:
   - id: promptfoo-test-agent-skills
     resource: "https://www.promptfoo.dev/docs/guides/test-agent-skills/"
     title: "Test Agent Skills"
-    last_modified: '2026-07-30'
+    last_modified: "2026-07-30"
     author: "org:Promptfoo"
   - id: promptfoo-deterministic-metrics
     resource: "https://www.promptfoo.dev/docs/configuration/expected-outputs/deterministic/"
     title: "Deterministic Metrics for LLM Output Validation"
-    last_modified: '2026-07-30'
+    last_modified: "2026-07-30"
     author: "org:Promptfoo"
   - id: promptfoo-llm-rubric
     resource: "https://www.promptfoo.dev/docs/configuration/expected-outputs/model-graded/llm-rubric/"
     title: "LLM Rubric"
-    last_modified: '2026-07-30'
+    last_modified: "2026-07-30"
     author: "org:Promptfoo"
   - id: promptfoo-search-rubric
     resource: "https://www.promptfoo.dev/docs/configuration/expected-outputs/model-graded/search-rubric/"
     title: "Search-Rubric"
-    last_modified: '2026-07-30'
+    last_modified: "2026-07-30"
     author: "org:Promptfoo"
   - id: promptfoo-js-provider
     resource: "https://www.promptfoo.dev/docs/providers/custom-api/"
     title: "Javascript Provider"
-    last_modified: '2026-07-30'
+    last_modified: "2026-07-30"
     author: "org:Promptfoo"
   - id: promptfoo-multiturn-tool-issue
     resource: "https://github.com/promptfoo/promptfoo/issues/5174"
     title: "How to test multi-turn conversations with tool calls?"
-    last_modified: '2026-07-30'
+    last_modified: "2026-07-30"
     author: "org:Promptfoo"
   - id: agentskills-evaluating-skills
     resource: "https://github.com/agentskills/agentskills/blob/38a2ff82958afee88dadf4831509e6f7e9d8ef4e/docs/skill-creation/evaluating-skills.mdx"
@@ -40,7 +40,7 @@ sources:
     author: "org:agentskills"
 generated:
   by: agent:claude
-  at: '2026-07-30T13:20:00Z'
+  at: "2026-07-30T13:20:00Z"
 ---
 
 # Promptfoo Agent Skill Testing
@@ -69,9 +69,9 @@ providers:
     config:
       model: claude-sonnet-4-6
       working_dir: ./fixtures/v1
-      setting_sources: ['project']
-      skills: ['review-standards']
-      append_allowed_tools: ['Read', 'Grep', 'Glob']
+      setting_sources: ["project"]
+      skills: ["review-standards"]
+      append_allowed_tools: ["Read", "Grep", "Glob"]
       output_format:
         type: json_schema
         schema:
@@ -103,7 +103,7 @@ providers:
 ```
 
 Skills are discovered from `.agents/skills/`. Codex's `skill-used` signal is
-*inferred* from a successful read of the matching `SKILL.md` (not a
+_inferred_ from a successful read of the matching `SKILL.md` (not a
 first-class tool call like Claude/OpenCode), so keep `enable_streaming:
 true` while developing the eval to make sure promptfoo collects that
 evidence.
@@ -147,7 +147,7 @@ Pattern/count form, and its negation:
 assert:
   - type: skill-used
     value:
-      pattern: 'project-*:*'
+      pattern: "project-*:*"
       min: 1
   - type: not-skill-used
     value: forbidden-skill
@@ -167,7 +167,7 @@ assert:
 ### Testing routing boundaries between skills in a bundle
 
 This is the pattern for the spec's "scope-boundary near miss" scenario type
-— checking that a skill fires on its own trigger and *not* on a
+— checking that a skill fires on its own trigger and _not_ on a
 neighboring skill's:
 
 ```yaml
@@ -192,7 +192,7 @@ tests:
 
 ## `trajectory:*` assertions (require tracing)
 
-These examine traced execution steps — what the agent actually *did*, via
+These examine traced execution steps — what the agent actually _did_, via
 tracing spans — rather than the final output or routing metadata alone.
 Enable tracing first:
 
@@ -213,7 +213,7 @@ tests:
       - type: trajectory:step-count
         value:
           type: command
-          pattern: '*review-standards/SKILL.md*'
+          pattern: "*review-standards/SKILL.md*"
           min: 1
 ```
 
@@ -225,7 +225,7 @@ assert:
     value: search_orders
   - type: trajectory:tool-used
     value:
-      pattern: 'search*'
+      pattern: "search*"
       min: 2
       max: 3
 ```
@@ -262,10 +262,10 @@ assert:
     value:
       name: search_orders
       args:
-        order_id: '{{ order_id }}'
+        order_id: "{{ order_id }}"
   - type: trajectory:tool-args-match
     value:
-      pattern: 'compose_*'
+      pattern: "compose_*"
       mode: exact
       arguments:
         tone: friendly
@@ -297,9 +297,9 @@ signals, not tool identity or sequence.
 ```yaml
 assert:
   - type: trace-span-count
-    value: { pattern: '*llm*', min: 1 }
+    value: { pattern: "*llm*", min: 1 }
   - type: trace-span-duration
-    value: { pattern: '*llm*', max: 2000, percentile: 95 }
+    value: { pattern: "*llm*", max: 2000, percentile: 95 }
   - type: trace-error-spans
     value: { max_count: 0 }
 ```
@@ -318,22 +318,22 @@ providers:
     config:
       model: claude-sonnet-4-6
       working_dir: ./fixtures/v1
-      setting_sources: ['project']
-      skills: ['review-standards']
+      setting_sources: ["project"]
+      skills: ["review-standards"]
   - id: anthropic:claude-agent-sdk
     label: review-standards-v2
     config:
       model: claude-sonnet-4-6
       working_dir: ./fixtures/v2
-      setting_sources: ['project']
-      skills: ['review-standards']
+      setting_sources: ["project"]
+      skills: ["review-standards"]
 
 defaultTest:
   assert:
     - type: skill-used
       value: review-standards
     - type: llm-rubric
-      value: 'Identifies weak password hashing and timing-unsafe comparison as issues'
+      value: "Identifies weak password hashing and timing-unsafe comparison as issues"
       threshold: 0.8
     - type: cost
       threshold: 0.5
@@ -346,7 +346,7 @@ tests:
       request: Review src/auth.ts for password handling and token issues.
 ```
 
-`skill-used` alone only proves the skill *fired*, not that it helped —
+`skill-used` alone only proves the skill _fired_, not that it helped —
 pair it with a content assertion (a rubric here, or a deterministic check
 for a Tool-pattern skill) on every test case. A suite that only checks
 routing gives false confidence: it stays green even if the skill routes
@@ -354,11 +354,11 @@ correctly and then does a mediocre job.
 
 ## Baseline comparison: with the skill vs. without it
 
-The example above compares two skill *versions* — both have the skill
+The example above compares two skill _versions_ — both have the skill
 loaded. A distinct, also-useful comparison (a pattern from the
 agentskills.io project's native eval methodology, in
-`references/agent-skills-native-evals.md`) is comparing *against a
-baseline where the skill isn't loaded at all* — does the skill add
+`references/agent-skills-native-evals.md`) is comparing _against a
+baseline where the skill isn't loaded at all_ — does the skill add
 measurable lift over the model's unaided behavior, not just "is v2 better
 than v1"? Consider this alongside version-to-version comparisons when the
 spec's evaluation plan calls for showing a skill's value, not just
@@ -376,8 +376,8 @@ providers:
     config:
       model: claude-sonnet-4-6
       working_dir: ./fixtures/v1
-      setting_sources: ['project']
-      skills: ['review-standards']
+      setting_sources: ["project"]
+      skills: ["review-standards"]
   - id: anthropic:claude-agent-sdk
     label: review-standards-without-skill
     config:
@@ -399,19 +399,19 @@ model-graded ones. (Pattern from agentskills.io's native eval methodology,
 in `references/agent-skills-native-evals.md`.)
 
 - **Good**: specific, observable, countable — `"The output file is valid
-  JSON"`, `"The chart has labeled axes"`, `"The response cites at least 2
-  file paths"`.
+JSON"`, `"The chart has labeled axes"`, `"The response cites at least 2
+file paths"`.
 - **Weak — too vague to grade**: `"The output is good"`, `"The response is
-  helpful"`.
+helpful"`.
 - **Weak — too brittle**: `"The output contains exactly the phrase 'Total
-  Revenue: $X'"` — a correct answer worded differently would wrongly fail.
+Revenue: $X'"` — a correct answer worded differently would wrongly fail.
   Prefer `contains-any`/`regex` with a few acceptable phrasings, or
   `llm-rubric` for wording-independent checks.
 - Not everything needs an assertion. Writing style, visual design, or
   whether an output "feels right" are better caught by human review (or a
   deliberately loose `llm-rubric`) than forced into a brittle pass/fail
   check.
-- If a scenario resists an honest assertion in *either* deterministic or
+- If a scenario resists an honest assertion in _either_ deterministic or
   `llm-rubric` form, that's usually a sign the target skill's own
   instructions are ambiguous, not that the assertion vocabulary is
   missing something — don't force a weak assertion through to get to
@@ -441,7 +441,7 @@ comparison (see "Baseline comparison" above) — it isn't distinguishing
 anything and inflates an apparent pass rate without reflecting real skill
 value. (Same principle as agentskills.io's native eval methodology, in
 `references/agent-skills-native-evals.md`.) An assertion that fails on
-*every* run is more often a broken assertion than a broken skill — check
+_every_ run is more often a broken assertion than a broken skill — check
 it before concluding the skill needs work.
 
 ### Reusing assertions across scenarios
@@ -556,7 +556,7 @@ price" that `llm-rubric` alone cannot verify).
 ```yaml
 assert:
   - type: search-rubric
-    value: 'Provides accurate current Bitcoin price within 5% of market value'
+    value: "Provides accurate current Bitcoin price within 5% of market value"
     threshold: 0.9
 ```
 
@@ -592,7 +592,7 @@ result, not what the model did with it on a second reasoning turn.
 
 This limitation applies to **ad-hoc providers** (a hand-written
 Python/JS/HTTP provider that doesn't already manage the full multi-turn
-loop itself). The workaround: have the provider run the *entire*
+loop itself). The workaround: have the provider run the _entire_
 invocation internally (every turn, every tool call) and return only the
 final `output` for assertions to check. That tests the end-to-end result,
 not any specific intermediate decision — call this out explicitly rather
@@ -601,7 +601,7 @@ than implying the test covers the full interior workflow.
 For the specific case of testing a Claude Agent SDK, OpenAI Codex SDK, or
 OpenCode SDK skill invocation, the provider setup and assertions earlier in
 this reference supersede this workaround entirely: `skill-used` and
-`trajectory:*` can check *which* skill/tool ran and in what order without a
+`trajectory:*` can check _which_ skill/tool ran and in what order without a
 hand-rolled provider.
 
 ## What this resolves, and what it doesn't

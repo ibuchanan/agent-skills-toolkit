@@ -1,5 +1,5 @@
 ---
-okf_version: '0.2.0'
+okf_version: "0.2.0"
 type: Git Submodule
 title: "Evaluating skill output quality (agentskills.io docs)"
 description: "The agentskills.io project's own canonical guide to eval-driven skill iteration: designing test cases, running with_skill/without_skill baseline comparisons, writing and grading assertions, aggregating results, and iterating on a SKILL.md from the signal. Authoritative for the evals/evals.json native format this skill can also target, alongside Promptfoo."
@@ -10,7 +10,7 @@ sources:
     author: "org:agentskills"
 generated:
   by: agent:claude
-  at: '2026-07-30T13:14:29Z'
+  at: "2026-07-30T13:14:29Z"
 ---
 
 You wrote a skill, tried it on a prompt, and it seemed to work. But does it work reliably — across varied prompts, in edge cases, better than no skill at all? Running structured evaluations (evals) answers these questions and gives you a feedback loop for improving the skill systematically.
@@ -62,7 +62,7 @@ The core pattern is to run each test case twice: once **with the skill** and onc
 
 Organize eval results in a workspace directory alongside your skill directory. Each pass through the full eval loop gets its own `iteration-N/` directory. Within that, each test case gets an eval directory with `with_skill/` and `without_skill/` subdirectories:
 
-```
+```text
 csv-analyzer/
 ├── SKILL.md
 └── evals/
@@ -105,7 +105,7 @@ For each run, provide:
 
 Here's an example of the instructions you'd give the agent for a single with-skill run:
 
-```
+```text
 Execute this task:
 - Skill path: /path/to/csv-analyzer
 - Task: I have a CSV of monthly sales data in data/sales_2025.csv.
@@ -229,12 +229,12 @@ Once every run in the iteration is graded, compute summary statistics per config
       "tokens": { "mean": 3800, "stddev": 400 }
     },
     "without_skill": {
-      "pass_rate": { "mean": 0.33, "stddev": 0.10 },
+      "pass_rate": { "mean": 0.33, "stddev": 0.1 },
       "time_seconds": { "mean": 32.0, "stddev": 8.0 },
       "tokens": { "mean": 2100, "stddev": 300 }
     },
     "delta": {
-      "pass_rate": 0.50,
+      "pass_rate": 0.5,
       "time_seconds": 13.0,
       "tokens": 1700
     }
@@ -252,7 +252,7 @@ Aggregate statistics can hide important patterns. After computing the benchmarks
 
 - **Remove or replace assertions that always pass in both configurations.** These don't tell you anything useful — the model handles them fine without the skill. They inflate the with-skill pass rate without reflecting actual skill value.
 - **Investigate assertions that always fail in both configurations.** Either the assertion is broken (asking for something the model can't do), the test case is too hard, or the assertion is checking for the wrong thing. Fix these before the next iteration.
-- **Study assertions that pass with the skill but fail without.** This is where the skill is clearly adding value. Understand *why* — which instructions or scripts made the difference?
+- **Study assertions that pass with the skill but fail without.** This is where the skill is clearly adding value. Understand _why_ — which instructions or scripts made the difference?
 - **Tighten instructions when results are inconsistent across runs.** If the same eval passes sometimes and fails others (reflected as high `stddev` in the benchmark), the eval may be flaky (sensitive to model randomness), or the skill's instructions may be ambiguous enough that the model interprets them differently each time. Add examples or more specific guidance to reduce ambiguity.
 - **Check time and token outliers.** If one eval takes 3x longer than the others, read its execution transcript (the full log of what the model did during the run) to find the bottleneck.
 
@@ -277,7 +277,7 @@ After grading and reviewing, you have three sources of signal:
 
 - **Failed assertions** point to specific gaps — a missing step, an unclear instruction, or a case the skill doesn't handle.
 - **Human feedback** points to broader quality issues — the approach was wrong, the output was poorly structured, or the skill produced a technically correct but unhelpful result.
-- **Execution transcripts** reveal *why* things went wrong. If the agent ignored an instruction, the instruction may be ambiguous. If the agent spent time on unproductive steps, those instructions may need to be simplified or removed.
+- **Execution transcripts** reveal _why_ things went wrong. If the agent ignored an instruction, the instruction may be ambiguous. If the agent spent time on unproductive steps, those instructions may need to be simplified or removed.
 
 The most effective way to turn these signals into skill improvements is to give all three — along with the current `SKILL.md` — to an LLM and ask it to propose changes. The LLM can synthesize patterns across failed assertions, reviewer complaints, and transcript behavior that would be tedious to connect manually. When prompting the LLM, include these guidelines:
 

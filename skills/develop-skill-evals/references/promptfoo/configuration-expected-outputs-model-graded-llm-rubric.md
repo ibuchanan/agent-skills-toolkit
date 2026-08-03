@@ -1,5 +1,5 @@
 ---
-okf_version: '0.2.0'
+okf_version: "0.2.0"
 type: Web Scrape
 title: "LLM Rubric (Promptfoo docs, full page capture)"
 description: "Full-fidelity firecrawl capture of the llm-rubric assertion reference. Authoritative verbatim source; see references/promptfoo-model-graded-assertions.md for the condensed digest agents should load by default."
@@ -7,11 +7,11 @@ sources:
   - id: promptfoo-llm-rubric
     resource: "https://www.promptfoo.dev/docs/configuration/expected-outputs/model-graded/llm-rubric/"
     title: "LLM Rubric"
-    last_modified: '2026-07-30'
+    last_modified: "2026-07-30"
     author: "org:Promptfoo"
 generated:
   by: firecrawl-cli/scrape
-  at: '2026-07-30T12:39:00Z'
+  at: "2026-07-30T12:39:00Z"
 ---
 
 `llm-rubric` is promptfoo's general-purpose grader for "LLM as a judge" evaluation.
@@ -120,7 +120,7 @@ By default, `llm-rubric` uses `gpt-5` for grading. You can override this in seve
 promptfoo eval --grader openai:gpt-5-mini
 ```
 
-2. Using `test.options` or `defaultTest.options`:
+1. Using `test.options` or `defaultTest.options`:
 
 ```yaml
 defaultTest:
@@ -134,7 +134,7 @@ tests:
         value: Is written in a professional tone
 ```
 
-3. Using `assertion.provider`:
+1. Using `assertion.provider`:
 
 ```yaml
 tests:

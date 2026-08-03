@@ -1,5 +1,5 @@
 ---
-okf_version: '0.2.0'
+okf_version: "0.2.0"
 type: Web Scrape
 title: "Search-Rubric (Promptfoo docs, full page capture)"
 description: "Full-fidelity firecrawl capture of the search-rubric assertion reference. Authoritative verbatim source; see references/promptfoo-model-graded-assertions.md for the condensed digest agents should load by default."
@@ -7,11 +7,11 @@ sources:
   - id: promptfoo-search-rubric
     resource: "https://www.promptfoo.dev/docs/configuration/expected-outputs/model-graded/search-rubric/"
     title: "Search-Rubric"
-    last_modified: '2026-07-30'
+    last_modified: "2026-07-30"
     author: "org:Promptfoo"
 generated:
   by: firecrawl-cli/scrape
-  at: '2026-07-30T12:39:00Z'
+  at: "2026-07-30T12:39:00Z"
 ---
 
 The `search-rubric` assertion type is like `llm-rubric` but with web search capabilities. It evaluates outputs according to a rubric while having the ability to search for current information when needed.

@@ -1,5 +1,5 @@
 ---
-okf_version: '0.2.0'
+okf_version: "0.2.0"
 type: Web Scrape
 title: "Skill Judge README (softaworks/agent-toolkit)"
 description: "A framework for scoring SKILL.md quality against 8 dimensions (knowledge delta, mindset/procedures, anti-patterns, spec compliance, progressive disclosure, freedom calibration, pattern recognition, practical usability), with a grading scale, failure-pattern catalog, and checklist. Judges the skill document's own writing quality (static), not runtime behavior — a different target than this skill's Promptfoo behavioral evals. Read only for the lessons distilled in ../skill-judge-lessons.md."
@@ -10,7 +10,7 @@ sources:
     author: "org:softaworks"
 generated:
   by: agent:claude
-  at: '2026-07-30T13:28:20Z'
+  at: "2026-07-30T13:28:20Z"
 ---
 
 # Skill Judge
@@ -71,26 +71,26 @@ Use Skill Judge when you need to:
 
 ### The 8 Evaluation Dimensions (120 points total)
 
-| Dimension | Max Points | What It Measures |
-|-----------|-----------|------------------|
-| **D1: Knowledge Delta** | 20 | Does the Skill add genuine expert knowledge? (THE CORE DIMENSION) |
-| **D2: Mindset + Procedures** | 15 | Does it transfer expert thinking patterns and domain-specific workflows? |
-| **D3: Anti-Pattern Quality** | 15 | Does it have effective NEVER lists with specific reasons? |
-| **D4: Specification Compliance** | 15 | Is the frontmatter valid? Is the description comprehensive? |
-| **D5: Progressive Disclosure** | 15 | Is content properly layered for on-demand loading? |
-| **D6: Freedom Calibration** | 15 | Is specificity appropriate for task fragility? |
-| **D7: Pattern Recognition** | 10 | Does it follow an established official pattern? |
-| **D8: Practical Usability** | 15 | Can an Agent actually use this Skill effectively? |
+| Dimension                        | Max Points | What It Measures                                                         |
+| -------------------------------- | ---------- | ------------------------------------------------------------------------ |
+| **D1: Knowledge Delta**          | 20         | Does the Skill add genuine expert knowledge? (THE CORE DIMENSION)        |
+| **D2: Mindset + Procedures**     | 15         | Does it transfer expert thinking patterns and domain-specific workflows? |
+| **D3: Anti-Pattern Quality**     | 15         | Does it have effective NEVER lists with specific reasons?                |
+| **D4: Specification Compliance** | 15         | Is the frontmatter valid? Is the description comprehensive?              |
+| **D5: Progressive Disclosure**   | 15         | Is content properly layered for on-demand loading?                       |
+| **D6: Freedom Calibration**      | 15         | Is specificity appropriate for task fragility?                           |
+| **D7: Pattern Recognition**      | 10         | Does it follow an established official pattern?                          |
+| **D8: Practical Usability**      | 15         | Can an Agent actually use this Skill effectively?                        |
 
 ### Grading Scale
 
-| Grade | Percentage | Meaning |
-|-------|-----------|---------|
-| A | 90%+ (108+) | Excellent - production-ready expert Skill |
-| B | 80-89% (96-107) | Good - minor improvements needed |
-| C | 70-79% (84-95) | Adequate - clear improvement path |
-| D | 60-69% (72-83) | Below Average - significant issues |
-| F | <60% (<72) | Poor - needs fundamental redesign |
+| Grade | Percentage      | Meaning                                   |
+| ----- | --------------- | ----------------------------------------- |
+| A     | 90%+ (108+)     | Excellent - production-ready expert Skill |
+| B     | 80-89% (96-107) | Good - minor improvements needed          |
+| C     | 70-79% (84-95)  | Adequate - clear improvement path         |
+| D     | 60-69% (72-83)  | Below Average - significant issues        |
+| F     | <60% (<72)      | Poor - needs fundamental redesign         |
 
 ## Key Features
 
@@ -98,23 +98,23 @@ Use Skill Judge when you need to:
 
 The skill teaches you to recognize three types of content:
 
-| Type | Definition | Treatment |
-|------|-----------|-----------|
-| **Expert** | Claude genuinely doesn't know this | Must keep - this is the Skill's value |
-| **Activation** | Claude knows but may not think of | Keep if brief - serves as reminder |
-| **Redundant** | Claude definitely knows this | Should delete - wastes tokens |
+| Type           | Definition                         | Treatment                             |
+| -------------- | ---------------------------------- | ------------------------------------- |
+| **Expert**     | Claude genuinely doesn't know this | Must keep - this is the Skill's value |
+| **Activation** | Claude knows but may not think of  | Keep if brief - serves as reminder    |
+| **Redundant**  | Claude definitely knows this       | Should delete - wastes tokens         |
 
 ### Five Official Design Patterns
 
 Skill Judge identifies and evaluates against five established patterns:
 
-| Pattern | Lines | Best For | Example |
-|---------|-------|----------|---------|
-| **Mindset** | ~50 | Creative tasks requiring taste | frontend-design |
-| **Navigation** | ~30 | Multiple distinct scenarios | internal-comms |
-| **Philosophy** | ~150 | Art/creation requiring originality | canvas-design |
-| **Process** | ~200 | Complex multi-step projects | mcp-builder |
-| **Tool** | ~300 | Precise operations on specific formats | docx, pdf, xlsx |
+| Pattern        | Lines | Best For                               | Example         |
+| -------------- | ----- | -------------------------------------- | --------------- |
+| **Mindset**    | ~50   | Creative tasks requiring taste         | frontend-design |
+| **Navigation** | ~30   | Multiple distinct scenarios            | internal-comms  |
+| **Philosophy** | ~150  | Art/creation requiring originality     | canvas-design   |
+| **Process**    | ~200  | Complex multi-step projects            | mcp-builder     |
+| **Tool**       | ~300  | Precise operations on specific formats | docx, pdf, xlsx |
 
 ### Common Failure Pattern Detection
 
@@ -134,25 +134,25 @@ The skill identifies 9 common failure patterns:
 
 ### Basic Evaluation
 
-```
+```text
 Evaluate the skill at skills/my-new-skill/SKILL.md
 ```
 
 ### Comparative Analysis
 
-```
+```text
 Compare the quality of skills/skill-a and skills/skill-b
 ```
 
 ### Targeted Improvement
 
-```
+```text
 How can I improve the knowledge delta in my skill?
 ```
 
 ### Pattern Identification
 
-```
+```text
 What pattern does this skill follow, and is it the right choice?
 ```
 
@@ -160,7 +160,7 @@ What pattern does this skill follow, and is it the right choice?
 
 Skill Judge produces a structured evaluation report:
 
-```
+```markdown
 # Skill Evaluation Report: [Skill Name]
 
 ## Summary
@@ -213,7 +213,7 @@ If yes, the Skill has genuine value. If no, it's compressing what Claude already
 
 ## Quick Reference Checklist
 
-```
+```text
 SKILL EVALUATION QUICK CHECK
 
 KNOWLEDGE DELTA (most important):

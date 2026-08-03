@@ -116,7 +116,7 @@ and the updated SKILL.md frontmatter
   (naming concrete failure modes, proposing 1-3 candidates,
   flagging safety-coverage tradeoffs on safety-relevant skills)
   adds real value over unaided rewriting,
-  not just whether it produces *a* rewrite.
+  not just whether it produces _a_ rewrite.
 - **Evidence source**:
   the target skill's own SKILL.md body is ground truth for "what it actually does";
   scenarios must not be invented independent of it.

@@ -1,5 +1,5 @@
 ---
-okf_version: '0.2.0'
+okf_version: "0.2.0"
 type: Specification
 title: "Native agentskills.io Evals (evals/evals.json) — Pattern Source, Not a Target Format"
 description: "Condensed digest of the agentskills.io project's own eval methodology: evals/evals.json test cases, with_skill/without_skill baseline comparison, LLM-judge assertion grading, deterministic tool_assertions, and benchmark aggregation. This skill does not author evals/evals.json and is not considering adopting it — read this only to mine transferable eval-design patterns for the Promptfoo path; see the note at the bottom for which patterns were already extracted into promptfoo-agent-skill-testing.md."
@@ -14,7 +14,7 @@ sources:
     author: "human:darkrishabh"
 generated:
   by: agent:claude
-  at: '2026-07-30T13:14:29Z'
+  at: "2026-07-30T13:14:29Z"
 ---
 
 # Native agentskills.io Evals
@@ -67,10 +67,10 @@ Directly reusable for this skill's own scenario-to-assertion mapping,
 regardless of target format:
 
 - **Good**: `"The output file is valid JSON"`, `"The bar chart has labeled
-  axes"`, `"The report includes at least 3 recommendations"` — specific,
+axes"`, `"The report includes at least 3 recommendations"` — specific,
   observable, countable.
 - **Weak**: `"The output is good"` (too vague to grade); `"The output uses
-  exactly the phrase 'Total Revenue: $X'"` (too brittle — correct output
+exactly the phrase 'Total Revenue: $X'"` (too brittle — correct output
   with different wording would wrongly fail).
 - Not everything needs an assertion. Writing style, visual design, "feel"
   are better caught by human review than forced into a pass/fail check.
@@ -103,12 +103,18 @@ Graded locally against the model's structured `tool_calls` — the same
 
 ```typescript
 type ToolAssertion =
-  | { type: "tool-called";       name: string }
-  | { type: "tool-not-called";   name: string }
-  | { type: "tool-arg-equals";   name: string; path: string; value: unknown }
+  | { type: "tool-called"; name: string }
+  | { type: "tool-not-called"; name: string }
+  | { type: "tool-arg-equals"; name: string; path: string; value: unknown }
   | { type: "tool-arg-contains"; name: string; path: string; value: string }
-  | { type: "tool-arg-matches";  name: string; path: string; pattern: string; flags?: string }
-  | { type: "tool-call-count";   name?: string; min?: number; max?: number };
+  | {
+      type: "tool-arg-matches";
+      name: string;
+      path: string;
+      pattern: string;
+      flags?: string;
+    }
+  | { type: "tool-call-count"; name?: string; min?: number; max?: number };
 ```
 
 `path` is dot-notation into the parsed tool-call arguments (e.g.
@@ -154,7 +160,7 @@ Promptfoo path regardless of format, and are now folded into
   plain `contains`/`regex`. See that file's "Writing assertions: good vs.
   weak" section.
 - **With-skill vs. without-skill baseline comparison** — this methodology
-  always compares against a *no-skill* baseline, not just skill-version A
+  always compares against a _no-skill_ baseline, not just skill-version A
   vs. B. Promptfoo's existing "compare two skill versions" example only
   covers A/B; a genuine baseline (same task, skill absent entirely) is a
   distinct, useful comparison this skill's plan-to-test-case mapping

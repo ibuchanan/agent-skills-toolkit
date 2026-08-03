@@ -2,7 +2,14 @@
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "version": "0.2",
   "files": ["**/*.{md,ts,json,yml,yaml}"],
-  "ignorePaths": ["vendor/**", "node_modules/**", "dist/**", "coverage/**"],
+  "ignorePaths": [
+    "vendor/**",
+    "node_modules/**",
+    "dist/**",
+    "coverage/**",
+    ".agents/**",
+    ".claude/**"
+  ],
   "words": [
     "agentskills",
     "alnum",

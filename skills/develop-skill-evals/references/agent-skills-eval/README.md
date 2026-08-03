@@ -1,5 +1,5 @@
 ---
-okf_version: '0.2.0'
+okf_version: "0.2.0"
 type: Git Submodule
 title: "agent-skills-eval README (test runner for Agent Skills)"
 description: "The agent-skills-eval CLI/SDK's own README: quickstart, YAML config, TypeScript SDK, custom-provider interface, skill layout, CLI flags, and agentskills.io spec compliance. The reference implementation of the native evals/evals.json evaluation methodology, as an alternative or complement to the Promptfoo-based approach."
@@ -10,7 +10,7 @@ sources:
     author: "human:darkrishabh"
 generated:
   by: agent:claude
-  at: '2026-07-30T13:14:29Z'
+  at: "2026-07-30T13:14:29Z"
 ---
 
 # agent-skills-eval
@@ -21,7 +21,7 @@ Write a `SKILL.md`, drop in some evals, and find out — empirically — whether
 
 ## Why this exists
 
-[Agent Skills](https://agentskills.io) — the open standard from Anthropic for giving agents domain knowledge — make it easy to ship a `SKILL.md` and assume your agent is now better at the task. The hard part is *proving* it.
+[Agent Skills](https://agentskills.io) — the open standard from Anthropic for giving agents domain knowledge — make it easy to ship a `SKILL.md` and assume your agent is now better at the task. The hard part is _proving_ it.
 
 `agent-skills-eval` is the missing piece. It runs your skill against the same prompts twice — once `with_skill` loaded into context, once `without_skill` (baseline) — has a judge model grade both outputs, and gives you a side-by-side report. If the skill doesn't make a measurable difference, you'll see it. If it does, you have receipts.
 
@@ -55,16 +55,16 @@ Open `iteration-1/report/index.html` and you have a real, evidence-backed answer
 
 ## What you get
 
-|  |  |
-|---|---|
-| **`with_skill` vs `without_skill`** | Every eval runs both ways so you can see the actual lift from the skill — or its absence. |
-| **Judge-graded outputs** | Use any chat model as a judge. Pass/fail with cited assertions, not vibes. |
-| **TypeScript SDK + CLI** | One-liner CLI for CI, full SDK for custom pipelines, custom providers, and dashboards. |
-| **OpenAI-compatible by default** | Works out of the box with OpenAI, Together, Groq, Anthropic via OpenAI-compat layers, local Llama servers — anything that speaks the OpenAI chat API. |
-| **Tool-call assertions** | Deterministic checks for agents that call tools, not just generate text. |
-| **Portable artifacts** | JSON + JSONL all the way down. Run today, diff tomorrow. Plug into your own dashboard. |
-| **Static HTML reports** | A drop-in report site you can publish anywhere — no infrastructure. |
-| **Fully spec-compliant** | Implements the full [agentskills.io specification](https://agentskills.io/specification): `SKILL.md` validation, `evals/evals.json`, official `iteration-N` artifact layout, frontmatter rules. |
+|                                     |                                                                                                                                                                                                 |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`with_skill` vs `without_skill`** | Every eval runs both ways so you can see the actual lift from the skill — or its absence.                                                                                                       |
+| **Judge-graded outputs**            | Use any chat model as a judge. Pass/fail with cited assertions, not vibes.                                                                                                                      |
+| **TypeScript SDK + CLI**            | One-liner CLI for CI, full SDK for custom pipelines, custom providers, and dashboards.                                                                                                          |
+| **OpenAI-compatible by default**    | Works out of the box with OpenAI, Together, Groq, Anthropic via OpenAI-compat layers, local Llama servers — anything that speaks the OpenAI chat API.                                           |
+| **Tool-call assertions**            | Deterministic checks for agents that call tools, not just generate text.                                                                                                                        |
+| **Portable artifacts**              | JSON + JSONL all the way down. Run today, diff tomorrow. Plug into your own dashboard.                                                                                                          |
+| **Static HTML reports**             | A drop-in report site you can publish anywhere — no infrastructure.                                                                                                                             |
+| **Fully spec-compliant**            | Implements the full [agentskills.io specification](https://agentskills.io/specification): `SKILL.md` validation, `evals/evals.json`, official `iteration-N` artifact layout, frontmatter rules. |
 
 ## Install
 
@@ -82,7 +82,7 @@ npx agent-skills-eval --help
 
 The mental model is straightforward. For every eval defined in your skill:
 
-```
+```ascii-diagram
                 ┌─────────────────────────────┐
                 │       same prompt           │
                 └───────────────┬─────────────┘
@@ -115,10 +115,10 @@ The judge sees the eval's `expected_output` and `assertions` and grades each sid
 
 ## YAML config
 
-For anything beyond a quick command, drop a config file at the root of your project:
+For anything beyond a quick command,
+drop a `agent-skills-eval.yaml` config file at the root of your project:
 
 ```yaml
-# agent-skills-eval.yaml
 root: ./skills
 workspace: ./agent-skills-workspace
 baseline: true
@@ -137,7 +137,7 @@ report:
   enabled: true
   title: Agent Skills Report
 logging:
-  format: pretty   # pretty | jsonl | silent
+  format: pretty # pretty | jsonl | silent
   verbose: false
   color: auto
 targetParams:
@@ -273,9 +273,7 @@ relevant rows.
       "prompt": "Use the attached data to summarize revenue.",
       "files": ["evals/files/input.csv"],
       "expected_output": "The response identifies the highest revenue month.",
-      "assertions": [
-        "The output identifies the highest revenue month."
-      ]
+      "assertions": ["The output identifies the highest revenue month."]
     }
   ]
 }
