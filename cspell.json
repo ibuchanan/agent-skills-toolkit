@@ -10,6 +10,29 @@
     ".agents/**",
     ".claude/**"
   ],
+  "dictionaryDefinitions": [
+    {
+      "name": "develop-skill-evals",
+      "path": "./skills/develop-skill-evals/cspell-words.txt"
+    },
+    {
+      "name": "grill-this-skill",
+      "path": "./skills/grill-this-skill/cspell-words.txt"
+    }
+  ],
+  "overrides": [
+    {
+      "filename": [
+        "skills/develop-skill-evals/**/*",
+        "specs/develop-skill-evals.md"
+      ],
+      "dictionaries": ["develop-skill-evals"]
+    },
+    {
+      "filename": ["skills/grill-this-skill/**/*", "specs/grill-this-skill.md"],
+      "dictionaries": ["grill-this-skill"]
+    }
+  ],
   "words": [
     "agentskills",
     "alnum",
