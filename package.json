@@ -18,7 +18,7 @@
     "lint:markdown": "markdownlint-cli2",
     "lint:spell": "cspell lint --gitignore",
     "prepare": "lefthook install",
-    "test": "bun test",
+    "test": "bun test test/scripts/*.test.ts",
     "test:coverage": "bun test --coverage",
     "test:watch": "bun test --watch",
     "todo": "grep -rn 'TODO' --exclude='package.json' . --color=auto || echo 'No TODOs found!'",
