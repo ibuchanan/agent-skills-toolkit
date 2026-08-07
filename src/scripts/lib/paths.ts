@@ -1,5 +1,5 @@
-import { realpath, stat } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { readdir, realpath, stat } from "node:fs/promises";
+import { dirname, join, resolve } from "node:path";
 import { cwd } from "node:process";
 
 /**
@@ -107,4 +107,30 @@ export async function isPathInsideRepository(
     // If realpath fails, assume path is not inside repository
     return false;
   }
+}
+
+/**
+ * Recursively finds all SKILL.md files under a directory, excluding node_modules.
+ *
+ * @param dir - Directory to search
+ * @returns Array of absolute paths to SKILL.md files
+ */
+export async function findSkillFiles(dir: string): Promise<string[]> {
+  const results: string[] = [];
+  const entries = await readdir(dir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const path = join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      if (entry.name === "node_modules") {
+        continue;
+      }
+      results.push(...(await findSkillFiles(path)));
+    } else if (entry.isFile() && entry.name === "SKILL.md") {
+      results.push(path);
+    }
+  }
+
+  return results;
 }

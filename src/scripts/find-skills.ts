@@ -9,29 +9,8 @@
  * Excludes SKILL.md files under node_modules.
  */
 
-import { readdir } from "node:fs/promises";
-import { join, relative } from "node:path";
-import { findRepositoryRoot } from "./lib/paths.js";
-
-async function findSkillFiles(dir: string): Promise<string[]> {
-  const results: string[] = [];
-  const entries = await readdir(dir, { withFileTypes: true });
-
-  for (const entry of entries) {
-    const path = join(dir, entry.name);
-
-    if (entry.isDirectory()) {
-      if (entry.name === "node_modules") {
-        continue;
-      }
-      results.push(...(await findSkillFiles(path)));
-    } else if (entry.isFile() && entry.name === "SKILL.md") {
-      results.push(path);
-    }
-  }
-
-  return results;
-}
+import { relative } from "node:path";
+import { findRepositoryRoot, findSkillFiles } from "./lib/paths.js";
 
 async function main() {
   const repoRoot = await findRepositoryRoot();
