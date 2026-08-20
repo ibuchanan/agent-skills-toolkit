@@ -219,6 +219,9 @@ $RECYCLE.BIN/
 # CocoIndex Code (ccc)
 /.cocoindex_code/
 
+# Bun build temporary artifacts
+*.bun-build
+
 package-lock.json
 bun.lock
 /scripts/

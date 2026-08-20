@@ -7,6 +7,7 @@
   "scripts": {
     "build": "bun run build:scripts",
     "build:scripts": "bun run src/scripts/build.ts",
+    "bootstrap": "cd vendor/agent-skills-eval && npm install && npm run build",
     "changelog": "git cliff",
     "check": "lefthook run pre-push --force",
     "clean": "rm -rf ./node_modules && rm -f bun.lock && rm -rf ./dist && rm -rf ./scripts",
@@ -17,8 +18,8 @@
     "lint:fix": "biome lint --write",
     "lint:markdown": "markdownlint-cli2",
     "lint:spell": "cspell lint --gitignore",
-    "prepare": "lefthook install",
-    "test": "bun test test/scripts/*.test.ts",
+    "prepare": "lefthook install && bun run bootstrap",
+    "test": "bun run bootstrap && bun test test/scripts/*.test.ts",
     "test:coverage": "bun test --coverage",
     "test:watch": "bun test --watch",
     "todo": "grep -rn 'TODO' --exclude='package.json' . --color=auto || echo 'No TODOs found!'",

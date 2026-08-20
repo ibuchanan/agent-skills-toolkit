@@ -1,0 +1,7 @@
+# Bun configuration
+# https://bun.sh/docs/runtime/bunfig
+
+[test]
+# Exclude vendored submodules from the default test discovery.
+# Their own tests should be run from inside each submodule directory.
+pathIgnorePatterns = ["vendor/**", "node_modules/**", "dist/**"]
