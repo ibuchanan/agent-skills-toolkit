@@ -441,9 +441,16 @@ export function createDefaultToolRunners(toolkitRoot: string): ToolRunner[] {
             skipReason: "promptfoo is not installed",
           };
         }
+        const envFile = join(context.repoRoot, ".env");
+        const bashCommand = [
+          `set -a`,
+          `[ -f "${envFile}" ] && source "${envFile}" || true`,
+          `set +a`,
+          `exec "${binary}" eval -c promptfooconfig.yaml`,
+        ].join(" && ");
         return runExternalCommand(
-          binary,
-          ["eval", "-c", "promptfooconfig.yaml"],
+          "bash",
+          ["-c", bashCommand],
           join(skillDir, "evals"),
         );
       },

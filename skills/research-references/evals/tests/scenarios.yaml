@@ -1,0 +1,83 @@
+# Scenario 1: normal case — skill proposes a focused research plan.
+- description: >
+    Normal case: user asks for authoritative sources for the
+    fixture-needs-references skill. Expect research-references to fire and
+    propose a focused plan before executing.
+  vars:
+    request: >
+      Research authoritative sources for the fixture-needs-references skill.
+      It needs references for evaluating source credibility and structuring a
+      research plan.
+  assert:
+    - type: skill-used
+      value: research-references
+    - type: llm-rubric
+      value: >
+        Proposes a focused research plan with specific aims and authority
+        criteria before asking to execute or write files. Does not silently
+        write files without approval.
+      threshold: 0.8
+      provider:
+        id: openrouter:qwen/qwen3-30b-a3b-instruct-2507
+        config:
+          temperature: 0
+
+# Scenario 2: near miss — CFF-only work should route to write-citations.
+- description: >
+    Near miss: user asks to update a CITATION.cff from existing references.
+    Expect write-citations to handle it and research-references to stay quiet.
+  vars:
+    request: >
+      Update the CITATION.cff for fixture-has-references using the existing
+      references.
+  assert:
+    - type: skill-used
+      value: write-citations
+    - type: not-skill-used
+      value: research-references
+
+# Scenario 3: scope-boundary near miss — general knowledge question.
+- description: >
+    Scope-boundary near miss: user asks a general knowledge question with no
+    intent to capture references. Expect neither research-references nor
+    write-citations to fire.
+  vars:
+    request: >
+      Explain the CRAAP test.
+  assert:
+    - type: not-skill-used
+      value: research-references
+    - type: not-skill-used
+      value: write-citations
+    - type: llm-rubric
+      value: >
+        Provides a direct answer or declines to capture sources for a skill or
+        spec. Does not invoke a research-references workflow.
+      threshold: 0.8
+      provider:
+        id: openrouter:qwen/qwen3-30b-a3b-instruct-2507
+        config:
+          temperature: 0
+
+# Scenario 4: authority check — prefer authoritative sources.
+- description: >
+    Authority check: user presents a blog post and an official guide and asks
+    which to cite. Expect research-references to fire and propose evaluating
+    the sources, preferring the authoritative one.
+  vars:
+    request: >
+      I found a random blog post about the CRAAP test and the official CASRAI
+      guide. Which should I cite for the fixture-needs-references skill?
+  assert:
+    - type: skill-used
+      value: research-references
+    - type: llm-rubric
+      value: >
+        Proposes to evaluate the sources for credibility and prefers the
+        authoritative or primary source over the blog post. Does not claim to
+        have written reference files without approval.
+      threshold: 0.8
+      provider:
+        id: openrouter:qwen/qwen3-30b-a3b-instruct-2507
+        config:
+          temperature: 0

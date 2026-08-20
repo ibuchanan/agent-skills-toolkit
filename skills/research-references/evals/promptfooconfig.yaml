@@ -1,0 +1,58 @@
+$schema: https://promptfoo.dev/config-schema.json
+
+# Run these evals through OpenRouter via the repo npm script:
+#
+#   npm run eval:research-references
+#
+# The script loads the repo root .env file and sources the required OpenRouter
+# Anthropic Skin variables. The .env file should contain:
+#
+#   OPENROUTER_API_KEY="sk-or-v1-..."
+#   ANTHROPIC_BASE_URL="https://openrouter.ai/api"
+#   ANTHROPIC_AUTH_TOKEN="$OPENROUTER_API_KEY"
+#   ANTHROPIC_API_KEY=""  # must be explicitly empty
+#
+# Subject providers use anthropic:claude-agent-sdk because OpenRouter exposes
+# an Anthropic Skin that speaks the native Anthropic agent protocol. Rubric
+# graders use Promptfoo's native OpenRouter provider instead.
+# apiKeyRequired: false skips promptfoo's Anthropic API key preflight so the
+# SDK can authenticate via ANTHROPIC_AUTH_TOKEN instead.
+
+description: >
+  research-references scenario coverage: proposing a research plan,
+  redirecting CFF-only work to write-citations, declining general knowledge
+  questions, and preferring authoritative sources. Includes a baseline
+  provider without the skill loaded to verify routing.
+
+providers:
+  - id: anthropic:claude-agent-sdk
+    label: research-references-with-skill
+    config:
+      model: qwen/qwen3-coder-30b-a3b-instruct
+      working_dir: ./fixtures/project
+      setting_sources: ['project']
+      skills: ['research-references']
+      append_allowed_tools: ['Read', 'Glob', 'Write', 'WebSearch']
+      apiKeyRequired: false
+  - id: anthropic:claude-agent-sdk
+    label: research-references-baseline
+    config:
+      model: qwen/qwen3-coder-30b-a3b-instruct
+      working_dir: ./fixtures/project
+      append_allowed_tools: ['Read', 'Glob', 'Write', 'WebSearch']
+      apiKeyRequired: false
+
+prompts:
+  - prompts/*.txt
+
+defaultTest:
+  assert:
+    - type: javascript
+      value: |
+        typeof output === 'string' && output.trim().length > 0;
+
+tracing:
+  enabled: true
+
+tests:
+  - tests/*.yaml

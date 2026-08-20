@@ -22,6 +22,10 @@
     {
       "name": "write-citations",
       "path": "./skills/write-citations/cspell-words.txt"
+    },
+    {
+      "name": "research-references",
+      "path": "./skills/research-references/cspell-words.txt"
     }
   ],
   "overrides": [
@@ -39,6 +43,13 @@
     {
       "filename": ["skills/write-citations/**/*", "specs/write-citations.md"],
       "dictionaries": ["write-citations"]
+    },
+    {
+      "filename": [
+        "skills/research-references/**/*",
+        "specs/research-references.md"
+      ],
+      "dictionaries": ["research-references"]
     }
   ],
   "words": [
