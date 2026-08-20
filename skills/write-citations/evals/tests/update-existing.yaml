@@ -1,0 +1,24 @@
+# Scenario 2: Update an existing CITATION.cff, preserving correct fields.
+- description: >
+    Given an existing CITATION.cff with an outdated author, write-citations
+    should explain the diff, preserve the correct title, and ask for
+    confirmation before writing.
+  vars:
+    request: >
+      Update the CITATION.cff for the skill in .claude/skills/existing-skill.
+  assert:
+    - type: skill-used
+      value: write-citations
+    - type: llm-rubric
+      value: >
+        Explains the difference between the existing CITATION.cff and the
+        proposed update, specifically noting that the author should change
+        from Pat Smith to Jordan Example. Preserves the title change only
+        if the references justify it, and asks for explicit confirmation or
+        approval before writing the updated file. Does not claim to have
+        already written the file without approval.
+      threshold: 0.8
+      provider:
+        id: anthropic:messages:claude-sonnet-4-6
+        config:
+          temperature: 0

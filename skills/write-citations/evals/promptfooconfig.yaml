@@ -1,0 +1,38 @@
+$schema: https://promptfoo.dev/config-schema.json
+
+description: >
+  write-citations scenario coverage: creating a new CITATION.cff, updating an
+  existing one, handling missing references, and scope near-misses for
+  validate-cff and paper-citation requests. The baseline provider runs the
+  same prompts without the skill loaded to verify routing and skill-added value.
+
+providers:
+  - id: anthropic:claude-agent-sdk
+    label: write-citations-with-skill
+    config:
+      model: claude-sonnet-4-6
+      working_dir: ./fixtures/project
+      setting_sources: ['project']
+      skills: ['write-citations']
+      append_allowed_tools: ['Read', 'Glob', 'Write']
+  - id: anthropic:claude-agent-sdk
+    label: write-citations-baseline
+    config:
+      model: claude-sonnet-4-6
+      working_dir: ./fixtures/project
+      append_allowed_tools: ['Read', 'Glob', 'Write']
+
+prompts:
+  - prompts/*.txt
+
+defaultTest:
+  assert:
+    - type: javascript
+      value: |
+        return typeof output === 'string' && output.trim().length > 0;
+
+tracing:
+  enabled: true
+
+tests:
+  - tests/*.yaml

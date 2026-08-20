@@ -1,0 +1,24 @@
+# Scenario 1: Create a new CITATION.cff from gathered references.
+- description: >
+    Given a skill with valid references and no existing CITATION.cff,
+    write-citations should fire, write a valid CFF 1.2.0 file at the skill
+    root, and report what it wrote.
+  vars:
+    request: >
+      Write a CITATION.cff for the skill in .claude/skills/new-skill.
+  assert:
+    - type: skill-used
+      value: write-citations
+    - type: trajectory:tool-used
+      value: Write
+    - type: llm-rubric
+      value: >
+        Claims to have created or written a CITATION.cff file for the skill.
+        The response includes a valid CFF 1.2.0 block with cff-version,
+        message, title, and authors fields, and does not invent authors or
+        metadata not present in the skill's references.
+      threshold: 0.8
+      provider:
+        id: anthropic:messages:claude-sonnet-4-6
+        config:
+          temperature: 0

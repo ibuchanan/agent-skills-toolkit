@@ -18,6 +18,10 @@
     {
       "name": "grill-this-skill",
       "path": "./skills/grill-this-skill/cspell-words.txt"
+    },
+    {
+      "name": "write-citations",
+      "path": "./skills/write-citations/cspell-words.txt"
     }
   ],
   "overrides": [
@@ -31,6 +35,10 @@
     {
       "filename": ["skills/grill-this-skill/**/*", "specs/grill-this-skill.md"],
       "dictionaries": ["grill-this-skill"]
+    },
+    {
+      "filename": ["skills/write-citations/**/*", "specs/write-citations.md"],
+      "dictionaries": ["write-citations"]
     }
   ],
   "words": [

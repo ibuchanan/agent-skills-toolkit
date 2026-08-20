@@ -1,0 +1,25 @@
+# Scenario 4: Missing references — do not invent authors or facts.
+- description: >
+    Given a skill with no references directory and no explicit metadata,
+    write-citations should fire but must not invent authors or other facts.
+    It should either ask for the missing information or produce a minimal,
+    honest skeleton.
+  vars:
+    request: >
+      Write a CITATION.cff for the skill in .claude/skills/empty-skill.
+  assert:
+    - type: skill-used
+      value: write-citations
+    - type: llm-rubric
+      value: >
+        Does not invent authors, titles, or other metadata not provided by
+        the user or present in the skill's references. Either asks the user
+        for the missing required information (title, authors) or produces
+        a minimal skeleton that leaves those fields empty or clearly marked
+        as needing input. Does not claim to have written a complete, valid
+        CITATION.cff with made-up values.
+      threshold: 0.8
+      provider:
+        id: anthropic:messages:claude-sonnet-4-6
+        config:
+          temperature: 0

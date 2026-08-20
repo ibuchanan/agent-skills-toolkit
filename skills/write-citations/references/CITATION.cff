@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata."
+title: "Agent Skills Toolkit"
+abstract: "Tooling and specifications for authoring, validating, and evaluating agent skills (SKILL.md packages): skill scaffolding scripts, Promptfoo evaluation-suite initialization, and skill-development workflows."
+type: software
+version: "0.0.0"
+license: "Apache-2.0"
+authors:
+  - family-names: Buchanan
+    given-names: Ian
+    email: ibuchanan@atlassian.com
+keywords:
+  - agent skills
+  - SKILL.md
+  - promptfoo
+  - evaluation

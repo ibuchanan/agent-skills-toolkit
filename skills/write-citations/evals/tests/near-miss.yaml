@@ -1,0 +1,19 @@
+# Scenario 3: Near-miss requests that should not trigger write-citations.
+- description: >
+    A request to validate an existing CITATION.cff should be handled by
+    validate-cff, not write-citations.
+  vars:
+    request: >
+      Validate the CITATION.cff for the skill in .claude/skills/existing-skill.
+  assert:
+    - type: not-skill-used
+      value: write-citations
+- description: >
+    A request about citing a paper or adding a README bibliography should not
+    trigger write-citations.
+  vars:
+    request: >
+      How should I cite this paper in the README bibliography?
+  assert:
+    - type: not-skill-used
+      value: write-citations
