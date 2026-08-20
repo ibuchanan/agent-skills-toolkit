@@ -443,8 +443,8 @@ export function createDefaultToolRunners(toolkitRoot: string): ToolRunner[] {
         }
         return runExternalCommand(
           binary,
-          ["eval", "-c", join(skillDir, "evals", "promptfooconfig.yaml")],
-          context.repoRoot,
+          ["eval", "-c", "promptfooconfig.yaml"],
+          join(skillDir, "evals"),
         );
       },
     },

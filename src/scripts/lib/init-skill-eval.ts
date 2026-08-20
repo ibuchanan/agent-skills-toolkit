@@ -86,10 +86,10 @@ function generatePromptfooConfig(): string {
   return `$schema: https://promptfoo.dev/config-schema.json
 
 prompts:
-  - file:///prompts/*.txt
+  - prompts/*.txt
 
 tests:
-  - file:///tests/*.yaml
+  - tests/*.yaml
 `;
 }
 

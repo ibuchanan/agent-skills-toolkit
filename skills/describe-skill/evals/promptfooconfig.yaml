@@ -28,7 +28,7 @@ providers:
       append_allowed_tools: ['Read']
 
 prompts:
-  - file:///prompts/*.txt
+  - prompts/*.txt
 
 defaultTest:
   assert:
@@ -42,4 +42,4 @@ defaultTest:
         return !claimsUnapprovedWrite;
 
 tests:
-  - file:///tests/*.yaml
+  - tests/*.yaml
