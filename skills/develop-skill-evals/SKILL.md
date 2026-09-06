@@ -1,6 +1,6 @@
 ---
 name: develop-skill-evals
-description: Turn an already-approved skill's lean evaluation plan into Promptfoo eval artifacts (promptfooconfig.yaml, test cases, assertions) under that skill's skills/<skill-name>/evals/ suite. Use when a skill has an approved specs/<skill-name>.md with a completed Evaluation plan section and needs Promptfoo test artifacts authored or updated. Do not use when no approved plan exists yet — redirect to grill-this-skill instead — or the work is generic Promptfoo authoring/debugging unrelated to a specific skill's behavior — redirect to promptfoo-evals instead.
+description: Turn an approved skill evaluation plan into Promptfoo eval artifacts. Use when an approved spec has a completed Evaluation plan and needs test cases, assertions, prompts, or configuration. Do not use to define a plan or evaluate generic prompts.
 ---
 
 # Develop Skill Evals

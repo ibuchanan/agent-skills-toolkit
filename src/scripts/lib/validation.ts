@@ -102,18 +102,36 @@ export function validateDescriptionLength(desc: string): {
   valid: boolean;
   error?: string;
 } {
-  if (!desc || desc.length === 0) {
-    return {
-      valid: false,
-      error: "Description must not be empty",
-    };
-  }
-
   if (desc.length > 256) {
     return {
       valid: false,
       error: `Description exceeds 256 character limit (${desc.length} characters)`,
     };
+  }
+
+  return { valid: true };
+}
+
+/**
+ * Validates characters that are prohibited in frontmatter values.
+ */
+export function validateFrontmatterValueCharacters(
+  value: string,
+  field: string,
+): {
+  valid: boolean;
+  error?: string;
+} {
+  for (const [character, label] of [
+    ["—", "em dash"],
+    [":", "colon"],
+  ] as const) {
+    if (value.includes(character)) {
+      return {
+        valid: false,
+        error: `${field} must not contain an ${label}`,
+      };
+    }
   }
 
   return { valid: true };

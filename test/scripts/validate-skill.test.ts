@@ -382,6 +382,28 @@ description: This is a valid description under 256 characters.
         const result = await validateSkill(skillDir);
         expect(result).toBeDefined();
       });
+
+      for (const [character, label, slug] of [
+        ["—", "em dash", "em-dash"],
+        [":", "colon", "colon"],
+      ]) {
+        it(`rejects descriptions containing an ${label}`, async () => {
+          const skillDir = createTestSkillDir(`invalid-description-${slug}`);
+          await mkdir(skillDir, { recursive: true });
+
+          const skillMd = `---
+name: invalid-description-${slug}
+description: Invalid${character} description
+---
+# Test`;
+
+          await writeFile(join(skillDir, "SKILL.md"), skillMd, "utf8");
+
+          await expect(validateSkill(skillDir)).rejects.toThrow(
+            `Description must not contain an ${label}`,
+          );
+        });
+      }
     });
 
     describe("valid SKILL.md fields: other", () => {
@@ -418,6 +440,49 @@ compatibility: Works with version 1.0+
         const result = await validateSkill(skillDir);
         expect(result.compatibility).toBe("Works with version 1.0+");
       });
+
+      for (const [field, yaml, errorLabel] of [
+        [
+          "compatibility colon",
+          'compatibility: "Invalid: value"',
+          "Compatibility",
+        ],
+        [
+          "compatibility em dash",
+          "compatibility: Invalid—value",
+          "Compatibility",
+        ],
+        [
+          "allowed tool colon",
+          'allowed-tools:\n  - "invalid: tool"',
+          "Allowed tool",
+        ],
+        [
+          "allowed tool em dash",
+          "allowed-tools:\n  - invalid—tool",
+          "Allowed tool",
+        ],
+      ]) {
+        it(`rejects prohibited characters in ${field}`, async () => {
+          const skillDir = createTestSkillDir(
+            `invalid-${field.replaceAll(" ", "-")}`,
+          );
+          await mkdir(skillDir, { recursive: true });
+
+          const skillMd = `---
+name: invalid-${field.replaceAll(" ", "-")}
+description: Test skill
+${yaml}
+---
+# Test`;
+
+          await writeFile(join(skillDir, "SKILL.md"), skillMd, "utf8");
+
+          await expect(validateSkill(skillDir)).rejects.toThrow(
+            `${errorLabel} must not contain`,
+          );
+        });
+      }
 
       it("rejects compatibility that is too long", async () => {
         const skillDir = createTestSkillDir("long-compat");

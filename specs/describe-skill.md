@@ -94,7 +94,7 @@ and the updated SKILL.md frontmatter
 - **Design pattern**:
   Tool-leaning — the output is a precise, bounded thing
   (a rewritten `description` string with structural constraints:
-  character limits, `name` untouched),
+  at most 256 characters, no colons or em dashes, `name` untouched),
   not a multi-turn or creative task.
   Favor deterministic checks for structure,
   paired with `llm-rubric` for rewrite quality;

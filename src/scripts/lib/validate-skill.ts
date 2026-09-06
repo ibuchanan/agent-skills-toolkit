@@ -7,6 +7,7 @@
  * - Required fields: name, description
  * - name: lowercase, no uppercase, valid characters, matches directory name
  * - description: length ≤ 256 characters
+ * - String frontmatter values: no colons or em dashes
  * - Optional fields: allowed-tools (array), compatibility (string ≤ 256 chars)
  * - No unexpected fields
  *
@@ -18,6 +19,7 @@ import { basename, join } from "node:path";
 import {
   ValidationError,
   validateDescriptionLength,
+  validateFrontmatterValueCharacters,
   validateSkillName,
   validateSkillNameMatches,
 } from "./validation.js";
@@ -133,9 +135,13 @@ export async function validateSkill(
   }
 
   // Validate description
-  const descValidation = validateDescriptionLength(description);
-  if (!descValidation.valid) {
-    throw new ValidationError(descValidation.error || "Invalid description");
+  for (const validation of [
+    validateDescriptionLength(description),
+    validateFrontmatterValueCharacters(description, "Description"),
+  ]) {
+    if (!validation.valid) {
+      throw new ValidationError(validation.error || "Invalid description");
+    }
   }
 
   // Validate optional fields
@@ -146,6 +152,15 @@ export async function validateSkill(
       throw new ValidationError("'allowed-tools' must be an array");
     }
     allowedTools = allowedToolsValue.map(String);
+    for (const allowedTool of allowedTools) {
+      const validation = validateFrontmatterValueCharacters(
+        allowedTool,
+        "Allowed tool",
+      );
+      if (!validation.valid) {
+        throw new ValidationError(validation.error || "Invalid allowed tool");
+      }
+    }
   }
 
   let compatibility: string | undefined;
@@ -158,6 +173,13 @@ export async function validateSkill(
       throw new ValidationError(
         `'compatibility' exceeds 256 character limit (${compatibilityValue.length} characters)`,
       );
+    }
+    const validation = validateFrontmatterValueCharacters(
+      compatibilityValue,
+      "Compatibility",
+    );
+    if (!validation.valid) {
+      throw new ValidationError(validation.error || "Invalid compatibility");
     }
     compatibility = compatibilityValue;
   }

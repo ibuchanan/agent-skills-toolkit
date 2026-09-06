@@ -11,6 +11,7 @@
  * - Required fields: name, description
  * - name: lowercase, valid characters, matches directory name
  * - description: length ≤ 256 characters
+ * - String frontmatter values: no colons or em dashes
  * - Optional fields: allowed-tools (array), compatibility (string)
  * - No unexpected fields in frontmatter
  *

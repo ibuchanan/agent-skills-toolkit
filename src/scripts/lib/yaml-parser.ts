@@ -59,14 +59,14 @@ class YamlParser {
 
     const content = line.trim();
 
-    // Mapping (object)
-    if (content.includes(":")) {
-      return this.parseMapping(lineIdx, baseIndent);
-    }
-
     // Sequence (array)
     if (content.startsWith("-")) {
       return this.parseSequence(lineIdx, baseIndent);
+    }
+
+    // Mapping (object)
+    if (content.includes(":")) {
+      return this.parseMapping(lineIdx, baseIndent);
     }
 
     // Scalar (string, number, boolean, null)

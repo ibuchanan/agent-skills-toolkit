@@ -1,6 +1,6 @@
 ---
 name: describe-skill
-description: Diagnose and tighten an existing skill's frontmatter `description` field so it triggers reliably. Compares the current description against the skill's actual SKILL.md body and spec, names concrete under- and over-triggering failure modes, and proposes 1-3 rewritten description candidates for approval — never edits without explicit approval and never touches the `name` field. Use when a description needs writing, tightening, or debugging: after observing a skill fail to fire, over-fire on a near miss, or before first use. Do not use to redesign what a skill does (hand off to grill-this-skill instead) or to rename a skill.
+description: Diagnose and improve an existing skill description so it triggers reliably. Use when writing, tightening, or debugging a skill description after a missed or incorrect activation. Do not use for skill redesigns or renames.
 ---
 
 # Describe Skill
@@ -61,8 +61,8 @@ Redirect instead of triggering when:
    Write 1-3 rewritten `description` strings that fix the diagnosed
    gaps. Each candidate must:
    - state what the skill does, then "Use when..." with concrete
-     triggers, written imperatively, non-empty, and under 1024
-     characters (see `references/skill-format.md`);
+     triggers, written imperatively, non-empty, at most 256
+     characters, and contain neither colons nor em dashes;
    - name explicit skip/non-trigger cases when the diagnosed failure
      mode is over-triggering;
    - leave the `name` field and the skill's actual instructions
@@ -79,12 +79,10 @@ Redirect instead of triggering when:
 
 5. **Apply and validate.**
    Write only the approved `description` string into the target's
-   frontmatter; leave `name` and body untouched. Validate the result
-   with `skills-ref validate ./path/to/skill` per
-   `references/validation.md` when that tool is
-   available; otherwise re-check the field manually against the
-   frontmatter contract (1-1024 characters, non-empty, states what and
-   when).
+   frontmatter; leave `name` and body untouched. Run
+   `validate-skill ./path/to/skill` to validate the repository rules.
+   Confirm the description is non-empty, at most 256 characters, and
+   contains neither a colon nor an em dash.
 
 ## Boundaries & safety
 
@@ -99,9 +97,9 @@ Redirect instead of triggering when:
 
 ## Reference load triggers
 
-- Read `references/skill-format.md` for the frontmatter contract
-  (`name`/`description` length and content rules) behind every candidate
-  rewrite.
+- Read `references/skill-format.md` for the broader Agent Skills format.
+  This repository additionally requires descriptions to be at most 256
+  characters and contain neither colons nor em dashes.
 - Read `references/validation.md` when the user wants the edited
   frontmatter checked with `skills-ref validate`.
 - Read `references/skill-composition.md` for this repo's dense
