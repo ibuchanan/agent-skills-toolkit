@@ -1,5 +1,7 @@
 # [Agent Skills Toolkit]
 
+<!-- cspell:words bunx ibuchanan -->
+
 > Please remove this quote block and replace the others with meaningful content. If you're looking at this on Bitbucket, be assured that it looks great on GitHub.
 
 [![Atlassian license](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat-square)](LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
@@ -14,11 +16,45 @@ See e.g.
 
 ## Usage
 
-> Provide a simple and concise (code) example of your project. Consumers should understand **how** your project solves their problem.
+This repository provides five skills:
+
+- `grill-this-skill`: define or revise a skill specification through an interview.
+- `research-references`: find and capture authoritative sources for a skill.
+- `describe-skill`: improve an existing skill's trigger description.
+- `develop-skill-evals`: turn an approved evaluation plan into Promptfoo tests.
+- `write-citations`: create citation metadata from existing references.
 
 ## Installation
 
-> Provide instructions on how to install and configure the project.
+Run the [Skills CLI](https://github.com/vercel-labs/skills) from the project
+where you want to use these skills. List the available skills first:
+
+```sh
+npx skills add ibuchanan/agent-skills-toolkit --list
+```
+
+Install one skill, or all five, for Claude Code (change `--agent` for your agent):
+
+```sh
+npx skills add ibuchanan/agent-skills-toolkit --skill describe-skill --agent claude-code --yes
+npx skills add ibuchanan/agent-skills-toolkit --skill '*' --agent claude-code --yes
+```
+
+Bun users can replace `npx skills` with `bunx skills`. These commands install
+into the current project; add `--global` for a user-wide installation.
+You do not need to add this toolkit to the consuming project's dependencies
+or run its contributor setup scripts.
+
+The CLI discovers `skills/<name>/SKILL.md` directly from Git and installs the
+skill directory with its supporting files. Neither npm publication nor a
+per-skill `package.json` is required. See the upstream
+[skill discovery documentation](https://github.com/vercel-labs/skills#skill-discovery).
+
+The root `package.json` includes a `files` allowlist for package archives:
+skill instructions, references, assets, scripts, and citation metadata.
+Evaluation fixtures, vendored repositories, and contributor tooling are excluded
+from those archives. This allowlist does not filter Git-based CLI installs.
+The package remains `private` to prevent accidental npm publication.
 
 ## Documentation
 

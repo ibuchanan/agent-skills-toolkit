@@ -2,7 +2,20 @@
   "name": "agent-skills-toolkit",
   "version": "0.0.0",
   "private": true,
+  "description": "Agent skills for defining, researching, describing, evaluating, and citing skills.",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ibuchanan/agent-skills-toolkit.git"
+  },
+  "files": [
+    "skills/*/SKILL.md",
+    "skills/*/references/**/*",
+    "skills/*/assets/**/*",
+    "skills/*/scripts/**/*",
+    "skills/*/CITATION.cff",
+    "CITATION.cff"
+  ],
   "type": "module",
   "scripts": {
     "build": "bun run build:scripts",

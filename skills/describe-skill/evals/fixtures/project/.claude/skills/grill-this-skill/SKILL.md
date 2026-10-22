@@ -1,0 +1,1 @@
+../../../../../../../grill-this-skill/SKILL.md
