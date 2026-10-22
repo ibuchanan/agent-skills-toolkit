@@ -1,5 +1,7 @@
 # Skill specification `axi`
 
+<!-- cspell:words unrequested TOON Addy Osmani -->
+
 ## Objective
 
 Help coding agents **design and implement new Agent eXperience Interfaces, or
