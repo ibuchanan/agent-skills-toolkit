@@ -222,7 +222,7 @@ $RECYCLE.BIN/
 # Bun build temporary artifacts
 *.bun-build
 
-package-lock.json
-bun.lock
+# Use Bun's committed lockfile, not a second root npm lockfile.
+/package-lock.json
 /scripts/
 .scratch/

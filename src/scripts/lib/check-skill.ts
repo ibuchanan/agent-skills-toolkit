@@ -1,5 +1,5 @@
 import { accessSync } from "node:fs";
-import { access, realpath, readdir, stat } from "node:fs/promises";
+import { access, readdir, realpath, stat } from "node:fs/promises";
 import { dirname, join, relative, resolve } from "node:path";
 import { findSkillFiles } from "./paths.js";
 import { validateCff } from "./validate-cff.js";

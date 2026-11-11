@@ -109,7 +109,10 @@ The package remains `private` to prevent accidental npm publication.
 
 Contributor hook installation and the vendored evaluation-runner bootstrap are
 separate: run `bun run setup` explicitly when developing this repository. They
-are not part of dependency preparation.
+are not part of dependency preparation. The root project uses Bun 1.4 or newer
+and commits `bun.lock`; use `bun install --frozen-lockfile` for a reproducible
+install. `bun run clean` removes generated output and dependencies, not the
+lockfile. The vendored evaluation runner retains its own npm workflow.
 
 ## Documentation
 
