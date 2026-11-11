@@ -1,0 +1,50 @@
+cff-version: 1.2.0
+message: "If you use this skill or its bundled reference materials, please cite it and the relevant upstream sources below."
+title: "Select LLM Agent Skill"
+type: software
+license: Apache-2.0
+authors:
+  - name: "Ranch Forge contributors"
+abstract: >-
+  A reusable agent skill for selecting LLMs for tasks and agent roles by
+  balancing cost, quality, and performance under budget, latency, reliability,
+  provider, and deployment constraints. Supports role-aware routing for coding
+  agents and multi-agent systems with structured recommendation output.
+keywords:
+  - llm-selection
+  - model-routing
+  - cost-optimization
+  - agent-skills
+  - prompt-engineering
+  - coding-agents
+references:
+  - type: article
+    title: "NIST AI 200-1: AI Use Taxonomy — A Human-Centered Approach"
+    authors:
+      - family-names: Theofanos
+        given-names: Mary
+      - family-names: Choong
+        given-names: Yee-Yin
+      - family-names: Jensen
+        given-names: Theodore
+    year: 2024
+    doi: "10.6028/NIST.AI.200-1"
+    notes: >-
+      Vendored in references/NIST.AI.200-1.md and used as the activity-oriented
+      taxonomy for classifying how an AI system contributes to a human task.
+  - type: article
+    title: "The Definitive LLM Selection & Benchmarks Guide"
+    year: 2026
+    url: "https://iternal.ai/llm-selection-guide"
+    notes: >-
+      Vendored in references/iternal-llm-selection-guide-2026.md and used as the
+      capability-oriented taxonomy for determining how much model intelligence a
+      task requires.
+  - type: website
+    title: "Artificial Analysis"
+    url: "https://artificialanalysis.ai/"
+    notes: >-
+      The default live data source for current model pricing, availability,
+      context limits, and provider compatibility. The skill includes a
+      scripts/fetch-model-catalog.py helper and a snapshot fallback in
+      assets/model-catalog.snapshot.json.
