@@ -21,15 +21,19 @@ The Open Knowledge Format (OKF) is a metadata standard for Markdown documents in
 ## Frontmatter Fields
 
 ### 1. Versioning
+
 - `okf_version`: Must be `'0.2.0'`.
 
 ### 2. Identity
+
 - `type`: High-level classification (e.g., `Specification`, `Web Scrape`, `PDF Conversion`, `Git Submodule`).
 - `title`: The canonical title of the knowledge piece.
 - `description`: A 1-2 sentence summary for agentic "just-in-time" loading decisions.
 
 ### 3. Provenance (`sources`)
+
 An array of objects representing the original material.
+
 - `id`: A unique local key for the source (e.g., `source-doc`).
 - `resource`: The direct URL, URI, or commit SHA.
 - `title`: The title of the source material.
@@ -37,12 +41,16 @@ An array of objects representing the original material.
 - `author`: The original author (e.g., `human:AAID`, `org:Anthropic`, or `agent:rovo`).
 
 ### 4. Generation (`generated`)
+
 Metadata about the extraction process.
+
 - `by`: The tool, agent, or process used (e.g., `docling/1.2.0`, `firecrawl/1.0.0`, `agent:rovo`).
 - `at`: ISO 8601 timestamp of extraction.
 
 ### 5. Verification (`verified`) - Optional
+
 Record of deterministic checks passed.
+
 - `by`: The verification process (e.g., `process:checksum-match`).
 - `at`: ISO 8601 timestamp of verification.
 

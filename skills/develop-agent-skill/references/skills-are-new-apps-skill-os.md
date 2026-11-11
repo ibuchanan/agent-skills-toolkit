@@ -1,3 +1,5 @@
+# Skills Are the New Apps — Source Transcription
+
 Preprints.org is a free multidisciplinary platform providing preprint service
 
 that is dedicated to making early versions of research outputs permanently
@@ -42,7 +44,7 @@ Le Chen, Zichang Wang, Wenxin Zheng, Erhu Feng, Dong Du, Yubin Xia * and Haibo C
 
 Shanghai Jiao Tong University, China
 
-* Correspondence: xiayubin@sjtu.edu.cn
+* Correspondence: <xiayubin@sjtu.edu.cn>
 
 ## Abstract
 
@@ -137,7 +139,7 @@ Figure 3. Skill procedure confidence distribution based on weighted pattern matc
 
 In the skill design paradigm, the main body of a skill is intended to include only the essential steps, while executable scripts should be stored as bundled resources so that they can be invoked directly without being loaded into the model's context. In practice, however, only fully deterministic scripts can be cleanly separated in this way. Many skills still embed scripts, code fragments, or template snippets that must be adapted to the specific prompt at runtime. We refer to these as semi-deterministic blocks. As shown in Figure 4, the name of files are determined by the user's input.
 
-```
+```text
 pypdf - Basic Operations Merge PDFs from pypdf import PdfWriter, PdfReader writer = PdfWriter() for pdf_file in ["doc1.pdf", "doc2.pdf", "doc3.pdf"]: reader = PdfReader(pdf_file) … with open("merged.pdf", "wb") as output: writer.write(output) Split PDF …
 ```
 
@@ -173,11 +175,11 @@ During execution, skills may be subject to certain requirements. As illustrated 
 
 When you have multiple unrelated failures, investigating them sequentially wastes time. Each investigation is independent and can happen in parallel.
 
-## Don't use when:
+## Don't use when
 
-- Failures are related (fix one might fix others)
-- Need to understand full system state
-- Agents would interfere with each other
+* Failures are related (fix one might fix others)
+* Need to understand full system state
+* Agents would interfere with each other
 
 Figure 6. Askill with parallel-safety requirement.
 
@@ -297,63 +299,63 @@ The key message is that many properties needed for system support-phased procedu
 
 ## References
 
-1. Agent Skills Initiative. Agent skills specification. https://agentskills.io/specification, 2024. Open SKILL.md format for agent skill portability; accessed: 2026-02-06.
-2. agentskills. Agent skills: Specification and documentation. https://github.com/agentskills/agentskills, 2024. Open format for giving agents new capabilities; specification, documentation, and reference SDK; accessed: 2026-02-06.
-3. Anthropic. Agent skills. https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview, 2025. Accessed: 2026-02-02.
-4. Anthropic. Equipping agents for the real world with agent skills. https://www.anthropic.com/engineering/ equipping-agents-for-the-real-world-with-agent-skills, 2025. Accessed: 2026-02-06.
-5. Anthropic. Extend claude with skills. https://code.claude.com/docs/en/skills, 2025. Claude Code skill mechanism; accessed: 2026-02-06.
+1. Agent Skills Initiative. Agent skills specification. <https://agentskills.io/specification>, 2024. Open SKILL.md format for agent skill portability; accessed: 2026-02-06.
+2. agentskills. Agent skills: Specification and documentation. <https://github.com/agentskills/agentskills>, 2024. Open format for giving agents new capabilities; specification, documentation, and reference SDK; accessed: 2026-02-06.
+3. Anthropic. Agent skills. <https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview>, 2025. Accessed: 2026-02-02.
+4. Anthropic. Equipping agents for the real world with agent skills. <https://www.anthropic.com/engineering/> equipping-agents-for-the-real-world-with-agent-skills, 2025. Accessed: 2026-02-06.
+5. Anthropic. Extend claude with skills. <https://code.claude.com/docs/en/skills>, 2025. Claude Code skill mechanism; accessed: 2026-02-06.
 6. Philip A. Bernstein, Vassos Hadzilacos, and Nathan Goodman. Concurrency Control and Recovery in Database Systems . Addison-Wesley, 1987.
 7. Rishi Bommasani, Drew A. Hudson, Ehsan Adeli, Russ Altman, Simran Arora, Sydney von Arx, et al. On the opportunities and risks of foundation models. arXiv preprint arXiv:2108.07258 , 2021.
 8. Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. Language models are few-shot learners. Advances in Neural Information Processing Systems (NeurIPS) , 33:1877-1901, 2020.
 9. Mike Burrows. The chubby lock service for loosely-coupled distributed systems. In Proceedings of the 7th USENIX Symposium on Operating Systems Design and Implementation (OSDI) , pages 335-350, 2006.
 10. Wenhu Chen, Xueguang Ma, Xuezhi Wang, William Cohen, Wen-tau Yih, Daniel Fried, et al. Program of thoughts prompting: Disentangling computation from reasoning for numerical reasoning tasks. Transactions of the Association for Computational Linguistics (TACL) , 11:547-563, 2023.
-11. Coze. Plugin development guide. https://www.coze.cn/open/docs/guides/plugin, 2025. Coze bot plugins and skills; accessed: 2026-02-06.
-12. Cursor. Agent skills. https://cursor.com/docs/context/skills, 2025. Cursor IDE skill mechanism; accessed: 2026-02-06.
+11. Coze. Plugin development guide. <https://www.coze.cn/open/docs/guides/plugin>, 2025. Coze bot plugins and skills; accessed: 2026-02-06.
+12. Cursor. Agent skills. <https://cursor.com/docs/context/skills>, 2025. Cursor IDE skill mechanism; accessed: 2026-02-06.
 13. Peter J. Denning. Virtual memory. ACMComputing Surveys , 2(3):153-189, 1970.
 14. Elmootazbellah N. Elnozahy, Lorenzo Alvisi, Yi-Min Wang, and David B. Johnson. A survey of rollbackrecovery protocols in message-passing systems. ACMComputing Surveys , 34(3):375-408, 2002.
 15. David F. Ferraiolo, Ravi Sandhu, Serban Gavrila, D. Richard Kuhn, and Ramaswamy Chandramouli. Proposed nist standard for role-based access control. ACMTransactions on Information and System Security (TISSEC) , 4(3):224-274, 2001.
 16. Luyu Gao, Aman Madaan, Shuyan Zhou, Uri Alon, Pengfei Liu, Yiming Yang, et al. Pal: Program-aided language models. International Conference on Machine Learning (ICML) , 2023.
-17. Google. Agent skills. https://antigravity.google/docs/skills, 2025. Google Antigravity coding agent skills; accessed: 2026-02-06.
+17. Google. Agent skills. <https://antigravity.google/docs/skills>, 2025. Google Antigravity coding agent skills; accessed: 2026-02-06.
 18. Jim Gray. The transaction concept: Virtues and limitations. Proceedings of the 7th International Conference on Very Large Data Bases (VLDB) , pages 144-154, 1981.
 
 <!-- image -->
 
-19. Zijian He, Reyna Abhyankar, Vikranth Srivatsa, and Yiying Zhang. Cognify: Supercharging gen-ai workflows with hierarchical autotuning. arXiv preprint arXiv:2502.08056 , 2025.
-20. Sirui Hong, Mingchen Zhuge, Jonathan Chen, Xiawu Zheng, Yuheng Cheng, Chaoyun Zhang, et al. Metagpt: Meta programming for a multi-agent collaborative framework. International Conference on Learning Representations (ICLR) , 2024.
-21. Patrick Hunt, Mahadev Konar, Flavio P. Junqueira, and Benjamin Reed. Zookeeper: Wait-free coordination for internet-scale systems. In USENIX Annual Technical Conference (ATC) , pages 145-158, 2010.
-22. Carlos E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and Karthik Narasimhan. Swe-bench: Can language models resolve real-world github issues? International Conference on Learning Representations (ICLR) , 2024.
-23. Omar Khattab, Arnav Singhvi, Paridhi Maheshwari, Zhiyuan Zhang, Keshav Santhanam, Sri Vardhamanan, et al. Dspy: Compiling declarative language model calls into self-improving pipelines. arXiv preprint arXiv:2310.03714 , 2023.
-24. Pavneet Singh Kochhar, Ferdian Thung, and David Lo. An empirical study of build failures in open source projects. Empirical Software Engineering , 21(4):1467-1503, 2016.
-25. Butler W. Lampson. Protection. In Proceedings of the 5th Princeton Conference on Information Sciences and Systems , pages 437-443, 1971.
-26. Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, et al. Retrieval-augmented generation for knowledge-intensive nlp tasks. Advances in Neural Information Processing Systems (NeurIPS) , 33:9459-9474, 2020.
-27. Hao Li et al. Agentskillos: Build your agent from 90,000+ skills via skill retrieval and orchestration. https://github.com/ynulihao/AgentSkillOS, 2026. Skill tree, retrieval, and DAG-based orchestration over large skill pools; accessed: 2026-02-06.
-28. Hao Li, Chunjiang Mu, Jianhao Chen, Siyue Ren, Zhiyao Cui, Yiqun Zhang, Lei Bai, and Shuyue Hu. Leveraging, managing, and scaling the agent skill ecosystem. Preprint , 2026. AgentSkillOS: skill retrieval and orchestration at scale.
-29. Zhenhao Li, Mingwen Zhang, Yingfei Xiong, et al. A large-scale study of api breaking changes in the wild. Empirical Software Engineering , 2023.
-30. Pengfei Liu, Weizhe Yuan, Jinlan Fu, Zhengbao Jiang, Hiroaki Hayashi, and Graham Neubig. Pre-train, prompt, and predict: A systematic survey of prompting methods in natural language processing. ACM Computing Surveys , 55(9):1-35, 2023. arXiv:2107.13586, 2021.
-31. Xiao Liu, Hao Lu, Yuxiang Zhang, Xiao Liu, Zhuohan Qian, Yansong Zhu, et al. Agentbench: Evaluating llms as agents. International Conference on Learning Representations (ICLR) , 2024.
-32. Zibin Liu, Cheng Zhang, Xi Zhao, Yunfei Feng, Bingyu Bai, Dahu Feng, Erhu Feng, Yubin Xia, and Haibo Chen. Beyond training: Enabling self-evolution of agents with MOBIMEM. arXiv preprint arXiv:2512.15784 , 2025.
-33. Grégoire Mialon, Roberto Dessì, Maria Lomeli, Carsten Eickhoff, Thomas Scialom, Zihan Wang, et al. Augmented language models: A survey. Transactions on Machine Learning Research (TMLR) , 2023.
-34. numman-ali. Openskills: Universal skills loader for ai coding agents. https://github.com/numman-ali/ openskills, 2026. CLI to install and load SKILL.md across Claude Code, Cursor, Windsurf, Aider, Codex; same format as Claude Code; accessed: 2026-02-06.
-35. OpenAI. Function calling and other api updates. https://openai.com/blog/function-calling-and-other-apiupdates, 2023. Accessed: 2026-02-06.
-36. OpenAI. Gpt-4 technical report. arXiv preprint arXiv:2303.08774 , 2023.
-37. OpenAI. Openai codex cli documentation. https://developers.openai.com/codex, 2025. Accessed: 2026-02-06.
-38. Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, et al. Training language models to follow instructions with human feedback. In Advances in Neural Information Processing Systems (NeurIPS) , volume 35, pages 27730-27744, 2022.
-39. Yujia Qin, Yining Ye, Lei Fang, Haoming Zhang, Wenhui Wang, Bin Qian, et al. Toolllm: Facilitating large language models to master 16000+ real-world apis. arXiv preprint arXiv:2307.16789 , 2023.
-40. Dennis M. Ritchie and Ken Thompson. The unix time-sharing system. Communications of the ACM , 17(7):365-375, 1974.
+ 1. Zijian He, Reyna Abhyankar, Vikranth Srivatsa, and Yiying Zhang. Cognify: Supercharging gen-ai workflows with hierarchical autotuning. arXiv preprint arXiv:2502.08056 , 2025.
+ 2. Sirui Hong, Mingchen Zhuge, Jonathan Chen, Xiawu Zheng, Yuheng Cheng, Chaoyun Zhang, et al. Metagpt: Meta programming for a multi-agent collaborative framework. International Conference on Learning Representations (ICLR) , 2024.
+ 3. Patrick Hunt, Mahadev Konar, Flavio P. Junqueira, and Benjamin Reed. Zookeeper: Wait-free coordination for internet-scale systems. In USENIX Annual Technical Conference (ATC) , pages 145-158, 2010.
+ 4. Carlos E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and Karthik Narasimhan. Swe-bench: Can language models resolve real-world github issues? International Conference on Learning Representations (ICLR) , 2024.
+ 5. Omar Khattab, Arnav Singhvi, Paridhi Maheshwari, Zhiyuan Zhang, Keshav Santhanam, Sri Vardhamanan, et al. Dspy: Compiling declarative language model calls into self-improving pipelines. arXiv preprint arXiv:2310.03714 , 2023.
+ 6. Pavneet Singh Kochhar, Ferdian Thung, and David Lo. An empirical study of build failures in open source projects. Empirical Software Engineering , 21(4):1467-1503, 2016.
+ 7. Butler W. Lampson. Protection. In Proceedings of the 5th Princeton Conference on Information Sciences and Systems , pages 437-443, 1971.
+ 8. Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, et al. Retrieval-augmented generation for knowledge-intensive nlp tasks. Advances in Neural Information Processing Systems (NeurIPS) , 33:9459-9474, 2020.
+ 9. Hao Li et al. Agentskillos: Build your agent from 90,000+ skills via skill retrieval and orchestration. <https://github.com/ynulihao/AgentSkillOS>, 2026. Skill tree, retrieval, and DAG-based orchestration over large skill pools; accessed: 2026-02-06.
+10. Hao Li, Chunjiang Mu, Jianhao Chen, Siyue Ren, Zhiyao Cui, Yiqun Zhang, Lei Bai, and Shuyue Hu. Leveraging, managing, and scaling the agent skill ecosystem. Preprint , 2026. AgentSkillOS: skill retrieval and orchestration at scale.
+11. Zhenhao Li, Mingwen Zhang, Yingfei Xiong, et al. A large-scale study of api breaking changes in the wild. Empirical Software Engineering , 2023.
+12. Pengfei Liu, Weizhe Yuan, Jinlan Fu, Zhengbao Jiang, Hiroaki Hayashi, and Graham Neubig. Pre-train, prompt, and predict: A systematic survey of prompting methods in natural language processing. ACM Computing Surveys , 55(9):1-35, 2023. arXiv:2107.13586, 2021.
+13. Xiao Liu, Hao Lu, Yuxiang Zhang, Xiao Liu, Zhuohan Qian, Yansong Zhu, et al. Agentbench: Evaluating llms as agents. International Conference on Learning Representations (ICLR) , 2024.
+14. Zibin Liu, Cheng Zhang, Xi Zhao, Yunfei Feng, Bingyu Bai, Dahu Feng, Erhu Feng, Yubin Xia, and Haibo Chen. Beyond training: Enabling self-evolution of agents with MOBIMEM. arXiv preprint arXiv:2512.15784 , 2025.
+15. Grégoire Mialon, Roberto Dessì, Maria Lomeli, Carsten Eickhoff, Thomas Scialom, Zihan Wang, et al. Augmented language models: A survey. Transactions on Machine Learning Research (TMLR) , 2023.
+16. numman-ali. Openskills: Universal skills loader for ai coding agents. <https://github.com/numman-ali/> openskills, 2026. CLI to install and load SKILL.md across Claude Code, Cursor, Windsurf, Aider, Codex; same format as Claude Code; accessed: 2026-02-06.
+17. OpenAI. Function calling and other api updates. <https://openai.com/blog/function-calling-and-other-apiupdates>, 2023. Accessed: 2026-02-06.
+18. OpenAI. Gpt-4 technical report. arXiv preprint arXiv:2303.08774 , 2023.
+19. OpenAI. Openai codex cli documentation. <https://developers.openai.com/codex>, 2025. Accessed: 2026-02-06.
+20. Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, et al. Training language models to follow instructions with human feedback. In Advances in Neural Information Processing Systems (NeurIPS) , volume 35, pages 27730-27744, 2022.
+21. Yujia Qin, Yining Ye, Lei Fang, Haoming Zhang, Wenhui Wang, Bin Qian, et al. Toolllm: Facilitating large language models to master 16000+ real-world apis. arXiv preprint arXiv:2307.16789 , 2023.
+22. Dennis M. Ritchie and Ken Thompson. The unix time-sharing system. Communications of the ACM , 17(7):365-375, 1974.
 
 <!-- image -->
 
-41. Jerome H. Saltzer and Michael D. Schroeder. The protection of information in computer systems. Proceedings of the IEEE , 63(9):1278-1308, 1975.
-42. Ravi S. Sandhu, Edward J. Coyne, Hal L. Feinstein, and Charles E. Youman. Role-based access control models. IEEE Computer , 29(2):38-47, 1996.
-43. Timo Schick, Jane Dwivedi-Yu, Roberto Dessì, Roberta Raileanu, Maria Lomeli, Jonas Hamburger, et al. Toolformer: Language models can teach themselves to use tools. Advances in Neural Information Processing Systems (NeurIPS) , 36, 2023.
-44. Yongliang Shen, Kaitao Song, Xu Tan, Dong Zhang, Weiming Lu, and Yueting Zhuang. Hugginggpt: Solving ai tasks with chatgpt and its friends in hugging face. Advances in Neural Information Processing Systems (NeurIPS) , 36, 2023.
-45. Noah Shinn, Federico Cassano, Emmanuel Berman, Ashwin Gopinath, Karthik Narasimhan, and Shunyu Yao. Reflexion: Language agents with verbal reinforcement learning. Advances in Neural Information Processing Systems (NeurIPS) , 37, 2024.
-46. Guanzhi Wang, Yuqi Xie, Yunfan Jiang, Ajay Mandlekar, Angel Fan, Anima Anandkumar, et al. Voyager: An open-ended embodied agent with large language models. Transactions on Machine Learning Research (TMLR) , 2024.
-47. Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed Chi, Sharan Narang, et al. Self-consistency improves chain of thought reasoning in language models. International Conference on Learning Representations (ICLR) , 2023.
-48. Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, et al. Chain-of-thought prompting elicits reasoning in large language models. Advances in Neural Information Processing Systems (NeurIPS) , 35:24824-24837, 2022.
-49. Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu, Beibin Li, Erkang Zhu, et al. Autogen: Enabling next-gen llm applications via multi-agent conversation. arXiv preprint arXiv:2308.08155 , 2023.
-50. John Yang, Carlos E. Jimenez, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and Karthik Narasimhan. Swe-agent: Agent-computer interfaces enable automated software engineering. arXiv preprint arXiv:2405.15793 , 2024.
-51. Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Thomas L. Griffiths, Yuan Cao, and Karthik Narasimhan. Tree of thoughts: Deliberate problem solving with large language models. Advances in Neural Information Processing Systems (NeurIPS) , 36, 2023.
-52. Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, and Yuan Cao. React: Synergizing reasoning and acting in language models. International Conference on Learning Representations (ICLR) , 2023.
+ 1. Jerome H. Saltzer and Michael D. Schroeder. The protection of information in computer systems. Proceedings of the IEEE , 63(9):1278-1308, 1975.
+ 2. Ravi S. Sandhu, Edward J. Coyne, Hal L. Feinstein, and Charles E. Youman. Role-based access control models. IEEE Computer , 29(2):38-47, 1996.
+ 3. Timo Schick, Jane Dwivedi-Yu, Roberto Dessì, Roberta Raileanu, Maria Lomeli, Jonas Hamburger, et al. Toolformer: Language models can teach themselves to use tools. Advances in Neural Information Processing Systems (NeurIPS) , 36, 2023.
+ 4. Yongliang Shen, Kaitao Song, Xu Tan, Dong Zhang, Weiming Lu, and Yueting Zhuang. Hugginggpt: Solving ai tasks with chatgpt and its friends in hugging face. Advances in Neural Information Processing Systems (NeurIPS) , 36, 2023.
+ 5. Noah Shinn, Federico Cassano, Emmanuel Berman, Ashwin Gopinath, Karthik Narasimhan, and Shunyu Yao. Reflexion: Language agents with verbal reinforcement learning. Advances in Neural Information Processing Systems (NeurIPS) , 37, 2024.
+ 6. Guanzhi Wang, Yuqi Xie, Yunfan Jiang, Ajay Mandlekar, Angel Fan, Anima Anandkumar, et al. Voyager: An open-ended embodied agent with large language models. Transactions on Machine Learning Research (TMLR) , 2024.
+ 7. Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed Chi, Sharan Narang, et al. Self-consistency improves chain of thought reasoning in language models. International Conference on Learning Representations (ICLR) , 2023.
+ 8. Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, et al. Chain-of-thought prompting elicits reasoning in large language models. Advances in Neural Information Processing Systems (NeurIPS) , 35:24824-24837, 2022.
+ 9. Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu, Beibin Li, Erkang Zhu, et al. Autogen: Enabling next-gen llm applications via multi-agent conversation. arXiv preprint arXiv:2308.08155 , 2023.
+10. John Yang, Carlos E. Jimenez, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and Karthik Narasimhan. Swe-agent: Agent-computer interfaces enable automated software engineering. arXiv preprint arXiv:2405.15793 , 2024.
+11. Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Thomas L. Griffiths, Yuan Cao, and Karthik Narasimhan. Tree of thoughts: Deliberate problem solving with large language models. Advances in Neural Information Processing Systems (NeurIPS) , 36, 2023.
+12. Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, and Yuan Cao. React: Synergizing reasoning and acting in language models. International Conference on Learning Representations (ICLR) , 2023.
 
 Disclaimer/Publisher's Note: The statements, opinions and data contained in all publications are solely those of the individual author(s) and contributor(s) and not of MDPI and/or the editor(s). MDPI and/or the editor(s) disclaim responsibility for any injury to people or property resulting from any ideas, methods, instructions or products referred to in the content.

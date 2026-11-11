@@ -12,7 +12,7 @@ The current skill is a pragmatic selector:
 
 It does not attempt to implement the more ambitious systems below.
 
-### 1. Critic-Based Task Profiling Is Out Of Scope
+## 1. Critic-Based Task Profiling Is Out Of Scope
 
 **Prior Art:** Derived from **BELLA (Budget-Efficient LLM Selection via Automated skill-profiling)**.
 
@@ -20,7 +20,7 @@ It does not attempt to implement the more ambitious systems below.
 - **Future direction:** decompose tasks into granular skill profiles using a critic or profiling stage before model selection
 - **Why out of scope now:** the current skill uses a lightweight taxonomy-driven task profile, not an additional learned or critic-based profiling pipeline
 
-### 2. Formal SLA Optimization Is Out Of Scope
+## 2. Formal SLA Optimization Is Out Of Scope
 
 **Prior Art:** Foundational to **Multi-Objective Optimization in LLM Routing** and **SAGE (Self-improving Agent with Skill Library)**.
 
@@ -28,7 +28,7 @@ It does not attempt to implement the more ambitious systems below.
 - **Future direction:** optimize routing with explicit SLA objectives such as token efficiency, TTFT, and benchmark-derived utility scores
 - **Why out of scope now:** the current skill uses simple weighted judgment over cost, quality, and performance rather than a formal optimization or reinforcement-learning system
 
-### 3. Speculative Evaluation Pipelines Are Out Of Scope
+## 3. Speculative Evaluation Pipelines Are Out Of Scope
 
 **Prior Art:** Derived from **Speculative Actions** and **Cascade Routing**.
 
@@ -36,7 +36,7 @@ It does not attempt to implement the more ambitious systems below.
 - **Future direction:** let a smaller model attempt a task or pre-evaluate a draft, then escalate only when confidence is low
 - **Why out of scope now:** the current skill can recommend escalation paths, but it does not orchestrate speculative execution or confidence-based cascade workflows
 
-### 4. Ontology-Driven Constraint Governance Is Out Of Scope
+## 4. Ontology-Driven Constraint Governance Is Out Of Scope
 
 **Prior Art:** Rooted in **HalluGuard** and **Constitutional AI (CAI)** frameworks.
 

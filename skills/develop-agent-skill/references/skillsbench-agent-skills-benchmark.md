@@ -1,4 +1,4 @@
-## SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks
+# SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks
 
 Xiangyi Li ∗ 1 Yimin Liu ∗ 2 Wenbo Chen ∗ 3 † Shenghan Zheng ∗ 4 Xiaokun Chen ‡ 5 Yifeng He ‡ 6 Yubo Li ‡ 7 Bingran You ‡ 8 Haotian Shen ‡ 9 Jiankai Sun ‡ 9 Shuyi Wang ‡ 9 Binxu Li 10 Qunhong Zeng 9 Di Wang 11 Xuandong Zhao 8 Yuanli Wang 12 Roey Ben Chaim 13 Zonglin Di 14 Yipeng Gao 15 Junwei He 16 Yizhuo He 7 Liqiang Jing 17 Luyang Kong 9 Xin Lan 18 Jiachen Li 19 Songlin Li 5 Yijiang Li 20 Yueqian Lin 21 Xinyi Liu 9 Xuanqing Liu 9 Haoran Lyu 9 Ze Ma 22 Kaixin Li 9 Runhui Wang 9 Tianyu Wang 9 Wengao Ye 23 Yue Zhang 17 Hanwen Xing 9 Kaixin Li 9 Yiqi Xue 15 Steven Dillmann 5 Han-chung Lee 9
 
@@ -14,7 +14,7 @@ Agent architecture stack and resolution rates across 7 agent-model configuration
 
 Curated Skills (beige) improve performance by +16.2pp on average; self-generated Skills (amber) provide negligible or negative benefit.
 
-∗ Equal contribution. ‡ Core contribution. †This work was conducted outside the author's role at Amazon. 1 BenchFlow 2 Ohio State University 3 Amazon 4 Dartmouth College 5 Stanford University 6 UC Davis 7 Carnegie Mellon University 8 UC Berkeley 9 Independent 10 Princeton University 11 Foxconn 12 Boston University 13 Zenity 14 UC Santa Cruz 15 USC 16 ByteDance 17 UT Dallas 18 Michigan State University 19 UT Austin 20 UC San Diego 21 Duke University 22 Columbia University 23 University of Oxford. Correspondence to: Xiangyi Li &lt;xiangyi@benchflow.ai&gt;.
+∗ Equal contribution. ‡ Core contribution. †This work was conducted outside the author's role at Amazon. 1 BenchFlow 2 Ohio State University 3 Amazon 4 Dartmouth College 5 Stanford University 6 UC Davis 7 Carnegie Mellon University 8 UC Berkeley 9 Independent 10 Princeton University 11 Foxconn 12 Boston University 13 Zenity 14 UC Santa Cruz 15 USC 16 ByteDance 17 UT Dallas 18 Michigan State University 19 UT Austin 20 UC San Diego 21 Duke University 22 Columbia University 23 University of Oxford. Correspondence to: Xiangyi Li &lt;<xiangyi@benchflow.ai>&gt;.
 
 Preprint. March 16, 2026.
 
@@ -32,7 +32,7 @@ To address this, we introduce SKILLSBENCH, the first benchmark that treats Skill
 
 1. A Skills-centric evaluation framework. We curate 84 tasks across 11 domains, each executed under three conditions-no Skills, curated Skills, and self-generated Skills-with deterministic verifiers and full trajectory logging. We stratify tasks by difficulty and conduct leak-
 2. age audits to ensure Skills provide guidance rather than solutions.
-2. Large-scale empirical evaluation. We evaluate 7 agentmodel configurations across 7,308 trajectories, producing the first systematic evidence on Skills efficacy, variance, and failure modes.
+3. Large-scale empirical evaluation. We evaluate 7 agentmodel configurations across 7,308 trajectories, producing the first systematic evidence on Skills efficacy, variance, and failure modes.
 
 ## 2. SKILLSBENCH
 
@@ -161,7 +161,7 @@ We evaluate how curated and self-generated Skills affect agent performance acros
 
 Table 3 presents pass rates across all three conditions for each model-harness combination, ordered by with-Skills performance.
 
-## Finding 1: Skills provide substantial but variable benefit.
+## Finding 1: Skills provide substantial but variable benefit
 
 Skills improve performance by +16.2pp on average across 7 model-harness configurations, but with high variance across configurations (range: +13.6pp to +23.3pp). This variability suggests that Skills efficacy depends strongly on the specific agent-model combination, contradicting the assumption of uniform Skills benefits.
 
@@ -295,18 +295,18 @@ Acknowledgements. We thank Junxian He for guidance and advice; Terry Yue Zhuo fo
 ## References
 
 - Anthropic. Introducing the model context protocol. https: //www.anthropic.com/news/model-conte xt-protocol , November 2024. Open standard for connecting AI systems with data sources.
-- Anthropic. Equipping agents for the real world with Agent Skills. https://www.anthropic.com/engi neering/equipping-agents-for-the-rea l-world-with-agent-skills , October 2025a. Anthropic Engineering Blog.
+- Anthropic. Equipping agents for the real world with Agent Skills. <https://www.anthropic.com/engi> neering/equipping-agents-for-the-rea l-world-with-agent-skills , October 2025a. Anthropic Engineering Blog.
 - Anthropic. Claude Code: an agentic coding tool. https: //github.com/anthropics/claude-code , 2025b.
 - Anthropic. Demystifying evals for AI agents. https: //www.anthropic.com/engineering/demy stifying-evals-for-ai-agents , 2026. Anthropic Engineering Blog.
 - Austin, J., Odena, A., Nye, M., Bosma, M., Michalewski, H., Dohan, D., Jiang, E., Cai, C., Terry, M., Le, Q., et al. Program synthesis with large language models. arXiv preprint arXiv:2108.07732 , 2021.
 - Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J. D., Dhariwal, P., Neelakantan, A., Shyam, P., Sastry, G., Askell, A., et al. Language models are few-shot learners. NeurIPS , 2020.
-- Brown, W. Verifiers: Environments for llm reinforcement learning. https://github.com/PrimeIntell ect-ai/verifiers , 2025.
+- Brown, W. Verifiers: Environments for llm reinforcement learning. <https://github.com/PrimeIntell> ect-ai/verifiers , 2025.
 - Chan, J. S., Chowdhury, N., Jaffe, O., Aung, J., Sherburn, D., Mays, E., Starace, G., Liu, K., Maksin, L., Patwardhan, T., Madry, A., and Weng, L. MLE-bench: Evaluating machine learning agents on machine learning engineering. In ICLR , 2025.
 - Chiang, W.-L., Zheng, L., Sheng, Y., Angelopoulos, A. N., Li, T., Li, D., Zhu, B., Zhang, H., Jordan, M., Gonzalez, J. E., et al. Chatbot arena: An open platform for evaluating llms by human preference. In ICML , 2024.
 - Chowdhery, A., Narang, S., Devlin, J., Bosma, M., Mishra, G., Roberts, A., Barham, P., Chung, H. W., Sutton, C., Gehrmann, S., et al. Palm: Scaling language modeling with pathways. JMLR , 2023.
 - Google. Gemini CLI: An open-source AI agent that brings the power of Gemini directly into your terminal. https: //github.com/google-gemini/gemini-cli , 2025.
 - Hake, R. R. Interactive-engagement versus traditional methods: A six-thousand-student survey of mechanics test data for introductory physics courses. American journal of Physics , 1998.
-- Harbor Framework Team. Harbor: A framework for evaluating and optimizing agents and models in container environments, January 2026. URL https://github .com/laude-institute/harbor .
+- Harbor Framework Team. Harbor: A framework for evaluating and optimizing agents and models in container environments, January 2026. URL <https://github> .com/laude-institute/harbor .
 - Jimenez, C. E., Yang, J., Wettig, A., Yao, S., Pei, K., Press, O., and Narasimhan, K. R. SWE-bench: Can language models resolve real-world github issues? In ICLR , 2024.
 - Khattab, O., Singhvi, A., Maheshwari, P., Zhang, Z., Santhanam, K., Vardhamanan, S., Haq, S., Sharma, A., Joshi, T. T., Moazam, H., et al. Dspy: Compiling declarative language model calls into self-improving pipelines. arXiv preprint arXiv:2310.03714 , 2023.
 - Koh, J. Y., Lo, R., Jang, L., Duvvur, V., Lim, M., Huang, P.-Y., Neubig, G., Zhou, S., Salakhutdinov, R., and Fried, D. Visualwebarena: Evaluating multimodal agents on realistic visual web tasks. In ACL , pp. 881-905, 2024.
@@ -315,7 +315,7 @@ Acknowledgements. We thank Junxian He for guidance and advice; Terry Yue Zhuo fo
 - Madaan, A., Tandon, N., Gupta, P., Hallinan, S., Gao, L., Wiegreffe, S., Alon, U., Dziri, N., Prabhumoye, S., Yang, Y., et al. Self-refine: Iterative refinement with self-feedback. NeurIPS , 2023.
 - Mattson, P., Cheng, C., Diamos, G., Coleman, C., Micikevicius, P., Patterson, D., Tang, H., Wei, G.-Y., Bailis, P., Bittorf, V., et al. Mlperf training benchmark. MLSys , 2020.
 - Merrill, M. A., Shaw, A. G., Carlini, N., Li, B., Raj, H., Bercovich, I., Shi, L., Shin, J. Y ., Walshe, T., Buchanan, E. K., et al. Terminal-bench: Benchmarking agents on hard, realistic tasks in command line interfaces. arXiv preprint arXiv:2601.11868 , 2026.
-- OpenAI. Codex CLI: Lightweight coding agent that runs in your terminal. https://github.com/openai/ codex , 2025.
+- OpenAI. Codex CLI: Lightweight coding agent that runs in your terminal. <https://github.com/openai/> codex , 2025.
 - Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C., Mishkin, P., Zhang, C., Agarwal, S., Slama, K., Ray, A., et al. Training language models to follow instructions with human feedback. NeurIPS , 2022.
 
 - Pan, M. Z., Cemri, M., Agrawal, L. A., Yang, S., Chopra, B., Tiwari, R., Keutzer, K., Parameswaran, A., Ramchandran, K., Klein, D., et al. Why do multiagent systems fail? In ICLR 2025 Workshop on Building Trust in Language Models and Applications , 2025.
@@ -389,9 +389,9 @@ Figure 6. Token distribution of SKILL.md files (n=36,338, 99.5th percentile show
 
 <!-- image -->
 
-2. Clarity: Readability and organization (0-3 points)
-3. Specificity: Actionable vs. vague guidance (0-3 points)
-4. Examples: Presence and quality of examples (0-3 points)
+1. Clarity: Readability and organization (0-3 points)
+2. Specificity: Actionable vs. vague guidance (0-3 points)
+3. Examples: Presence and quality of examples (0-3 points)
 
 Mean quality score across the ecosystem is 6.2/12 (SD=2.8), indicating substantial room for improvement in Skill authoring practices.
 
@@ -418,7 +418,7 @@ Each task is a self-contained directory with the following layout:
 
 Figure 7. Total Skill size distribution (n=37,078, 99.5th percentile shown, excluding metadata.json). Median total size remains under 2.5k tokens, with distribution highly skewed toward concise artifacts.
 
-```
+```text
 task.toml # Metadata and resource configuration environment/ Dockerfile # Container setup skills/ # Curated Skills (absent in no-Skills) <skill-name>/ SKILL.md # Required per skill scripts/ # Optional executable code references/ # Optional reference documentation solution/ solve.sh # Oracle solution (must pass 100%) tests/ test.sh # Runs pytest inside the container test_outputs.py # Programmatic assertions
 ```
 
@@ -426,7 +426,7 @@ task.toml # Metadata and resource configuration environment/ Dockerfile # Contai
 
 Each task specifies metadata and resource limits in TOML format:
 
-```
+```text
 version = "1.0" [metadata] author_name = "Contributor Name" author_email = "email@example.com" difficulty = "medium" # easy | medium | hard category = "finance" tags = ["pandas", "data-analysis", "spreadsheet"] [verifier] timeout_sec = 900.0 # 600-900s typical [agent] timeout_sec = 900.0 # 600-1200s typical [environment]
 ```
 
@@ -434,7 +434,7 @@ version = "1.0" [metadata] author_name = "Contributor Name" author_email = "emai
 
 Figure 8. Distribution of Skill categories. The top 10 categories account for 79.6% of all Skills, with Documentation (11.9%), Git/Version Control (11.8%), and Code Quality (9.0%) leading. No single category dominates, reflecting diverse developer needs across documentation, infrastructure, testing, and frontend tasks.
 
-```
+```text
 build_timeout_sec = 600.0 cpus = 1 # 1-4 cores memory_mb = 4096 # 2048-10240 MB storage_mb = 10240 # 10 GB standard
 ```
 
@@ -442,7 +442,7 @@ build_timeout_sec = 600.0 cpus = 1 # 1-4 cores memory_mb = 4096 # 2048-10240 MB 
 
 Verification uses pytest with the CTRF (Common Test Report Format) output. The test.sh script installs dependencies, runs pytest, and writes a binary reward:
 
-```
+```text
 #!/bin/bash pip3 install --break -system-packages pytest pytest-json-ctrf mkdir -p /logs/verifier pytest --ctrf /logs/verifier/ctrf.json \ /tests/test_outputs.py -rA -v if [ $? -eq 0 ]; then echo 1 > /logs/verifier/reward.txt else echo 0 > /logs/verifier/reward.txt fi exit 0
 ```
 
@@ -459,7 +459,7 @@ Figure 9. File count distribution per Skill. Most Skills contain 1-5 files.
 
 <!-- image -->
 
-3. Benchmark report : For each task, reviewers produce a structured report documenting oracle results, agent pass rates with and without Skills, failure analysis, and a final verdict (approve, major changes needed, or reject).
+1. Benchmark report : For each task, reviewers produce a structured report documenting oracle results, agent pass rates with and without Skills, failure analysis, and a final verdict (approve, major changes needed, or reject).
 
 Of 322 candidate submissions from 105 contributors, 86 tasks passed all review stages and were included in the final benchmark (26.7% acceptance rate).
 
@@ -491,7 +491,7 @@ Figure 10. File extension distribution. Markdown files dominate, indicating Skil
 
 <!-- image -->
 
-7. Multimodal verification : For multimodal tasks (audio, PPTX, video, PDF), maintainers personally inspect agent output to verify correctness beyond programmatic assertions.
+1. Multimodal verification : For multimodal tasks (audio, PPTX, video, PDF), maintainers personally inspect agent output to verify correctness beyond programmatic assertions.
 
 ## B.7. Automated CI Pipeline
 
@@ -569,7 +569,7 @@ Model Family Consideration. Claude models have been trained with awareness of th
 
 Agents interact with the environment through a standardized interface:
 
-```
+```text
 class BaseAgent(ABC): @abstractmethod def step(self, obs: str ) -> str : """obs: terminal output -> action""" pass
 ```
 
@@ -577,7 +577,7 @@ class BaseAgent(ABC): @abstractmethod def step(self, obs: str ) -> str : """obs:
 
 Skills are injected into each task's Docker container by copying the environment/skills/ directory to agent-specific paths. Each Dockerfile includes:
 
-```
+```text
 # Copy skills to agent-specific locations COPY skills /root/.claude/skills # Claude Code COPY skills /root/.codex/skills # Codex CLI COPY skills /root/.gemini/skills # Gemini CLI COPY skills /root/.agents/skills # Portable agents
 ```
 
@@ -587,7 +587,7 @@ Each agent harness discovers and loads Skills from its respective directory at r
 
 Each Skill is a directory containing a required SKILL.md fi le with YAML frontmatter and optional bundled resources:
 
-```
+```text
 skill-name/ SKILL.md # Required: YAML frontmatter + instructions scripts/ # Optional: executable code references/ # Optional: reference documentation
 ```
 
@@ -782,7 +782,7 @@ SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks
 
 Table 10 consolidates all aggregate results across 7 model-harness configurations and 3 Skills conditions. Scores are computed using Method D (task-mean with fixed denominator of 84 evaluated tasks), consistent with Terminal-Bench (Merrill et al., 2026) scoring methodology. Confidence intervals are 95% bootstrap CIs with 1,000 resamples.
 
-## Key observations.
+## Key observations
 
 - Curated Skills improve performance by +16.2pp on average (range: +13.6 to +23.3pp), corresponding to a normalized gain of 21.5%.
 - Claude Code + Opus 4.5 shows the largest absolute improvement (+23.3pp) and normalized gain (29.9%), reflecting Claude Code's native Skills integration.

@@ -10,7 +10,7 @@ Agent Skills are a lightweight, open format for extending AI agent capabilities 
 
 At its core, a skill is a folder containing a `SKILL.md` file. This file includes metadata (`name` and `description`, at minimum) and instructions that tell an agent how to perform a specific task. Skills can also bundle scripts, reference materials, templates, and other resources.
 
-```
+```text
 my-skill/
 ├── SKILL.md          # Required: metadata + instructions
 ├── scripts/          # Optional: executable code

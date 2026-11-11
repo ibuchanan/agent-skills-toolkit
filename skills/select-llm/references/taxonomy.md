@@ -20,7 +20,7 @@ Classify each task on three axes:
 These categories summarize the NIST AI Use Taxonomy in a form that is practical for LLM routing.
 
 | Activity | Meaning | Common LLM examples |
-|---|---|---|
+| --- | --- | --- |
 | extraction and classification | pull fields, labels, entities, or simple judgments from input | entity extraction, tagging, moderation, schema fill |
 | transformation | rewrite or convert material without changing the core meaning | translation, normalization, reformatting, tone shift |
 | summarization and synthesis | condense or combine information into a coherent whole | meeting notes, briefings, multi-document synthesis |
@@ -41,7 +41,7 @@ Notes:
 These levels summarize the Iternal intelligence hierarchy. The goal is to estimate the minimum capability threshold needed for reliable results.
 
 | Level | Name | Typical requirement |
-|---|---|---|
+| --- | --- | --- |
 | 1 | extraction | pull specific values from known patterns |
 | 2 | classification | assign labels or buckets |
 | 3 | transformation | convert format, style, or representation |
@@ -100,7 +100,7 @@ These concepts connect the taxonomy to selection behavior.
 Use this quick mapping when profiling common LLM workflows.
 
 | Workflow | Primary activity | Typical complexity |
-|---|---|---|
+| --- | --- | --- |
 | structured derivation | extraction and classification | 1-3 |
 | summarization or compression | summarization and synthesis | 4 |
 | extraction or tagging | extraction and classification | 1-2 |

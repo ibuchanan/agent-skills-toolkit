@@ -8,9 +8,23 @@
     "dist/**",
     "coverage/**",
     ".agents/**",
-    ".claude/**"
+    ".claude/**",
+    "skills/develop-agent-skill/references/agent-skills-architecture-acquisition-security-path-forward.md",
+    "skills/develop-agent-skill/references/agent-skills-security-vulnerabilities-at-scale.md",
+    "skills/develop-agent-skill/references/skillject-stealthy-skill-prompt-injection.md",
+    "skills/develop-agent-skill/references/skills-are-new-apps-skill-os.md",
+    "skills/develop-agent-skill/references/skillsbench-agent-skills-benchmark.md",
+    "skills/select-llm/assets/model-catalog.snapshot.json"
   ],
   "dictionaryDefinitions": [
+    {
+      "name": "select-llm",
+      "path": "./skills/select-llm/cspell-words.txt"
+    },
+    {
+      "name": "microskills",
+      "path": "./specs/references/microskills/cspell-words.txt"
+    },
     {
       "name": "develop-skill-evals",
       "path": "./skills/develop-skill-evals/cspell-words.txt"
@@ -29,6 +43,18 @@
     }
   ],
   "overrides": [
+    {
+      "filename": ["skills/select-llm/**/*"],
+      "dictionaries": ["select-llm"]
+    },
+    {
+      "filename": [
+        "cspell.json",
+        "specs/capture-microskill.md",
+        "specs/references/microskills/**/*"
+      ],
+      "dictionaries": ["microskills"]
+    },
     {
       "filename": [
         "skills/develop-skill-evals/**/*",
@@ -53,6 +79,22 @@
     }
   ],
   "words": [
+    "AAID",
+    "bunx",
+    "Docling",
+    "duplicative",
+    "Firecrawl",
+    "ibuchanan",
+    "minimise",
+    "Mintlify",
+    "pathlib",
+    "pytest",
+    "skillject",
+    "skillsbench",
+    "triggerability",
+    "venv",
+    "Zenodo",
+    "Zotero",
     "agentskills",
     "ahormati",
     "alnum",

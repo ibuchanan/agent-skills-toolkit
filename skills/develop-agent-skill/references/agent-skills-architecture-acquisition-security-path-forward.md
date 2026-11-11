@@ -1,4 +1,4 @@
-## Agent Skills for Large Language Models: Architecture, Acquisition, Security, and the Path Forward
+# Agent Skills for Large Language Models: Architecture, Acquisition, Security, and the Path Forward
 
 Renjun Xu * , Yang Yan
 
@@ -6,7 +6,7 @@ Zhejiang University, China
 
 ## Abstract
 
-The transition from monolithic language models to modular, skill-equipped agents marks a defining shift in how large language models (LLMs) are deployed in practice. Rather than encoding all procedural knowledge within model weights, agent skillscomposable packages of instructions, code, and resources that agents load on demand-enable dynamic capability extension without retraining. It is formalized in a paradigm of progressive disclosure, portable skill definitions, and integration with the Model Context Protocol (MCP). This survey provides a comprehensive treatment of the agent skills landscape, as it has rapidly evolved during the last few months. We organize the field along four axes: (i) architectural foundations, examining the SKILL.md specification, progressive context loading, and the complementary roles of skills and MCP; (ii) skill acquisition, covering reinforcement learning with skill libraries (SAGE), autonomous skill discovery (SEAgent), and compositional skill synthesis; (iii) deployment at scale, including the computer-use agent (CUA) stack, GUI grounding advances, and benchmark progress on OSWorld and SWE-bench; and (iv) security, where recent empirical analyses reveal that 26.1% of communitycontributed skills contain vulnerabilities, motivating our proposed Skill Trust and Lifecycle Governance Framework-a fourtier, gate-based permission model that maps skill provenance to graduated deployment capabilities. We identify seven open challenges-from cross-platform skill portability to capability-based permission models-and propose a research agenda for realizing trustworthy, self-improving skill ecosystems. Unlike prior surveys that broadly cover LLM agents or tool use, this work focuses specifically on the emerging skill abstraction layer and its implications for the next generation of agentic systems. An accompanied collection of awesome agent skills resources can be found at https://github.com/scienceaix/agentskills.
+The transition from monolithic language models to modular, skill-equipped agents marks a defining shift in how large language models (LLMs) are deployed in practice. Rather than encoding all procedural knowledge within model weights, agent skillscomposable packages of instructions, code, and resources that agents load on demand-enable dynamic capability extension without retraining. It is formalized in a paradigm of progressive disclosure, portable skill definitions, and integration with the Model Context Protocol (MCP). This survey provides a comprehensive treatment of the agent skills landscape, as it has rapidly evolved during the last few months. We organize the field along four axes: (i) architectural foundations, examining the SKILL.md specification, progressive context loading, and the complementary roles of skills and MCP; (ii) skill acquisition, covering reinforcement learning with skill libraries (SAGE), autonomous skill discovery (SEAgent), and compositional skill synthesis; (iii) deployment at scale, including the computer-use agent (CUA) stack, GUI grounding advances, and benchmark progress on OSWorld and SWE-bench; and (iv) security, where recent empirical analyses reveal that 26.1% of communitycontributed skills contain vulnerabilities, motivating our proposed Skill Trust and Lifecycle Governance Framework-a fourtier, gate-based permission model that maps skill provenance to graduated deployment capabilities. We identify seven open challenges-from cross-platform skill portability to capability-based permission models-and propose a research agenda for realizing trustworthy, self-improving skill ecosystems. Unlike prior surveys that broadly cover LLM agents or tool use, this work focuses specifically on the emerging skill abstraction layer and its implications for the next generation of agentic systems. An accompanied collection of awesome agent skills resources can be found at <https://github.com/scienceaix/agentskills>.
 
 Keywords: Agent skills, large language models, tool use, computer-use agents, Model Context Protocol, skill libraries, agentic AI, progressive disclosure, security
 
@@ -20,7 +20,7 @@ Anthropic formalized this concept in October 2025 with the launch of Agent Skill
 
 This rapid convergence reflects a broader recognition: as agents move from research prototypes to production deployments, the industry needs standardized mechanisms for packaging, distributing, and governing procedural expertise. The parallel maturation of the Model Context Protocol (MCP)-an open standard for connecting agents to external data and tools, donated to the Linux Foundation's Agentic AI Foundation in December 2025 [4]-provides the complementary infrastructure layer. Together, skills and MCP define an emerging agentic stack in which skills supply the 'what to do' and MCP supplies the 'how to connect.'
 
-* Corresponding author: rux@zju.edu.cn
+* Corresponding author: <rux@zju.edu.cn>
 
 This survey is the first to provide a comprehensive, focused treatment of the agent skills paradigm. While excellent surveys exist on LLM agents broadly [5, 6], tool use [7], and GUI agents [8, 9], none specifically examines the skill abstraction layer that has emerged as a unifying architectural primitive. Our contributions are:
 
@@ -231,40 +231,40 @@ The path forward requires simultaneous advances in multiple directions: more pri
 
 ## References
 
-- [1] Barry Zhang, Keith Lazuka, and Mahesh Murag. Equipping agents for the real world with agent skills. https://www.anthropic.com/engineering/ equipping-agents-for-the-real-world-with-agent-skills , 2025. Anthropic Engineering Blog, Oct 2025.
-- [2] Anthropic. Introducing agent skills. https://www.anthropic.com/news/skills , 2025. Product Announcement, Oct 2025.
-- [3] Anthropic. Agent skills open standard. https://agentskills.io , 2025. Open standard specification.
-- [4] Anthropic. Donating the model context protocol and establishing the agentic AI foundation. https://www. anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-a 2025. Dec 9, 2025.
-- [5] Junyu Luo et al. Large language model agent: A survey on methodology, applications and challenges. arXiv preprint arXiv:2503.21460 , 2025.
-- [6] Aske Plaat et al. Agentic large language models: A survey. arXiv preprint arXiv:2503.23037 , 2025.
-- [7] Changle Qu et al. Tool learning with large language models: A survey. Frontiers of Computer Science , 19(8), 2025.
-- [8] Chaoyun Zhang et al. Large language model-brained GUI agents: A survey. arXiv preprint arXiv:2411.18279 , 2024. Updated May 2025.
-- [9] Xueyu Hu et al. OS agents: A survey on MLLM-based agents for general computing devices use. In Proceedings of the Association for Computational Linguistics (ACL) , 2025.
-- [10] Guanzhi Wang et al. Voyager: An open-ended embodied agent with large language models. arXiv preprint arXiv:2305.16291 , 2023.
-- [11] Cheng Qian et al. CREATOR: Tool creation for disentangling abstract and concrete reasonings of large language models. In Findings of EMNLP , 2024.
-- [12] Tianle Cai, Xuezhi Wang, Tengyu Ma, Xinyun Chen, and Denny Zhou. Large language models as tool makers. arXiv preprint arXiv:2305.17126 , 2023.
-- [13] Timo Schick et al. Toolformer: Language models can teach themselves to use tools. 2024.
-- [14] Anthropic. Introducing the model context protocol. https://www.anthropic.com/news/ model-context-protocol , 2024. Nov 2024.
-- [15] Model Context Protocol. Model context protocol specification (2025-11-25). https:// modelcontextprotocol.io/specification/2025-11-25 , 2025.
-- [16] Anthropic. Introducing advanced tool use on the claude developer platform. https://www.anthropic.com/ engineering/advanced-tool-use , 2025. Nov 24, 2025.
-- [17] Jiongxiao Wang et al. Reinforcement learning for self-improving agent with skill library. arXiv preprint arXiv:2512.17102 , 2025.
-- [18] Zeyi Sun, Ziyu Liu, Yuhang Zang, Yuhang Cao, Xiaoyi Dong, Tong Wu, Dahua Lin, and Jiaqi Wang. SEAgent: Selfevolving computer use agent with autonomous learning from experience. arXiv preprint arXiv:2508.04700 , 2025.
+* [1] Barry Zhang, Keith Lazuka, and Mahesh Murag. Equipping agents for the real world with agent skills. <https://www.anthropic.com/engineering/> equipping-agents-for-the-real-world-with-agent-skills , 2025. Anthropic Engineering Blog, Oct 2025.
+* [2] Anthropic. Introducing agent skills. <https://www.anthropic.com/news/skills> , 2025. Product Announcement, Oct 2025.
+* [3] Anthropic. Agent skills open standard. <https://agentskills.io> , 2025. Open standard specification.
+* [4] Anthropic. Donating the model context protocol and establishing the agentic AI foundation. <https://www>. anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-a 2025. Dec 9, 2025.
+* [5] Junyu Luo et al. Large language model agent: A survey on methodology, applications and challenges. arXiv preprint arXiv:2503.21460 , 2025.
+* [6] Aske Plaat et al. Agentic large language models: A survey. arXiv preprint arXiv:2503.23037 , 2025.
+* [7] Changle Qu et al. Tool learning with large language models: A survey. Frontiers of Computer Science , 19(8), 2025.
+* [8] Chaoyun Zhang et al. Large language model-brained GUI agents: A survey. arXiv preprint arXiv:2411.18279 , 2024. Updated May 2025.
+* [9] Xueyu Hu et al. OS agents: A survey on MLLM-based agents for general computing devices use. In Proceedings of the Association for Computational Linguistics (ACL) , 2025.
+* [10] Guanzhi Wang et al. Voyager: An open-ended embodied agent with large language models. arXiv preprint arXiv:2305.16291 , 2023.
+* [11] Cheng Qian et al. CREATOR: Tool creation for disentangling abstract and concrete reasonings of large language models. In Findings of EMNLP , 2024.
+* [12] Tianle Cai, Xuezhi Wang, Tengyu Ma, Xinyun Chen, and Denny Zhou. Large language models as tool makers. arXiv preprint arXiv:2305.17126 , 2023.
+* [13] Timo Schick et al. Toolformer: Language models can teach themselves to use tools. 2024.
+* [14] Anthropic. Introducing the model context protocol. <https://www.anthropic.com/news/> model-context-protocol , 2024. Nov 2024.
+* [15] Model Context Protocol. Model context protocol specification (2025-11-25). https:// modelcontextprotocol.io/specification/2025-11-25 , 2025.
+* [16] Anthropic. Introducing advanced tool use on the claude developer platform. <https://www.anthropic.com/> engineering/advanced-tool-use , 2025. Nov 24, 2025.
+* [17] Jiongxiao Wang et al. Reinforcement learning for self-improving agent with skill library. arXiv preprint arXiv:2512.17102 , 2025.
+* [18] Zeyi Sun, Ziyu Liu, Yuhang Zang, Yuhang Cao, Xiaoyi Dong, Tong Wu, Dahua Lin, and Jiaqi Wang. SEAgent: Selfevolving computer use agent with autonomous learning from experience. arXiv preprint arXiv:2508.04700 , 2025.
 
-- [19] Tianyi Chen et al. CUA-Skill: Develop skills for computer using agent. arXiv preprint arXiv:2601.21123 , 2026.
-- [20] Zhengbo Jiao et al. Agentic proposing: Enhancing large language model reasoning via compositional skill synthesis. arXiv preprint arXiv:2602.03279 , 2026.
-- [21] Xiaoxiao Li. When single-agent with skills replace multi-agent systems and when they fail. arXiv preprint arXiv:2601.04748 , 2026.
-- [22] Yujia Qin et al. UI-TARS: Pioneering automated GUI interaction with native agents. arXiv preprint arXiv:2501.12326 , 2025.
-- [23] Haoming Wang et al. UI-TARS-2 technical report: Advancing GUI agent with multi-turn reinforcement learning. arXiv preprint arXiv:2509.02544 , 2025.
-- [24] Saaket Agashe et al. Agent S2: A compositional generalist-specialist framework for computer use agents. arXiv preprint arXiv:2504.00906 , 2025.
-- [25] Xinyuan Wang et al. OpenCUA: Open foundations for computer-use agents. In Advances in Neural Information Processing Systems (NeurIPS) , 2025. Spotlight.
-- [26] Boyu Gou et al. UGround: Universal visual grounding for GUI agents. In International Conference on Learning Representations (ICLR) , 2025. Oral.
-- [27] Tianbao Xie et al. Scaling computer-use grounding via user interface decomposition and synthesis. In Advances in Neural Information Processing Systems (NeurIPS) , 2025. Spotlight.
-- [28] Xinbin Yuan et al. Enhancing visual grounding for GUI agents via self-evolutionary reinforcement learning. arXiv preprint arXiv:2505.12370 , 2025.
-- [29] Qianhui Wu et al. GUI-Actor: Coordinate-free visual grounding for GUI agents. arXiv preprint arXiv:2506.03143 , 2025.
-- [30] Jing Wu et al. OS-Marathon: Benchmarking computer-use agents on long-horizon repetitive tasks. arXiv preprint arXiv:2601.20650 , 2026.
-- [31] Linxin Song et al. CoAct-1: Computer-using agents with coding as actions. arXiv preprint arXiv:2508.03923 , 2025.
-- [32] David Schmotz, Sahar Abdelnabi, and Maksym Andriushchenko. Agent skills enable a new class of realistic and trivially simple prompt injections. arXiv preprint arXiv:2510.26328 , 2025.
-- [33] Yi Liu et al. Agent skills in the wild: An empirical study of security vulnerabilities at scale. arXiv preprint arXiv:2601.10338 , 2026.
-- [34] Yi Liu et al. Malicious agent skills in the wild: A large-scale security empirical study. arXiv preprint arXiv:2602.06547 , 2026.
-- [35] Anthropic. Demystifying evals for AI agents. https://www.anthropic.com/engineering/ demystifying-evals-for-ai-agents , 2025.
-- [36] Idan Shenfeld, Mehul Damani, et al. Self-distillation enables continual learning. arXiv preprint arXiv:2601.19897 , 2026.
+* [19] Tianyi Chen et al. CUA-Skill: Develop skills for computer using agent. arXiv preprint arXiv:2601.21123 , 2026.
+* [20] Zhengbo Jiao et al. Agentic proposing: Enhancing large language model reasoning via compositional skill synthesis. arXiv preprint arXiv:2602.03279 , 2026.
+* [21] Xiaoxiao Li. When single-agent with skills replace multi-agent systems and when they fail. arXiv preprint arXiv:2601.04748 , 2026.
+* [22] Yujia Qin et al. UI-TARS: Pioneering automated GUI interaction with native agents. arXiv preprint arXiv:2501.12326 , 2025.
+* [23] Haoming Wang et al. UI-TARS-2 technical report: Advancing GUI agent with multi-turn reinforcement learning. arXiv preprint arXiv:2509.02544 , 2025.
+* [24] Saaket Agashe et al. Agent S2: A compositional generalist-specialist framework for computer use agents. arXiv preprint arXiv:2504.00906 , 2025.
+* [25] Xinyuan Wang et al. OpenCUA: Open foundations for computer-use agents. In Advances in Neural Information Processing Systems (NeurIPS) , 2025. Spotlight.
+* [26] Boyu Gou et al. UGround: Universal visual grounding for GUI agents. In International Conference on Learning Representations (ICLR) , 2025. Oral.
+* [27] Tianbao Xie et al. Scaling computer-use grounding via user interface decomposition and synthesis. In Advances in Neural Information Processing Systems (NeurIPS) , 2025. Spotlight.
+* [28] Xinbin Yuan et al. Enhancing visual grounding for GUI agents via self-evolutionary reinforcement learning. arXiv preprint arXiv:2505.12370 , 2025.
+* [29] Qianhui Wu et al. GUI-Actor: Coordinate-free visual grounding for GUI agents. arXiv preprint arXiv:2506.03143 , 2025.
+* [30] Jing Wu et al. OS-Marathon: Benchmarking computer-use agents on long-horizon repetitive tasks. arXiv preprint arXiv:2601.20650 , 2026.
+* [31] Linxin Song et al. CoAct-1: Computer-using agents with coding as actions. arXiv preprint arXiv:2508.03923 , 2025.
+* [32] David Schmotz, Sahar Abdelnabi, and Maksym Andriushchenko. Agent skills enable a new class of realistic and trivially simple prompt injections. arXiv preprint arXiv:2510.26328 , 2025.
+* [33] Yi Liu et al. Agent skills in the wild: An empirical study of security vulnerabilities at scale. arXiv preprint arXiv:2601.10338 , 2026.
+* [34] Yi Liu et al. Malicious agent skills in the wild: A large-scale security empirical study. arXiv preprint arXiv:2602.06547 , 2026.
+* [35] Anthropic. Demystifying evals for AI agents. <https://www.anthropic.com/engineering/> demystifying-evals-for-ai-agents , 2025.
+* [36] Idan Shenfeld, Mehul Damani, et al. Self-distillation enables continual learning. arXiv preprint arXiv:2601.19897 , 2026.
