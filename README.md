@@ -50,11 +50,66 @@ skill directory with its supporting files. Neither npm publication nor a
 per-skill `package.json` is required. See the upstream
 [skill discovery documentation](https://github.com/vercel-labs/skills#skill-discovery).
 
-The root `package.json` includes a `files` allowlist for package archives:
-skill instructions, references, assets, scripts, and citation metadata.
-Evaluation fixtures, vendored repositories, and contributor tooling are excluded
-from those archives. This allowlist does not filter Git-based CLI installs.
+### Helper commands as a development dependency
+
+For projects that also need the helper commands, add this repository as a Git
+devDependency (Bun 1.4 or newer is required for preparation):
+
+```sh
+bun add --dev --trust github:ibuchanan/agent-skills-toolkit
+```
+
+Dependency lifecycle scripts must be allowed for this trusted package. Its
+`prepare` script runs `bun run build`, compiling eight native executables:
+`check-skill`, `find-skills`, `init-skill`, `init-skill-eval`,
+`link-toolkit-skills`, `validate-cff`, `validate-okf`, and `validate-skill`.
+Package managers expose these commands in `node_modules/.bin`; they are also
+available by name in package scripts.
+For example, from an existing Git repository with a `skills/` directory:
+
+```sh
+./node_modules/.bin/init-skill example
+./node_modules/.bin/find-skills
+./node_modules/.bin/validate-skill skills/example
+```
+
+To symlink the installed toolkit skills into the consuming project's
+`.agents/skills/`, run `link-toolkit-skills` from that project's root, or add:
+
+```json
+{
+  "scripts": {
+    "skill:link-toolkit": "link-toolkit-skills",
+    "prepare": "bun run skill:link-toolkit"
+  }
+}
+```
+
+If the project also installs Lefthook, its preparation can be
+`(lefthook install || true) && bun run skill:link-toolkit`. The linker creates
+relative links for immediate skill directories containing `SKILL.md`. Reruns
+leave correct links unchanged and remove stale same-name links into this
+toolkit's skills directory. Existing files, directories, and foreign links are
+preserved and reported as conflicts (exit 1). A missing toolkit skills directory
+is a successful no-op; it does not remove existing links. Invalid arguments exit
+2. The helper does not search parent directories or perform global installation.
+
+The native executables target the build machine's OS and architecture. Package
+archives include these executables and must be built on a compatible machine;
+they are not cross-platform distributions. Archives do not include build source
+and cannot be rebuilt after installation. The standalone validators bundle their
+YAML parser. `check-skill` additionally calls external linters (`cspell`,
+`markdownlint-cli2`, and `promptlint`), which the consuming project must provide;
+Promptfoo is optional.
+
+The root `package.json` allowlist includes skill resources, citation metadata,
+and the compiled root helpers. Evaluation fixtures and root contributor tooling
+are excluded. This allowlist does not filter Git-based Skills CLI installs.
 The package remains `private` to prevent accidental npm publication.
+
+Contributor hook installation and the vendored evaluation-runner bootstrap are
+separate: run `bun run setup` explicitly when developing this repository. They
+are not part of dependency preparation.
 
 ## Documentation
 
