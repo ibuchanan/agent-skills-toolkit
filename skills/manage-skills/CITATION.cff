@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use the agentskills reference materials vendored in this directory, please cite the upstream Agent Skills project."
+title: "Agent Skills reference materials for manage-skills"
+type: dataset
+authors:
+  - name: "Anthropic"
+repository-code: "https://github.com/agentskills/agentskills"
+url: "https://agentskills.io"
+license: "Apache-2.0 AND CC-BY-4.0"
+references:
+  - type: software
+    title: "Agent Skills"
+    authors:
+      - name: "Anthropic"
+    repository-code: "https://github.com/agentskills/agentskills"
+    url: "https://agentskills.io"
+    license: "Apache-2.0 AND CC-BY-4.0"

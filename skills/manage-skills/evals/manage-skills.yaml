@@ -1,0 +1,82 @@
+# Evals for the manage-skills skill.
+# Each test exercises a specific rule or principle from SKILL.md.
+# Run: bunx promptfoo eval -c src/promptfoo/promptfooconfig.mts --no-cache
+
+- description: 'routes operational skill tasks through the correct subcommands'
+  vars:
+    skill_path: src/skills/manage-skills/SKILL.md
+    task: |
+      I want to see what skills exist locally, scaffold a new one, and maybe import
+      an external skill correctly. Explain which subcommands to use.
+  expect_substrings:
+    recommended_actions:
+      - list
+      - new
+      - import
+  expect_any_substrings:
+    references:
+      - - skills.mjs
+        - bun run
+  array_min_lengths:
+    recommended_actions: 3
+    guardrails: 2
+    references: 1
+
+- description: 'uses bun run and global script path, not npm exec'
+  vars:
+    skill_path: src/skills/manage-skills/SKILL.md
+    task: |
+      How do I scaffold a new skill called "my-skill" in this repo?
+  expect_substrings:
+    recommended_actions:
+      - bun run
+      - skills.mjs
+      - new
+  reject_substrings:
+    recommended_actions:
+      - npm exec
+      - node_modules/.bin
+  array_min_lengths:
+    recommended_actions: 1
+
+- description: 'warns to verify file creation after running new'
+  vars:
+    skill_path: src/skills/manage-skills/SKILL.md
+    task: |
+      I ran the scaffold command and it exited successfully. How do I know it
+      actually created the skill directory?
+  expect_any_substrings:
+    guardrails:
+      - - ls
+        - list
+        - verify
+        - exit 0
+  array_min_lengths:
+    guardrails: 1
+
+- description: 'install uses symlink by default and mentions copy option'
+  vars:
+    skill_path: src/skills/manage-skills/SKILL.md
+    task: |
+      How do I make the manage-skills skill available under .agents/skills in
+      this repo?
+  expect_substrings:
+    recommended_actions:
+      - install
+  expect_any_substrings:
+    recommended_actions:
+      - - symlink
+        - '--copy'
+  array_min_lengths:
+    recommended_actions: 1
+
+- description: 'validate subcommand checks skill structure'
+  vars:
+    skill_path: src/skills/manage-skills/SKILL.md
+    task: |
+      How do I check whether my new skill is structurally valid before using it?
+  expect_substrings:
+    recommended_actions:
+      - validate
+  array_min_lengths:
+    recommended_actions: 1
