@@ -1,144 +1,97 @@
-# [Agent Skills Toolkit]
+# Agent Skills Toolkit
 
 <!-- cspell:words bunx ibuchanan -->
 
-> Please remove this quote block and replace the others with meaningful content. If you're looking at this on Bitbucket, be assured that it looks great on GitHub.
-
 [![Atlassian license](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat-square)](LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
 
-> Provide an introduction/overview of your project, and articulate the problem it solves for the broader engineering community. Potential consumers should understand **what** the project is, and **why** it exists.
+Reusable Agent Skills and command-line helpers for developing other skills:
+agree on behavior, gather evidence, write instructions, sharpen triggers,
+author evaluations, and maintain attribution.
 
-Other recommended badges are a [version](https://shields.io/category/version) badge (e.g. `npm`) and a [build](https://shields.io/category/build) badge (e.g., `circleci` or `travis`). Order should be `license - version - build - PRs`. Please use the `flat-square` style.
+Use this toolkit when you maintain skills and want a specification-driven
+workflow with traceable references and behavioral checks. It is not an agent
+runtime, and installing it does not make model behavior deterministic.
+The package is private and versioned `0.0.0`; install skills from Git rather
+than relying on an npm release.
 
-See e.g.
+## Install and try a skill
 
-[![npm version](https://img.shields.io/npm/v/react-beautiful-dnd.svg?style=flat-square)](https://www.npmjs.com/package/react-beautiful-dnd) [![npm version](https://img.shields.io/npm/v/@atlaskit/button.svg?style=flat-square)](https://www.npmjs.com/package/@atlaskit/button) [![Build Status](https://img.shields.io/travis/stricter/stricter/master?style=flat-square)](https://travis-ci.org/stricter/stricter)
-
-## Usage
-
-This repository provides five skills:
-
-- `grill-this-skill`: define or revise a skill specification through an interview.
-- `research-references`: find and capture authoritative sources for a skill.
-- `describe-skill`: improve an existing skill's trigger description.
-- `develop-skill-evals`: turn an approved evaluation plan into Promptfoo tests.
-- `write-citations`: create citation metadata from existing references.
-
-## Installation
-
-Run the [Skills CLI](https://github.com/vercel-labs/skills) from the project
-where you want to use these skills. List the available skills first:
+From the project where you use your agent, list the available skills with the
+[Skills CLI](https://github.com/vercel-labs/skills). This path requires Node.js
+and npm, but not a toolkit checkout or contributor setup:
 
 ```sh
 npx skills add ibuchanan/agent-skills-toolkit --list
-```
-
-Install one skill, or all five, for Claude Code (change `--agent` for your agent):
-
-```sh
 npx skills add ibuchanan/agent-skills-toolkit --skill describe-skill --agent claude-code --yes
-npx skills add ibuchanan/agent-skills-toolkit --skill '*' --agent claude-code --yes
 ```
 
-Bun users can replace `npx skills` with `bunx skills`. These commands install
-into the current project; add `--global` for a user-wide installation.
-You do not need to add this toolkit to the consuming project's dependencies
-or run its contributor setup scripts.
+Change `--agent` for your supported agent. Use `--skill '*'` to install the full
+collection, or add `--global` for a user-wide installation. Bun users can replace
+`npx skills` with `bunx skills`. The CLI installs skill directories and their
+supporting files directly from Git; it does not install external tools needed
+by individual skills.
 
-The CLI discovers `skills/<name>/SKILL.md` directly from Git and installs the
-skill directory with its supporting files. Neither npm publication nor a
-per-skill `package.json` is required. See the upstream
-[skill discovery documentation](https://github.com/vercel-labs/skills#skill-discovery).
+In your agent, ask:
 
-### Helper commands as a development dependency
+> Use describe-skill to review the description of my existing skill. Identify
+> incorrect activation cases and propose a tighter description. Do not edit
+> until I approve the exact string.
 
-For projects that also need the helper commands, add this repository as a Git
-devDependency (Bun 1.4 or newer is required for preparation):
+Supply the target `SKILL.md`, its specification if available, and concrete
+requests where it activated incorrectly. Expect a diagnosis and one to three
+candidate descriptions, not an unapproved edit. See the
+[over-triggering how-to](docs/how-to/repair-over-triggering.md) for verification.
+
+## Choose the right skill
+
+| Goal                                                | Skill                                                        |
+| --------------------------------------------------- | ------------------------------------------------------------ |
+| Define or revise intended behavior                  | [`grill-this-skill`](skills/grill-this-skill/SKILL.md)       |
+| Find and assess authoritative sources               | [`research-references`](skills/research-references/SKILL.md) |
+| Capture and maintain supporting knowledge           | [`ingest-reference`](skills/ingest-reference/SKILL.md)       |
+| Improve an existing skill's instructions            | [`develop-agent-skill`](skills/develop-agent-skill/SKILL.md) |
+| Repair missed or incorrect activation               | [`describe-skill`](skills/describe-skill/SKILL.md)           |
+| Turn an approved evaluation plan into tests         | [`develop-skill-evals`](skills/develop-skill-evals/SKILL.md) |
+| Attribute existing reference material               | [`write-citations`](skills/write-citations/SKILL.md)         |
+| Scaffold, validate, import, or install local skills | [`manage-skills`](skills/manage-skills/SKILL.md)             |
+| Design or review an agent-facing tool interface     | [`axi`](skills/axi/SKILL.md)                                 |
+| Choose a model and fallback for a bounded task      | [`select-llm`](skills/select-llm/SKILL.md)                   |
+
+## Optional: install the helper commands
+
+For a consuming project that also needs scaffolding and validation helpers,
+add the toolkit as a trusted Git development dependency with Bun 1.4 or newer:
 
 ```sh
 bun add --dev --trust github:ibuchanan/agent-skills-toolkit
+./node_modules/.bin/validate-skill path/to/existing-skill
 ```
 
-Dependency lifecycle scripts must be allowed for this trusted package. Its
-`prepare` script runs `bun run build`, compiling eight native executables:
-`check-skill`, `find-skills`, `init-skill`, `init-skill-eval`,
-`link-toolkit-skills`, `validate-cff`, `validate-okf`, and `validate-skill`.
-Package managers expose these commands in `node_modules/.bin`; they are also
-available by name in package scripts.
-For example, from an existing Git repository with a `skills/` directory:
+Allow the trusted package's lifecycle script: `prepare` compiles eight native
+helpers for the build machine's OS and architecture. A passing validation checks
+frontmatter, not behavioral correctness. Built archives are platform-specific
+and do not include helper build source.
 
-```sh
-./node_modules/.bin/init-skill example
-./node_modules/.bin/find-skills
-./node_modules/.bin/validate-skill skills/example
-```
+See the [CLI reference](docs/reference/cli-tools.md) for all commands and limits,
+and the [local installation how-to](docs/how-to/install-local-skill.md) to put
+one local skill into another project. `check-skill` can run live Promptfoo
+evaluations, requiring credentials and incurring provider costs; it is not an
+offline-only validation command.
 
-To symlink the installed toolkit skills into the consuming project's
-`.agents/skills/`, run `link-toolkit-skills` from that project's root, or add:
+## Documentation and development
 
-```json
-{
-  "scripts": {
-    "skill:link-toolkit": "link-toolkit-skills",
-    "prepare": "bun run skill:link-toolkit"
-  }
-}
-```
+- **Learn by doing:** [Build a change-note skill](docs/tutorials/build-an-agent-skill.md).
+  The tutorial's live-agent walkthrough is not yet verified.
+- **Understand the design:** [Skills as engineered, maintained knowledge](docs/explanation/agent-skill-development.md).
+- **Maintain references:** [Refresh a stale reference](docs/how-to/refresh-stale-reference.md).
+- **Contribute:** [Development setup and inner loop](DEVELOPMENT.md),
+  [contribution process](CONTRIBUTING.md), and [code of conduct](CODE_OF_CONDUCT.md).
+- **Browse everything:** [Documentation index](docs/README.md).
 
-If the project also installs Lefthook, its preparation can be
-`(lefthook install || true) && bun run skill:link-toolkit`. The linker creates
-relative links for immediate skill directories containing `SKILL.md`. Reruns
-leave correct links unchanged and remove stale same-name links into this
-toolkit's skills directory. Existing files, directories, and foreign links are
-preserved and reported as conflicts (exit 1). A missing toolkit skills directory
-is a successful no-op; it does not remove existing links. Invalid arguments exit
-2. The helper does not search parent directories or perform global installation.
-
-The native executables target the build machine's OS and architecture. Package
-archives include these executables and must be built on a compatible machine;
-they are not cross-platform distributions. Archives do not include build source
-and cannot be rebuilt after installation. The standalone validators bundle their
-YAML parser. `check-skill` additionally calls external linters (`cspell`,
-`markdownlint-cli2`, and `promptlint`), which the consuming project must provide;
-Promptfoo is optional.
-
-The root `package.json` allowlist includes skill resources, citation metadata,
-and the compiled root helpers. Evaluation fixtures and root contributor tooling
-are excluded. This allowlist does not filter Git-based Skills CLI installs.
-The package remains `private` to prevent accidental npm publication.
-
-Contributor hook installation and the vendored evaluation-runner bootstrap are
-separate: run `bun run setup` explicitly when developing this repository. They
-are not part of dependency preparation. The root project uses Bun 1.4 or newer
-and commits `bun.lock`; use `bun install --frozen-lockfile` for a reproducible
-install. `bun run clean` removes generated output and dependencies, not the
-lockfile. The vendored evaluation runner retains its own npm workflow.
-
-## Documentation
-
-> If your project is small and simple enough, documentation can be added here. For larger projects, provide a link to where the documentation lives.
-
-## Tests
-
-> Describe and show how to run the tests with code examples.
-
-## Contributions
-
-Contributions to [Agent Skills Toolkit] are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+Report bugs or propose larger changes through
+[GitHub issues](https://github.com/ibuchanan/agent-skills-toolkit/issues).
 
 ## License
 
-Copyright (c) [2026] Atlassian US., Inc.
-Apache 2.0 licensed, see [LICENSE](LICENSE) file.
-
-<br/>
-
-> Pick one of the following:
-
-[![With ❤️ from Atlassian](https://raw.githubusercontent.com/atlassian-internal/oss-assets/master/banner-cheers.png)](https://www.atlassian.com)
-
-[![With ❤️ from Atlassian](https://raw.githubusercontent.com/atlassian-internal/oss-assets/master/banner-with-thanks.png)](https://www.atlassian.com)
-
-[![With ❤️ from Atlassian](https://raw.githubusercontent.com/atlassian-internal/oss-assets/master/banner-with-thanks-light.png)](https://www.atlassian.com)
-
-[![With ❤️ from Atlassian](https://raw.githubusercontent.com/atlassian-internal/oss-assets/master/banner-cheers-light.png)](https://www.atlassian.com)
+Copyright (c) 2026 Atlassian US., Inc. Licensed under [Apache 2.0](LICENSE).
+Vendored material retains its own license and attribution.

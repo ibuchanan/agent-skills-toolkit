@@ -1,203 +1,238 @@
-# Development for [Agent Skills Toolkit]
+# Development
 
-<!-- cspell:words ast-grep Biome git-cliff prelint SecretSpec secretspec -->
+<!-- cspell:words Biome fnm gitleaks ibuchanan -->
 
-This guide is for contributors who are changing the code. Keep `README.md`
-focused on what the project does, first-run setup, basic usage, and links.
-Keep pull request process and community expectations in `CONTRIBUTING.md`.
+Use this guide when changing skills, helper code, or documentation. For installing
+skills into a consuming project, start with the [README](README.md). Collaboration
+rules and the CLA are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Delete any generated notes that do not match this repository before publishing.
+## Set up a checkout
 
-## Prerequisites
+Prerequisites:
 
-- [Node.js 24.x][node-download] and [npm][npm-install]. Do not use pnpm or
-  yarn unless this project deliberately changes package managers.
-- [Atlassian Forge CLI][forge-cli-install], authenticated with the Atlassian
-  account used for local development. See [Forge getting started][forge-start]
-  for the full setup flow.
-- Access to the Forge app, target site, and any Atlassian Cloud organization or
-  product resources this app needs.
-- [SecretSpec][secretspec-quick-start], when this repository uses the generated
-  `secretspec.toml` workflow for Forge command configuration and app secrets.
+- Git with submodule support.
+- Bun 1.4 or newer for root dependencies, TypeScript, builds, and tests.
+- Node.js and npm for the vendored evaluation runner's install/build workflow.
+- `gitleaks` on `PATH` if using the installed pre-commit hook.
 
-Run one-time local setup for secret storage when using `secretspec`:
+Clone with the pinned submodules and initialize the toolchain:
 
 ```sh
-secretspec config init
+git clone --recurse-submodules https://github.com/ibuchanan/agent-skills-toolkit.git
+cd agent-skills-toolkit
+bun install --frozen-lockfile
+bun run build
+bun run setup
 ```
 
-## Initial Setup
+For an existing clone, use `git submodule update --init --recursive` before setup.
+`bun install` may already build helpers through `prepare`; the explicit build
+also covers installs where lifecycle scripts did not run. `setup` installs
+Lefthook hooks and runs `bootstrap`, which uses npm to install and build
+`vendor/agent-skills-eval`. These commands can access the network.
 
-Install dependencies and run the default verification path:
+Confirm a helper runs:
 
 ```sh
-npm install
-secretspec check
-npm run check
+scripts/validate-skill skills/describe-skill
 ```
 
-If this app has project-specific Forge variables, add their definitions to
-`secretspec.toml`, set the real values in your local secret backend, and keep
-secret values out of git.
+Expect the skill name and description with exit status `0`. This checks the local
+frontmatter contract, not skill quality. Forge credentials, a cloud site, and
+SecretSpec are not prerequisites for this repository's current package scripts.
 
-## Common Commands
+## The key development loop
 
-Keep this table synchronized with `package.json`.
+**Agree on behavior → ground the knowledge → edit → check → evaluate → review.**
 
-| Command                 | Purpose                                                     |
-| ----------------------- | ----------------------------------------------------------- |
-| `npm run check`         | Run the default local quality gate.                         |
-| `npm run build`         | Compile the Forge app into `dist/` with TypeScript.         |
-| `npm run dev`           | Compile in watch mode while editing.                        |
-| `npm run typecheck`     | Run [TypeScript][typescript-docs] without emitting files.   |
-| `npm run format`        | Format files with [Biome][biome-docs].                      |
-| `npm run format:check`  | Check formatting without writing changes.                   |
-| `npm run lint`          | Run static checks, Forge linting, and prelint rules.        |
-| `npm run lint:fix`      | Apply safe lint fixes where supported.                      |
-| `npm run test`          | Run [Vitest][vitest-docs] once.                             |
-| `npm run test:watch`    | Run Vitest in watch mode.                                   |
-| `npm run test:coverage` | Run tests with coverage.                                    |
-| `npm run size`          | Check the [size-limit][size-limit-docs] bundle budget.      |
-| `npm run changelog`     | Generate changelog output with [git-cliff][git-cliff-docs]. |
-| `npm run todo`          | Search for TODO markers.                                    |
+### 1. Scope the change against its specification
 
-## Forge Environment Workflow
+Read the target `skills/<name>/SKILL.md`, its `specs/<name>.md` when present, and
+existing evaluations before editing.
 
-[`manifest.yml`][forge-manifest] is the source of truth for Forge modules,
-functions, resources, scopes, runtime settings, and external access. Review it
-with code changes that touch handlers, UI resources, permissions, or egress.
+For a new skill or a behavior, trigger, safety, reference-plan, or evaluation-plan
+change, use [`grill-this-skill`](skills/grill-this-skill/SKILL.md) to establish an
+approved specification and lean evaluation plan. Do not start a new interview
+for a bounded mechanical correction that leaves the agreement unchanged.
 
-Default Forge command configuration lives in `secretspec.toml`:
-
-- `FORGE_SITE` is the target Atlassian site hostname.
-- `FORGE_PRODUCT` is the product for installation, such as `jira` or
-  `confluence`.
-- `FORGE_ENVIRONMENT` is the Forge environment name.
-
-Use these scripts from the Forge app root:
+For a new directory, scaffold from the checkout root:
 
 ```sh
-npm run forge:register
-npm run forge:variables:set:secretspec
-npm run forge:deploy
-npm run forge:install
+scripts/init-skill your-skill-name
 ```
 
-`forge:register` wraps [`forge register`][forge-register] and is normally a
-one-time step for a new app. Run `forge:variables:set:secretspec` whenever
-committed variable definitions or local secret values change; it publishes
-variables through the Forge [variables command][forge-variables]. Run
-`forge:deploy` for [`forge deploy`][forge-deploy]. Run `forge:upgrade` instead
-of `forge:install` when an already-installed app needs an installation upgrade;
-both use [`forge install`][forge-install].
+Replace placeholders before treating the skill as usable. Scaffolding does not
+approve behavior or create a complete evaluation suite.
 
-## Project Structure
+### 2. Ground the implementation
 
-- `manifest.yml`: Forge modules, handlers, resources, scopes, runtime settings,
-  and egress declarations.
-- `src/index.ts`: handler exports referenced by `manifest.yml`.
-- `src/frontend/`: Forge UI resource code, when the app has a UI surface.
-- `src/`: application code, domain logic, API clients, configuration loading,
-  and Forge boundary adapters.
-- `test/`: Vitest tests, including Forge architecture and manifest wiring
-  checks when generated by `repo-init`.
-- `scripts/`: local helper scripts such as Forge variable publishing.
-- `docs/`: design specs, architecture notes, ADRs, or longer how-to material.
-- `CONTEXT.md`: domain glossary, if the repository keeps one.
+Use `research-references` to find and assess sources, respecting its plan and
+capture approval gates. Use `ingest-reference` to capture and maintain the
+approved material. Preserve source identity, provenance, and attribution;
+add loading triggers rather than stuffing every reference into `SKILL.md`.
 
-## Working on Code
+For maintenance work, follow
+[Refresh a stale reference](docs/how-to/refresh-stale-reference.md). If a source
+change alters the skill's intended behavior, revisit the specification instead
+of silently broadening the implementation.
 
-- Keep Forge SDK calls and platform I/O near the edges of the codebase. Prefer
-  small, deterministic functions for parsing, planning, validation, and result
-  shaping so they can be tested without Forge.
-- Update `manifest.yml`, handler exports, and manifest wiring tests together.
-- Update `secretspec.toml`, README configuration notes, and tests together when
-  adding or changing configuration.
-- Update architecture tests when changing boundaries between frontend, backend,
-  storage, API clients, or generated Forge handlers.
-- Keep TypeScript on `^5.x` until Forge bundler support for later major
-  versions is confirmed.
+### 3. Make a focused edit
 
-## Testing Expectations
+Use `develop-agent-skill` for existing instruction changes, `describe-skill` for
+a description-only repair, and `write-citations` for metadata derived from
+existing references. Preserve each skill's approval boundaries.
 
-- Unit tests should cover pure domain behavior, API response handling, config
-  validation, and error mapping.
-- Forge architecture tests should cover manifest wiring and forbidden imports or
-  boundary violations that would otherwise fail late during deployment.
-- Run `npm run check` before opening a pull request.
-- Run `npm run size` when changing runtime dependencies or code that affects the
-  deployed Forge bundle.
+For helper changes, edit entry points in `src/scripts/` and reusable logic in
+`src/scripts/lib/`. Add regression coverage under `test/scripts/`, including
+usage errors, filesystem side effects, and output/exit behavior where relevant.
+Rebuild after changing helper source:
 
-## Generated and Built Files
+```sh
+bun run build
+bun run typecheck
+```
 
-- Do not edit `dist/` by hand.
-- Treat generated config and tests as source once committed. If a generated file
-  is no longer appropriate, update it deliberately and keep this guide current.
-- When changing `repo-init` template-driven behavior upstream, keep generator
-  code, templates, and tests synchronized.
+Keep the eight packaged commands synchronized with `package.json.bin`. Do not
+hand-edit generated executables.
 
-## Documentation Boundaries
+### 4. Run targeted static checks and code tests
 
-- `README.md`: purpose, status, prerequisites, first-run setup, basic usage,
-  essential configuration, support, contribution entry point, and license.
-- `DEVELOPMENT.md`: local development environment, inner loop, commands,
-  structure, testing, debugging, and contributor troubleshooting.
-- `CONTRIBUTING.md`: pull request process, CLA, issue workflow, and community
-  expectations.
-- `docs/`: detailed design specs, ADRs, tutorials, how-to guides, references,
-  and longer explanations.
+Set the skill path and run the applicable structural checks:
 
-## Tool References
+```sh
+skill_dir='skills/your-skill-name'
+bun run src/scripts/validate-skill.ts "$skill_dir"
+if [ -d "$skill_dir/references" ]; then
+  bun run src/scripts/validate-okf.ts "$skill_dir/references"
+fi
+if [ -f "$skill_dir/CITATION.cff" ]; then
+  bun run src/scripts/validate-cff.ts "$skill_dir"
+fi
+```
 
-- [Forge getting started][forge-start]
-- [Forge CLI overview][forge-cli-overview]
-- [Forge CLI installation][forge-cli-install]
-- [Forge manifest reference][forge-manifest]
-- Forge commands: [`register`][forge-register], [`deploy`][forge-deploy],
-  [`install`][forge-install], [`variables`][forge-variables],
-  [`lint`][forge-lint], [`tunnel`][forge-tunnel], [`logs`][forge-logs]
-- [SecretSpec quick start][secretspec-quick-start]
-- [Node.js downloads][node-download] and [npm installation][npm-install]
-- [TypeScript][typescript-docs], [Biome][biome-docs],
-  [Vitest][vitest-docs], [size-limit][size-limit-docs],
-  [git-cliff][git-cliff-docs], and [ast-grep][ast-grep-docs]
+For a helper change, run its focused tests, for example:
 
-## Troubleshooting
+```sh
+bun test test/scripts/validate-skill.test.ts
+```
 
-Forge CLI cannot find the app:
-Run Forge commands from the directory containing `manifest.yml`.
+For Markdown-only edits, format the changed files with the local Biome binary,
+then run Markdown lint and spelling. For example, for these two guides:
 
-`secretspec check` reports unresolved values:
-Add missing values to your local secret backend or make optional values explicit
-in `secretspec.toml`.
+```sh
+./node_modules/.bin/biome format --write README.md DEVELOPMENT.md
+./node_modules/.bin/markdownlint-cli2 README.md DEVELOPMENT.md
+./node_modules/.bin/cspell lint --gitignore --no-progress README.md DEVELOPMENT.md
+```
 
-`forge lint` fails after a manifest change:
-Check module keys, handler names, scopes, egress declarations, and runtime
-settings.
+The repository's Markdown lint configuration adds its own globs, so that lint
+invocation can inspect more than the two named files. Check local links and
+command snippets as well. Formatting and structural validators do not establish
+source fidelity, trigger accuracy, or safe agent behavior.
 
-`npm run lint:prelint` cannot find rules:
-Run `npm install` and confirm `tool-forge-prelint-ast-grep` is installed.
+### 5. Author and run behavioral evaluations separately
 
-Bundle size check fails:
-Inspect new runtime dependencies and generated output before raising the budget.
+Use `develop-skill-evals` only when the approved specification contains a
+completed `### Evaluation plan`. It authors Promptfoo artifacts; it does not
+invent the plan or execute tests. Initialize a missing Promptfoo skeleton with:
 
-[ast-grep-docs]: https://ast-grep.github.io/
-[biome-docs]: https://biomejs.dev/
-[forge-cli-install]: https://developer.atlassian.com/platform/forge/getting-started/#install-the-forge-cli
-[forge-cli-overview]: https://developer.atlassian.com/platform/forge/cli-reference/
-[forge-deploy]: https://developer.atlassian.com/platform/forge/cli-reference/deploy/
-[forge-install]: https://developer.atlassian.com/platform/forge/cli-reference/install/
-[forge-lint]: https://developer.atlassian.com/platform/forge/cli-reference/lint/
-[forge-logs]: https://developer.atlassian.com/platform/forge/cli-reference/logs/
-[forge-manifest]: https://developer.atlassian.com/platform/forge/manifest-reference/
-[forge-register]: https://developer.atlassian.com/platform/forge/cli-reference/register/
-[forge-start]: https://developer.atlassian.com/platform/forge/getting-started/
-[forge-tunnel]: https://developer.atlassian.com/platform/forge/cli-reference/tunnel/
-[forge-variables]: https://developer.atlassian.com/platform/forge/cli-reference/variables/
-[git-cliff-docs]: https://git-cliff.org/docs/
-[node-download]: https://nodejs.org/en/download
-[npm-install]: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
-[secretspec-quick-start]: https://secretspec.dev/quick-start/
-[size-limit-docs]: https://github.com/ai/size-limit
-[typescript-docs]: https://www.typescriptlang.org/docs/
-[vitest-docs]: https://vitest.dev/
+```sh
+scripts/init-skill-eval skills/your-skill-name
+```
+
+The scaffold has no provider or meaningful test cases. Supply the suite's agent
+harness, provider configuration, credentials, and assertions before execution.
+Do not overwrite an existing suite or convert older formats without an explicit
+migration decision. Some existing suites use the separate vendored
+`agent-skills-eval` runner.
+
+Run live evaluations only when authorized. Promptfoo is not a root dependency.
+The research-reference suite has `bun run eval:research-references`, which
+requires Bash, `fnm`, Node 22, Promptfoo, and provider configuration. Its wrapper
+sources the root `.env`; inspect it before use and keep credentials out of Git.
+
+`check-skill <directory>` combines validators, external linters, and a Promptfoo
+run when applicable. It can source `.env` as shell input, use credentials, contact
+providers, incur costs, and write artifacts. Missing Promptfoo is reported as a
+successful skip, so exit `0` does not prove behavioral tests ran. Use the targeted
+commands above when you need static-only checks. See the
+[CLI reference](docs/reference/cli-tools.md) for exact applicability and exits.
+
+Record the model, configuration, observed results, and skipped checks. Distinguish
+skill defects from assertion defects and provider-output failures before editing
+instructions to satisfy a failing test.
+
+### 6. Review the change and run the repository gate
+
+Review the source diff, test evidence, updated references, and documentation.
+Do not claim a live-agent walkthrough passed when only file operations or unit
+tests were checked. Use [Repair over-triggering](docs/how-to/repair-over-triggering.md)
+for activation evidence and [Install a local skill](docs/how-to/install-local-skill.md)
+for a controlled target-project check.
+
+Run the pre-push gate before submitting:
+
+```sh
+bun run check
+```
+
+It runs formatting checks, lint/type checks, and the root test script. The root
+test script bootstraps the vendored runner before executing helper tests; it can
+install dependencies and build binaries. This is not the live skill-evaluation
+gate and does not run every skill's Promptfoo suite.
+
+## Repository map
+
+| Path                                                                    | Responsibility                                          |
+| ----------------------------------------------------------------------- | ------------------------------------------------------- |
+| `skills/<name>/SKILL.md`                                                | Agent instructions and trigger metadata                 |
+| `skills/<name>/references/`                                             | Supporting knowledge and loading maps                   |
+| `skills/<name>/evals/`                                                  | Skill-specific evaluation configurations and cases      |
+| `specs/`                                                                | Intended skill behavior and evaluation plans            |
+| `specs/references/`                                                     | Shared specification-authoring knowledge                |
+| `src/scripts/`, `src/scripts/lib/`                                      | Helper entry points and implementation                  |
+| `scripts/`                                                              | Generated native helpers; ignored by Git                |
+| `test/scripts/`                                                         | Helper, installation, and package tests                 |
+| `vendor/`                                                               | Pinned upstream Git submodules                          |
+| `docs/`                                                                 | Tutorial, how-to guides, explanation, and CLI reference |
+| `package.json`, `bun.lock`                                              | Root tasks, package allowlist, and dependency lock      |
+| `lefthook.yml`, `biome.jsonc`, `.markdownlint-cli2.yaml`, `cspell.json` | Hooks and static-check configuration                    |
+
+## Hooks, builds, and packaging
+
+- **Pre-commit:** builds helpers, formats files and stages fixes, and runs
+  `gitleaks` against staged changes. Review the staged diff after formatting.
+- **Pre-push:** runs formatting checks, lint, and tests. `bun run check` invokes
+  this group explicitly; it is different from `check-skill`.
+- **Preparation:** `prepare` only builds helpers. It does not install hooks or
+  bootstrap the vendored runner; `setup` does those explicitly.
+- **Dependencies:** use Bun and retain `bun.lock` at the root. The vendored
+  runner retains its npm workflow. Keep submodule updates deliberate and pinned.
+- **Package contents:** the private package includes native helpers, skill
+  instructions, references, assets, scripts, and citation metadata. The allowlist
+  excludes root helper source and evaluation fixtures. Git-based Skills CLI
+  installation uses a different discovery path, not that package allowlist.
+- **Platform:** native helpers target the machine on which they were built.
+  Build archives on a compatible machine; they cannot rebuild themselves after
+  installation. Package tests cover preparation and consumer exposure.
+- **Cleanup:** `bun run clean` deletes root `node_modules/`, `dist/`, and
+  generated `scripts/`, but keeps `bun.lock`. Reinstall and rebuild afterward.
+
+## Common blockers
+
+| Symptom                                          | Action                                                                                                        |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| Missing native helper                            | Run `bun run build`; check that Bun satisfies `package.json.engines`                                          |
+| Missing vendored runner source/build             | Initialize submodules, then run `bun run bootstrap`                                                           |
+| Commit fails because `gitleaks` is absent        | Install it and ensure it is on the hook's `PATH`                                                              |
+| `check-skill` fails on a missing linter          | Provide the required tool; inspect the [CLI contract](docs/reference/cli-tools.md)                            |
+| Skill passes one validator but fails another     | Distinguish the packaged validator from the local `manage-skills` validator; they enforce different contracts |
+| Eval reports skipped or lacks a provider         | Configure the suite and record the skip; do not count it as a behavioral pass                                 |
+| Static check fails on unrelated existing content | Isolate and report the baseline failure instead of broadening the patch silently                              |
+
+For background on the loop, read
+[Agent Skills as engineered, maintained knowledge](docs/explanation/agent-skill-development.md).
+For a guided first skill, use the [tutorial](docs/tutorials/build-an-agent-skill.md).
+Keep detailed command contracts in the [reference](docs/reference/cli-tools.md),
+not duplicated in this guide. Route new documentation through the
+[documentation index](docs/README.md).
