@@ -30,16 +30,16 @@ providers:
     config:
       model: qwen/qwen3-coder-30b-a3b-instruct
       working_dir: ./fixtures/project
-      setting_sources: ['project']
-      skills: ['research-references']
-      append_allowed_tools: ['Read', 'Glob', 'Write', 'WebSearch']
+      setting_sources: ["project"]
+      skills: ["research-references"]
+      append_allowed_tools: ["Read", "Glob", "Write", "WebSearch"]
       apiKeyRequired: false
   - id: anthropic:claude-agent-sdk
     label: research-references-baseline
     config:
       model: qwen/qwen3-coder-30b-a3b-instruct
       working_dir: ./fixtures/project
-      append_allowed_tools: ['Read', 'Glob', 'Write', 'WebSearch']
+      append_allowed_tools: ["Read", "Glob", "Write", "WebSearch"]
       apiKeyRequired: false
 
 prompts:

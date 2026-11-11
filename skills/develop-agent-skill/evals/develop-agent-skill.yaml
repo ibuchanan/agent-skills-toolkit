@@ -1,4 +1,4 @@
-- description: 'develop-agent-skill recommends an inspect-evaluate-iterate loop'
+- description: "develop-agent-skill recommends an inspect-evaluate-iterate loop"
   vars:
     skill_path: src/skills/develop-agent-skill/SKILL.md
     task: |
@@ -29,7 +29,7 @@
       guardrails: 2
       references: 1
 
-- description: 'develop-agent-skill loosens a brittle substring assertion instead of rewriting the skill'
+- description: "develop-agent-skill loosens a brittle substring assertion instead of rewriting the skill"
   vars:
     skill_path: src/skills/develop-agent-skill/SKILL.md
     task: |
@@ -70,7 +70,7 @@
       guardrails: 1
       references: 1
 
-- description: 'develop-agent-skill removes an over-eager reject_substrings rule'
+- description: "develop-agent-skill removes an over-eager reject_substrings rule"
   vars:
     skill_path: src/skills/develop-agent-skill/SKILL.md
     task: |
@@ -107,7 +107,7 @@
       guardrails: 1
       references: 1
 
-- description: 'develop-agent-skill distinguishes a brittle assertion from a genuine content gap'
+- description: "develop-agent-skill distinguishes a brittle assertion from a genuine content gap"
   vars:
     skill_path: src/skills/develop-agent-skill/SKILL.md
     task: |
@@ -144,7 +144,7 @@
       guardrails: 1
       references: 1
 
-- description: 'develop-agent-skill requires content assertions beyond structural checks'
+- description: "develop-agent-skill requires content assertions beyond structural checks"
   vars:
     skill_path: src/skills/develop-agent-skill/SKILL.md
     task: |

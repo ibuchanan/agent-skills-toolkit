@@ -2,7 +2,7 @@
 # Each test exercises a specific rule or principle from SKILL.md.
 # Run: bunx promptfoo eval -c src/promptfoo/promptfooconfig.mts --no-cache
 
-- description: 'routes operational skill tasks through the correct subcommands'
+- description: "routes operational skill tasks through the correct subcommands"
   vars:
     skill_path: src/skills/manage-skills/SKILL.md
     task: |
@@ -22,7 +22,7 @@
     guardrails: 2
     references: 1
 
-- description: 'uses bun run and global script path, not npm exec'
+- description: "uses bun run and global script path, not npm exec"
   vars:
     skill_path: src/skills/manage-skills/SKILL.md
     task: |
@@ -39,7 +39,7 @@
   array_min_lengths:
     recommended_actions: 1
 
-- description: 'warns to verify file creation after running new'
+- description: "warns to verify file creation after running new"
   vars:
     skill_path: src/skills/manage-skills/SKILL.md
     task: |
@@ -54,7 +54,7 @@
   array_min_lengths:
     guardrails: 1
 
-- description: 'install uses symlink by default and mentions copy option'
+- description: "install uses symlink by default and mentions copy option"
   vars:
     skill_path: src/skills/manage-skills/SKILL.md
     task: |
@@ -66,11 +66,11 @@
   expect_any_substrings:
     recommended_actions:
       - - symlink
-        - '--copy'
+        - "--copy"
   array_min_lengths:
     recommended_actions: 1
 
-- description: 'validate subcommand checks skill structure'
+- description: "validate subcommand checks skill structure"
   vars:
     skill_path: src/skills/manage-skills/SKILL.md
     task: |

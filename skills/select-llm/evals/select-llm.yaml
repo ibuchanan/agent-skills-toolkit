@@ -1,4 +1,4 @@
-- description: 'select-llm balances cost, quality, and fallback choices'
+- description: "select-llm balances cost, quality, and fallback choices"
   vars:
     skill_path: src/skills/select-llm/SKILL.md
     task: |
@@ -15,7 +15,7 @@
         - fallback
         - json
     expect_any_substrings:
-      '*':
+      "*":
         - latency
         - budget
     array_min_lengths:
@@ -23,7 +23,7 @@
       guardrails: 2
       references: 2
 
-- description: 'select-llm supports role-aware routing for coding agents'
+- description: "select-llm supports role-aware routing for coding agents"
   vars:
     skill_path: src/skills/select-llm/SKILL.md
     task: |
@@ -43,14 +43,14 @@
         - extractor
         - escalation
     expect_any_substrings:
-      '*':
+      "*":
         - coder
     array_min_lengths:
       recommended_actions: 4
       guardrails: 2
       references: 2
 
-- description: 'select-llm handles privacy and local deployment constraints'
+- description: "select-llm handles privacy and local deployment constraints"
   vars:
     skill_path: src/skills/select-llm/SKILL.md
     task: |
@@ -66,7 +66,7 @@
       recommended_actions:
         - hard constraint
     expect_any_substrings:
-      '*':
+      "*":
         - privacy
         - local
         - controlled environment
@@ -76,7 +76,7 @@
       guardrails: 2
       references: 2
 
-- description: 'select-llm treats long-context synthesis as a practical constraint'
+- description: "select-llm treats long-context synthesis as a practical constraint"
   vars:
     skill_path: src/skills/select-llm/SKILL.md
     task: |
@@ -101,7 +101,7 @@
       guardrails: 2
       references: 2
 
-- description: 'select-llm avoids frontier overkill for cheap utility workflows'
+- description: "select-llm avoids frontier overkill for cheap utility workflows"
   vars:
     skill_path: src/skills/select-llm/SKILL.md
     task: |
@@ -119,7 +119,7 @@
     expect_any_substrings:
       recommended_actions:
         - [lowest-cost, low-cost, cheapest]
-      '*':
+      "*":
         - latency
         - cost
     reject_substrings:
@@ -130,7 +130,7 @@
       guardrails: 2
       references: 2
 
-- description: 'select-llm prioritizes reliability for high-stakes review'
+- description: "select-llm prioritizes reliability for high-stakes review"
   vars:
     skill_path: src/skills/select-llm/SKILL.md
     task: |
@@ -150,7 +150,7 @@
       guardrails:
         - reliability
     expect_any_substrings:
-      '*':
+      "*":
         - security
     array_min_lengths:
       recommended_actions: 3

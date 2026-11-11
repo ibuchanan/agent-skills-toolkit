@@ -44,22 +44,22 @@ secret values out of git.
 
 Keep this table synchronized with `package.json`.
 
-| Command | Purpose |
-| --- | --- |
-| `npm run check` | Run the default local quality gate. |
-| `npm run build` | Compile the Forge app into `dist/` with TypeScript. |
-| `npm run dev` | Compile in watch mode while editing. |
-| `npm run typecheck` | Run [TypeScript][typescript-docs] without emitting files. |
-| `npm run format` | Format files with [Biome][biome-docs]. |
-| `npm run format:check` | Check formatting without writing changes. |
-| `npm run lint` | Run static checks, Forge linting, and prelint rules. |
-| `npm run lint:fix` | Apply safe lint fixes where supported. |
-| `npm run test` | Run [Vitest][vitest-docs] once. |
-| `npm run test:watch` | Run Vitest in watch mode. |
-| `npm run test:coverage` | Run tests with coverage. |
-| `npm run size` | Check the [size-limit][size-limit-docs] bundle budget. |
-| `npm run changelog` | Generate changelog output with [git-cliff][git-cliff-docs]. |
-| `npm run todo` | Search for TODO markers. |
+| Command                 | Purpose                                                     |
+| ----------------------- | ----------------------------------------------------------- |
+| `npm run check`         | Run the default local quality gate.                         |
+| `npm run build`         | Compile the Forge app into `dist/` with TypeScript.         |
+| `npm run dev`           | Compile in watch mode while editing.                        |
+| `npm run typecheck`     | Run [TypeScript][typescript-docs] without emitting files.   |
+| `npm run format`        | Format files with [Biome][biome-docs].                      |
+| `npm run format:check`  | Check formatting without writing changes.                   |
+| `npm run lint`          | Run static checks, Forge linting, and prelint rules.        |
+| `npm run lint:fix`      | Apply safe lint fixes where supported.                      |
+| `npm run test`          | Run [Vitest][vitest-docs] once.                             |
+| `npm run test:watch`    | Run Vitest in watch mode.                                   |
+| `npm run test:coverage` | Run tests with coverage.                                    |
+| `npm run size`          | Check the [size-limit][size-limit-docs] bundle budget.      |
+| `npm run changelog`     | Generate changelog output with [git-cliff][git-cliff-docs]. |
+| `npm run todo`          | Search for TODO markers.                                    |
 
 ## Forge Environment Workflow
 

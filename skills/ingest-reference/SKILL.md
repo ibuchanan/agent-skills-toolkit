@@ -31,6 +31,7 @@ Manage the lifecycle of reference materials for agent skills: decision, ingestio
 2. **Structure with OKF Frontmatter**.
    - Wrap every ingested `.md` file in OKF `0.2.0` frontmatter immediately after extraction.
    - **OKF Template (v0.2.0)**:
+
      ```yaml
      ---
      okf_version: '0.2.0'
@@ -49,6 +50,7 @@ Manage the lifecycle of reference materials for agent skills: decision, ingestio
      license: "Apache-2.0" # Optional: if different from root CITATION.cff
      ---
      ```
+
 3. **Apply the 5/5000 Rule (Progressive Disclosure)**.
    - If a doc set exceeds **5 files** or **5,000 tokens**, create a `SUMMARY.md` (wrapped in OKF) to act as a context map.
    - List sub-documents in a table format: `| Source | Purpose | Loading Trigger |`.
@@ -76,4 +78,3 @@ Manage the lifecycle of reference materials for agent skills: decision, ingestio
 - **Semantic Chunking**: Do not split documents at arbitrary token boundaries. Extraction tools should preserve logical section/paragraph boundaries.
 - **Provenance Parity**: Ensure root `CITATION.cff` and document OKF metadata remain in sync regarding sources and authors.
 - **Validation**: Validate that extracted tables and formulas (LaTeX) maintain structural integrity before finalizing ingestion.
-

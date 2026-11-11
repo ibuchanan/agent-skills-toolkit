@@ -1,4 +1,4 @@
-- description: 'ingest-reference helps manage the lifecycle of skill references'
+- description: "ingest-reference helps manage the lifecycle of skill references"
   vars:
     skill_path: "src/skills/ingest-reference/SKILL.md"
     task: |
@@ -21,7 +21,7 @@
       guardrails: 2
       references: 1
 
-- description: 'ingest-reference handles PDF conversion with Docling and OKF'
+- description: "ingest-reference handles PDF conversion with Docling and OKF"
   vars:
     skill_path: "src/skills/ingest-reference/SKILL.md"
     task: |
@@ -44,7 +44,7 @@
       guardrails: 1
       references: 1
 
-- description: 'ingest-reference applies the 5/5000 progressive-disclosure rule to a large doc set'
+- description: "ingest-reference applies the 5/5000 progressive-disclosure rule to a large doc set"
   vars:
     skill_path: "src/skills/ingest-reference/SKILL.md"
     task: |

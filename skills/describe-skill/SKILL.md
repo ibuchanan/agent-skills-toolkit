@@ -24,7 +24,7 @@ shouldn't", "polish this description before I ship it".
 
 Redirect instead of triggering when:
 
-- The request wants to change what the skill *does* — behavior, or
+- The request wants to change what the skill _does_ — behavior, or
   triggers as a byproduct of a bigger redesign → hand off to
   `grill-this-skill`.
 - The request wants to rename the skill (the `name` field) → decline;
@@ -54,8 +54,8 @@ Redirect instead of triggering when:
    - **Over-triggering**: a near-miss request the description would
      wrongly catch, especially one that belongs to a different skill or
      falls in this skill's own stated non-scope.
-   State the diagnosis directly. Do not run a multi-question interview
-   before proposing a rewrite.
+     State the diagnosis directly. Do not run a multi-question interview
+     before proposing a rewrite.
 
 3. **Propose 1-3 candidates.**
    Write 1-3 rewritten `description` strings that fix the diagnosed
@@ -67,10 +67,10 @@ Redirect instead of triggering when:
      mode is over-triggering;
    - leave the `name` field and the skill's actual instructions
      untouched.
-   If the target skill's purpose is safety-, security-, or
-   boundary-related, and a candidate would narrow triggering, call out
-   that recall/precision tradeoff explicitly before the user picks it.
-   Never silently trade away coverage on a safety-relevant skill.
+     If the target skill's purpose is safety-, security-, or
+     boundary-related, and a candidate would narrow triggering, call out
+     that recall/precision tradeoff explicitly before the user picks it.
+     Never silently trade away coverage on a safety-relevant skill.
 
 4. **Get explicit approval before writing.**
    Present the critique and candidates in conversation. Do not edit the

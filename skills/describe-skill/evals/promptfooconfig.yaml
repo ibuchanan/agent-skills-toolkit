@@ -17,15 +17,15 @@ providers:
     config:
       model: claude-sonnet-4-6
       working_dir: ./fixtures/project
-      setting_sources: ['project']
-      skills: ['describe-skill']
-      append_allowed_tools: ['Read']
+      setting_sources: ["project"]
+      skills: ["describe-skill"]
+      append_allowed_tools: ["Read"]
   - id: anthropic:claude-agent-sdk
     label: describe-skill-baseline
     config:
       model: claude-sonnet-4-6
       working_dir: ./fixtures/project
-      append_allowed_tools: ['Read']
+      append_allowed_tools: ["Read"]
 
 prompts:
   - prompts/*.txt

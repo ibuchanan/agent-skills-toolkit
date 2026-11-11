@@ -12,15 +12,15 @@ providers:
     config:
       model: claude-sonnet-4-6
       working_dir: ./fixtures/project
-      setting_sources: ['project']
-      skills: ['write-citations']
-      append_allowed_tools: ['Read', 'Glob', 'Write']
+      setting_sources: ["project"]
+      skills: ["write-citations"]
+      append_allowed_tools: ["Read", "Glob", "Write"]
   - id: anthropic:claude-agent-sdk
     label: write-citations-baseline
     config:
       model: claude-sonnet-4-6
       working_dir: ./fixtures/project
-      append_allowed_tools: ['Read', 'Glob', 'Write']
+      append_allowed_tools: ["Read", "Glob", "Write"]
 
 prompts:
   - prompts/*.txt

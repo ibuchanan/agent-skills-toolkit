@@ -116,7 +116,7 @@ miss, scope-boundary near miss, and so on), write one Promptfoo test case:
   do not invent new scenarios.
 - Set a `description:` on the test case stating the scenario and expected
   behavior, not just the prompt — this is what lets a future reader (or
-  future you) recover *why* the test exists once the target `SKILL.md`
+  future you) recover _why_ the test exists once the target `SKILL.md`
   has moved on from its current wording.
 - If the spec's scenario types have no scope-boundary/routing case at all,
   flag that gap before writing test cases — a skill that never fires in
