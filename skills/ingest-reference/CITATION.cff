@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this skill, please cite it as below."
+title: "Ingest Reference Skill"
+type: software
+authors:
+  - name: "Ranch Forge Maintainers"
+license: Apache-2.0
+references:
+  - type: website
+    title: "Citation File Format"
+    authors:
+      - name: "Citation File Format"
+    url: "https://citation-file-format.github.io/"
+    notes: "Authoritative guide for root-level provenance metadata."
+  - type: website
+    title: "Open Knowledge Format (OKF) Producer"
+    authors:
+      - name: "Ian Buchanan"
+    repository-code: "https://github.com/ibuchanan/explore-forge-confluence-okf-producer"
+    notes: "Definitive source for OKF 0.2.0 frontmatter specification."
+  - type: software
+    title: "Agent Skills"
+    authors:
+      - name: "Anthropic"
+    repository-code: "https://github.com/agentskills/agentskills"
+    url: "https://agentskills.io"
+    license: "Apache-2.0 AND CC-BY-4.0"
+    notes: "Defines the subtopic of references in agent skill packages."
+  - type: software
+    title: "Firecrawl"
+    url: "https://docs.firecrawl.dev"
+    notes: "Tool for web documentation scraping."
+  - type: software
+    title: "Docling"
+    url: "https://github.com/DS4SD/docling"
+    notes: "Tool for PDF/Word to high-fidelity Markdown extraction."

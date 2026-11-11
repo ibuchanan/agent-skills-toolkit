@@ -1,0 +1,71 @@
+- description: 'ingest-reference helps manage the lifecycle of skill references'
+  vars:
+    skill_path: "src/skills/ingest-reference/SKILL.md"
+    task: |
+      I want to add the Atlassian Design System design tokens documentation as a reference to the forge-ui skill. It's quite large, so it shouldn't be inline. I'd like to use a submodule if possible, and ensure it has OKF frontmatter. What's the process?
+    required_paths:
+      summary: true
+      recommended_actions: true
+      guardrails: true
+      references: true
+    expect_substrings:
+      recommended_actions:
+        - submodule
+        - OKF
+      guardrails:
+        - No Mystery Docs
+      references:
+        - okf-0.2.0-spec
+    array_min_lengths:
+      recommended_actions: 3
+      guardrails: 2
+      references: 1
+
+- description: 'ingest-reference handles PDF conversion with Docling and OKF'
+  vars:
+    skill_path: "src/skills/ingest-reference/SKILL.md"
+    task: |
+      I have a PDF specification for a new API. I need to ingest it into the 'design-api-first' skill. How should I use Docling and OKF for this?
+    required_paths:
+      summary: true
+      recommended_actions: true
+      guardrails: true
+      references: true
+    expect_substrings:
+      recommended_actions:
+        - Docling
+        - OKF
+      guardrails:
+        - Validate
+      references:
+        - okf-0.2.0-spec
+    array_min_lengths:
+      recommended_actions: 3
+      guardrails: 1
+      references: 1
+
+- description: 'ingest-reference applies the 5/5000 progressive-disclosure rule to a large doc set'
+  vars:
+    skill_path: "src/skills/ingest-reference/SKILL.md"
+    task: |
+      I've scraped 12 pages of vendor API documentation into a skill's
+      references/ directory, all wrapped in OKF frontmatter. Do I need to do
+      anything else before linking these from SKILL.md, given how many files
+      there are?
+    required_paths:
+      summary: true
+      recommended_actions: true
+      guardrails: true
+      references: true
+    expect_substrings:
+      recommended_actions:
+        - SUMMARY.md
+        - table
+      guardrails:
+        - mystery docs
+      references:
+        - agentskills/SUMMARY
+    array_min_lengths:
+      recommended_actions: 2
+      guardrails: 1
+      references: 1
