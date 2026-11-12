@@ -183,22 +183,31 @@ gate and does not run every skill's Promptfoo suite.
 
 ## Repository map
 
-| Path                                                                    | Responsibility                                          |
-| ----------------------------------------------------------------------- | ------------------------------------------------------- |
-| `skills/<name>/SKILL.md`                                                | Agent instructions and trigger metadata                 |
-| `skills/<name>/references/`                                             | Supporting knowledge and loading maps                   |
-| `skills/<name>/evals/`                                                  | Skill-specific evaluation configurations and cases      |
-| `specs/`                                                                | Intended skill behavior and evaluation plans            |
-| `specs/references/`                                                     | Shared specification-authoring knowledge                |
-| `src/scripts/`, `src/scripts/lib/`                                      | Helper entry points and implementation                  |
-| `scripts/`                                                              | Generated native helpers; ignored by Git                |
-| `test/scripts/`                                                         | Helper, installation, and package tests                 |
-| `vendor/`                                                               | Pinned upstream Git submodules                          |
-| `docs/`                                                                 | Tutorial, how-to guides, explanation, and CLI reference |
-| `package.json`, `bun.lock`                                              | Root tasks, package allowlist, and dependency lock      |
-| `lefthook.yml`, `biome.jsonc`, `.markdownlint-cli2.yaml`, `cspell.json` | Hooks and static-check configuration                    |
+| Path                                                                    | Responsibility                                                                  |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `skills/<name>/SKILL.md`                                                | Agent instructions and trigger metadata                                         |
+| `skills/<name>/references/`                                             | Supporting knowledge and loading maps                                           |
+| `skills/<name>/evals/`                                                  | Skill-specific evaluation configurations and cases                              |
+| `specs/`                                                                | Intended skill behavior and evaluation plans                                    |
+| `specs/references/`                                                     | Shared specification-authoring knowledge                                        |
+| `src/scripts/`, `src/scripts/lib/`                                      | Helper entry points and implementation                                          |
+| `scripts/`                                                              | Generated native helpers; ignored by Git                                        |
+| `.scratch/tests/`                                                       | Ignored temporary package and linking fixtures; safe to remove after tests stop |
+| `test/scripts/`                                                         | Helper, installation, and package tests                                         |
+| `vendor/`                                                               | Pinned upstream Git submodules                                                  |
+| `docs/`                                                                 | Tutorial, how-to guides, explanation, and CLI reference                         |
+| `package.json`, `bun.lock`                                              | Root tasks, package allowlist, and dependency lock                              |
+| `lefthook.yml`, `biome.jsonc`, `.markdownlint-cli2.yaml`, `cspell.json` | Hooks and static-check configuration                                            |
 
 ## Hooks, builds, and packaging
+
+Helper compilation runs from a unique `.scratch/build/compile-*` directory.
+Bun writes its `.bun-build` intermediates there while finished executables go
+to `scripts/`. The builder restores its working directory and removes only its
+own scratch directory on success or ordinary failure. A forcibly terminated
+build may leave ignored scratch files; remove those only after builds stop.
+Existing root-level `.bun-build` files from older builds are not deleted
+automatically.
 
 - **Pre-commit:** builds helpers, formats files and stages fixes, and runs
   `gitleaks` against staged changes. Review the staged diff after formatting.
@@ -217,6 +226,13 @@ gate and does not run every skill's Promptfoo suite.
   installation. Package tests cover preparation and consumer exposure.
 - **Cleanup:** `bun run clean` deletes root `node_modules/`, `dist/`, and
   generated `scripts/`, but keeps `bun.lock`. Reinstall and rebuild afterward.
+
+Tests that need repository-local temporary fixtures use
+`test/scripts/shared/temp-dir.ts` to create unique directories under
+`.scratch/tests/`. Each test still removes its own directory in cleanup. If a
+process is interrupted, leftovers stay ignored by Git; remove them only after
+related test processes have stopped. Other isolated tests use the OS temporary
+directory. Do not create new fixture directories at the repository root.
 
 ## Common blockers
 

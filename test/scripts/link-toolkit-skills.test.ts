@@ -2,7 +2,6 @@ import { afterEach, beforeEach, expect, it } from "bun:test";
 import {
   lstat,
   mkdir,
-  mkdtemp,
   readlink,
   rm,
   symlink,
@@ -10,14 +9,13 @@ import {
 } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { linkSkills } from "../../src/scripts/lib/link-toolkit-skills.js";
+import { createTestTempDir } from "./shared/temp-dir.js";
 
 let tempDir: string;
 let source: string;
 let target: string;
 beforeEach(async () => {
-  tempDir = await mkdtemp(
-    join(resolve(import.meta.dir, "../.."), "tmp_rovo_link_"),
-  );
+  tempDir = await createTestTempDir("link-");
   source = join(tempDir, "node_modules/agent-skills-toolkit/skills");
   target = join(tempDir, ".agents/skills");
 });

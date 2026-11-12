@@ -1,19 +1,12 @@
 import { expect, it } from "bun:test";
-import {
-  cp,
-  mkdir,
-  mkdtemp,
-  readdir,
-  rm,
-  symlink,
-  writeFile,
-} from "node:fs/promises";
+import { cp, mkdir, readdir, rm, symlink, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
+import { createTestTempDir } from "./shared/temp-dir.js";
 
 const repoRoot = resolve(import.meta.dir, "../..");
 
 it("prepares helpers from source and exposes them to a devDependency consumer", async () => {
-  const tempDir = await mkdtemp(join(repoRoot, "tmp_rovo_consumer_"));
+  const tempDir = await createTestTempDir("consumer-");
   try {
     const source = join(tempDir, "source");
     const consumer = join(tempDir, "consumer");
@@ -40,6 +33,10 @@ it("prepares helpers from source and exposes them to a devDependency consumer", 
       { cwd: source },
     );
     expect(pack.exitCode, pack.stderr.toString()).toBe(0);
+    expect(
+      (await readdir(source)).filter((name) => name.endsWith(".bun-build")),
+    ).toEqual([]);
+    expect(await readdir(join(source, ".scratch/build"))).toEqual([]);
 
     const commands = Object.keys(manifest.bin);
     const entrypoints = (await readdir(join(source, "src/scripts")))
@@ -103,7 +100,7 @@ it("prepares helpers from source and exposes them to a devDependency consumer", 
 }, 120_000);
 
 it("copies every skill with symlinks dereferenced without fixture cycles", async () => {
-  const tempDir = await mkdtemp(join(repoRoot, "tmp_rovo_copy_skills_"));
+  const tempDir = await createTestTempDir("copy-skills-");
   try {
     for (const entry of await readdir(join(repoRoot, "skills"), {
       withFileTypes: true,
@@ -123,7 +120,7 @@ it("copies every skill with symlinks dereferenced without fixture cycles", async
 });
 
 it("packs all skill resources without evaluation fixtures or contributor tooling", async () => {
-  const tempDir = await mkdtemp(join(repoRoot, "tmp_rovo_package_skills_"));
+  const tempDir = await createTestTempDir("package-skills-");
   try {
     const archive = join(tempDir, "skills.tgz");
     const pack = Bun.spawnSync(
