@@ -10,6 +10,7 @@ Manage the lifecycle of reference materials for agent skills: decision, ingestio
 ## Use this skill for
 
 - adding external documentation or specifications to a skill's `references/` directory
+- copying or adapting selected shared repository resources into a target skill's own `references/` directory so the skill is self-contained
 - converting raw text or web content into structured, agent-friendly markdown references
 - adding or updating `CITATION.cff` files for provenance and attribution
 - auditing a skill's references for staleness, bloat, or duplication
@@ -17,15 +18,17 @@ Manage the lifecycle of reference materials for agent skills: decision, ingestio
 
 ## Toolchain
 
-- **Git Submodule**: Preferred for external repos to enable controlled versioning and easy `git submodule update --remote` flows.
+- **Git Submodule**: Preferred as an acquisition source for external repos, not as a runtime dependency of the installed skill. Copy needed content into the skill's `references/`.
 - **Firecrawl**: Use `firecrawl scrape` for one-offs or `crawl` for site-wide ingestion.
 - **Docling**: Preferred for PDF and Word document extraction to high-quality Markdown.
 - **OKF (Open Knowledge Format)**: Use version `0.2.0` for per-document frontmatter.
 
 ## Workflow
 
-1. **Decide Ingestion Method**.
-   - **Controlled Inclusion**: Use **Git Submodules** for external repositories. SHA-pinning ensures deterministic environments.
+1. **Decide Ingestion Method and Destination**.
+   - Identify the target skill directory and which selected material its executing agent actually needs. Shared repository references and the skill's own spec are authoring inputs, not runtime resources merely because they are available in the checkout.
+   - **Local Material**: Copy or adapt needed shared material into `<target-skill>/references/`. Reuse the selected source without repeating research. Keep required behavior inline in `SKILL.md`; do not bundle an entire spec merely to avoid implementing its instructions.
+   - **Controlled Inclusion**: Use **Git Submodules** as version-pinned acquisition sources for external repositories. A checkout under `vendor/` is not a delivered reference; copy the required material into the target skill's `references/` rather than requiring submodule initialization at runtime.
    - **Dynamic Scrape**: Use **Firecrawl** for web docs. Leverages `onlyMainContent` to achieve up to **93% token reduction** vs raw HTML. Validate URLs against authoritative domains (e.g., `*.atlassian.com`, `*.github.io`).
    - **High-Fidelity Extraction**: Use **Docling** for PDF/Word documents. Preserves semantic structures (tables, formulas, reading order) to minimize hallucinations.
 2. **Structure with OKF Frontmatter**.
@@ -56,10 +59,11 @@ Manage the lifecycle of reference materials for agent skills: decision, ingestio
    - List sub-documents in a table format: `| Source | Purpose | Loading Trigger |`.
    - This prevents "context rot" and ensures the agent loads detailed context only when intent-based triggers are met.
 4. **Dual-Layer Attribution**.
-   - **Global (CITATION.cff)**: Root-level provenance for authors, primary repositories, and top-level licenses.
+   - **Global (CITATION.cff)**: Provenance at the target skill's root for authors, primary repositories, and top-level licenses; do not rely solely on the toolkit root's metadata. Preserve upstream attribution and license notices when copying or adapting material.
    - **Document (OKF 0.2.0)**: Per-file extraction metadata (exact source, timestamp, specific author).
 5. **Link with Intent-Based Triggers**.
-   - In `SKILL.md`, add a "Reference load triggers" section.
+   - In `SKILL.md`, add a "Reference load triggers" section pointing to the target skill's bundled `references/` files, with paths relative to the skill directory.
+   - Rewrite required links inside copied references to bundled destinations too. Include necessary linked material or remove irrelevant links; do not leave required reads pointing to shared directories, sibling skills, absolute checkout paths, or symlinks escaping the package. Retain source paths or URLs only as provenance, clearly separate from runtime load instructions.
    - Target the `SUMMARY.md` first for sets exceeding 5 files or 5,000 tokens to enable hierarchical exploration.
    - Trigger phrases must match user intent: "Read `references/api/SUMMARY.md` when the user asks for auth endpoint details."
 6. **Maintain and Audit**.
@@ -77,4 +81,5 @@ Manage the lifecycle of reference materials for agent skills: decision, ingestio
 - **No Mystery Docs**: Every file in `references/` MUST have OKF frontmatter or be indexed in an OKF-wrapped `SUMMARY.md`.
 - **Semantic Chunking**: Do not split documents at arbitrary token boundaries. Extraction tools should preserve logical section/paragraph boundaries.
 - **Provenance Parity**: Ensure root `CITATION.cff` and document OKF metadata remain in sync regarding sources and authors.
-- **Validation**: Validate that extracted tables and formulas (LaTeX) maintain structural integrity before finalizing ingestion.
+- **Validation**: Validate that extracted tables and formulas (LaTeX) maintain structural integrity before finalizing ingestion. Trace required loads from the target `SKILL.md` through the copied references and confirm they exist inside the skill directory without access to the authoring checkout. Report missing material or licensing restrictions as blockers; do not silently substitute an external runtime dependency.
+- **Ownership**: `develop-skill` owns self-contained instruction authoring and routine copying of selected local references. This skill owns substantial reference acquisition, adaptation, and localization. `manage-skills` owns standalone package portability review; successful structural validation alone is insufficient.

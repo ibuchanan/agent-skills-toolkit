@@ -27,9 +27,10 @@ Not for: writing high-quality skill content from scratch, improving existing ski
 ## Core workflow
 
 1. Determine which subcommand matches the user's intent (see decision guide below).
-2. Run the command using the repo-local script.
-3. **Verify the result** — confirm created files exist with `ls` or `list`; do not trust exit 0 alone.
-4. After making changes, summarize what was created, imported, installed, or validated.
+2. Before `install` or `import`, perform the self-containment review below on the source. Report blocking dependencies before proceeding; do not silently repair content or treat structural validation as proof of portability.
+3. Run the command using the repo-local script.
+4. **Verify the result** — confirm created files exist with `ls` or `list`; do not trust exit 0 alone. Review the resulting package for self-containment after `import` or copy-mode `install`, and when explicitly validating a skill.
+5. After making changes, summarize what was created, imported, installed, or validated. Report structural validity and self-containment separately.
 
 ## Subcommands
 
@@ -93,6 +94,30 @@ bun run ~/.agents/skills/manage-skills/scripts/skills.mjs validate <skill-name-o
 ```
 
 Validates required frontmatter fields and directory conventions. Reports clear failures.
+
+## Self-containment review
+
+This is an agent review in addition to the CLI's structural checks; the current
+validator does not establish that resource links or runtime dependencies resolve.
+
+1. Start at `SKILL.md` and follow required resource loads through references,
+   templates, and helpers. Confirm each bundled path exists and resolves inside
+   the skill directory, including symlink targets and transitive dependencies.
+2. Flag required reads of the skill's own unbundled spec, shared repository
+   resources such as `specs/references/` or `vendor/`, sibling skill directories,
+   absolute author-machine paths, and relative paths escaping the package.
+   Inspect prose and commands as well as Markdown links.
+3. Distinguish those defects from legitimate task inputs (such as a target spec
+   supplied by the user), explicit tool/service prerequisites, optional handoffs,
+   and source/provenance links. These do not need copying, but their role and
+   unavailable-prerequisite behavior must be clear.
+4. Review as if only this skill directory had been copied into a different
+   project, without the authoring checkout or conversation context. A symlink
+   installation working in the original checkout is not portability evidence.
+   Do not execute bundled code just to inspect dependencies.
+5. Report offending paths, why they are required, and unresolved checks. Hand off
+   instruction repairs to `develop-skill` and reference localization to
+   `ingest-reference`; do not claim self-containment until blockers are resolved.
 
 ## Decision guide
 
