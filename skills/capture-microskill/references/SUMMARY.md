@@ -34,7 +34,7 @@ generated:
 
 ## Microskills reference map
 
-**Verified:** 11 November 2026. These references critically assess the initial research supplied during discovery; that seed is not retained in this repository and is not an authority for its own claims. The references are concise syntheses, not copies of the original sources or a new microskill specification. The agreed local design is recorded in [capture-microskill.md](../../capture-microskill.md).
+**Verified:** 11 November 2026. These references critically assess the initial research supplied during discovery; that seed is not retained in this repository and is not an authority for its own claims. The references are concise syntheses, not copies of the original sources or a new microskill specification. The installed `SKILL.md` records the agreed local design; its authoring spec is provenance, not required runtime reading.
 
 | Reference                                                                | Purpose                                                                              | Loading trigger                                                                                 |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
@@ -80,7 +80,7 @@ The MicroSkill paper supplies the closest direct definition but only a limited a
 
 ## Approved local design
 
-The approved [capture-microskill specification](../../capture-microskill.md) defines a microskill as a standard skill directory containing only `SKILL.md`, scoped to one coherent tool-use intent and activation context. The human selects the lessons and judges whether their evidence is sufficient; a human-stated lesson is sufficient input, and supporting logs are optional.
+The local design implemented in `SKILL.md` defines a microskill as a standard skill directory containing only `SKILL.md`, scoped to one coherent tool-use intent and activation context. The human selects the lessons and judges whether their evidence is sufficient; a human-stated lesson is sufficient input, and supporting logs are optional.
 
 Single-file output, tool-first naming, grouping by intent, and provenance-free captured guidance are deliberate local decisions, not research findings. Capture does not require successful execution, authoritative corroboration, multiple sessions, or another evidence threshold. The references here inform authoring the capture skill; they are not artifacts to embed in generated microskills.
 

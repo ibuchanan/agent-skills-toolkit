@@ -39,7 +39,7 @@ A skill is a directory containing `SKILL.md`, with required `name` and `descript
 
 The specification recommends keeping the main file under 500 lines and individual reference files focused. These are authoring recommendations, not a normative 20–80-line definition of microskills.
 
-**Consequence for the seed:** `SKILL.md` is a packaging format, not a synonym for a broad, permanently loaded prompt. A narrowly scoped, selectively loaded unit can already be an ordinary Agent Skill. The existing [pinned Agent Skills reference map](../agent-skills/SUMMARY.md) records an earlier repository snapshot; this document describes live pages inspected on the verification date and does not update that pin.
+**Consequence for the seed:** `SKILL.md` is a packaging format, not a synonym for a broad, permanently loaded prompt. A narrowly scoped, selectively loaded unit can already be an ordinary Agent Skill. Earlier authoring research used a pinned repository snapshot; this document describes live pages inspected on the verification date and does not update that historical pin. That earlier reference map is not needed to use this bundled guidance.
 
 ## OpenHands — skills overview and keyword documentation
 

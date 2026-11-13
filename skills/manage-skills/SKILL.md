@@ -1,7 +1,7 @@
 ---
 name: manage-skills
 description: Use this skill to manage local skill definitions, especially when listing, scaffolding, installing, importing, or validating skills.
-compatibility: Requires the manage-skills CLI usually installed to `~/.agents/skills/manage-skills/scripts/skills.mjs`. Use bun run to execute it.
+compatibility: Requires Bun to run the bundled CLI. No package installation is needed.
 ---
 
 # Manage Skills
@@ -10,13 +10,22 @@ compatibility: Requires the manage-skills CLI usually installed to `~/.agents/sk
 
 Use this skill to manage local skill definitions, especially when listing, scaffolding, installing, importing, or validating skills. This skill is about creating and managing skill definitions; not about designing a skill's behavior. If the user needs help authoring or iterating on a skill's content after scaffolding, use `develop-skill`.
 
-## Invocation — use the global script with bun
+## Invocation — use the skill's bundled script
+
+Resolve `SKILLDIR` to the directory containing this loaded `SKILL.md`, not the
+current project directory. Substitute that actual path below; `get_skill` is not
+a shell command. Quote paths so installations containing spaces work.
 
 ```bash
-bun run ~/.agents/skills/manage-skills/scripts/skills.mjs <subcommand> [args]
+SKILLDIR="/actual/path/to/manage-skills"
+bun run "$SKILLDIR/scripts/skills.mjs" <subcommand> [args]
 ```
 
-The script defaults `--source` to `packages/agents/src/skills`, so no `--source` flag is needed for standard skill operations. Do not use `npm exec -- manage-skills` or `node_modules/.bin/manage-skills` — they silently do nothing.
+The script bundles its JavaScript dependencies; only Bun is required. If Bun is
+unavailable, report the unmet prerequisite rather than installing it silently.
+The default source is `packages/agents/src/skills` relative to the current working
+directory. For a different project layout, pass `--source <actual-skills-directory>`
+to the subcommand. The source tree is a task input, not an installation path.
 
 ## Scope
 
@@ -28,7 +37,7 @@ Not for: writing high-quality skill content from scratch, improving existing ski
 
 1. Determine which subcommand matches the user's intent (see decision guide below).
 2. Before `install` or `import`, perform the self-containment review below on the source. Report blocking dependencies before proceeding; do not silently repair content or treat structural validation as proof of portability.
-3. Run the command using the repo-local script.
+3. Run the command using this skill's bundled script, with `--source` when the project's skill directory differs from the default.
 4. **Verify the result** — confirm created files exist with `ls` or `list`; do not trust exit 0 alone. Review the resulting package for self-containment after `import` or copy-mode `install`, and when explicitly validating a skill.
 5. After making changes, summarize what was created, imported, installed, or validated. Report structural validity and self-containment separately.
 
@@ -39,8 +48,8 @@ Not for: writing high-quality skill content from scratch, improving existing ski
 Inspect available repo-local skills.
 
 ```bash
-bun run ~/.agents/skills/manage-skills/scripts/skills.mjs list
-bun run ~/.agents/skills/manage-skills/scripts/skills.mjs list --json
+bun run "$SKILLDIR/scripts/skills.mjs" list
+bun run "$SKILLDIR/scripts/skills.mjs" list --json
 ```
 
 Lists skill directories that contain `SKILL.md`. Emits readable text or JSON.
@@ -50,7 +59,7 @@ Lists skill directories that contain `SKILL.md`. Emits readable text or JSON.
 Scaffold a new skill directory.
 
 ```bash
-bun run ~/.agents/skills/manage-skills/scripts/skills.mjs new <skill-name>
+bun run "$SKILLDIR/scripts/skills.mjs" new <skill-name>
 ```
 
 - Name must match `^[a-z0-9][a-z0-9-]*$`
@@ -63,8 +72,8 @@ bun run ~/.agents/skills/manage-skills/scripts/skills.mjs new <skill-name>
 Place a skill into a repo-local `.agents/skills` directory.
 
 ```bash
-bun run ~/.agents/skills/manage-skills/scripts/skills.mjs install <skill-name>
-bun run ~/.agents/skills/manage-skills/scripts/skills.mjs install <skill-name> /path/to/other-repo --copy
+bun run "$SKILLDIR/scripts/skills.mjs" install <skill-name>
+bun run "$SKILLDIR/scripts/skills.mjs" install <skill-name> /path/to/other-repo --copy
 ```
 
 - Validates the source skill before installing
@@ -77,7 +86,7 @@ bun run ~/.agents/skills/manage-skills/scripts/skills.mjs install <skill-name> /
 Bring an external skill directory into this repo.
 
 ```bash
-bun run ~/.agents/skills/manage-skills/scripts/skills.mjs import /path/to/external/skill [name]
+bun run "$SKILLDIR/scripts/skills.mjs" import /path/to/external/skill [name]
 ```
 
 - Validates the external skill before import
@@ -90,7 +99,7 @@ bun run ~/.agents/skills/manage-skills/scripts/skills.mjs import /path/to/extern
 Check whether a skill is structurally valid.
 
 ```bash
-bun run ~/.agents/skills/manage-skills/scripts/skills.mjs validate <skill-name-or-path>
+bun run "$SKILLDIR/scripts/skills.mjs" validate <skill-name-or-path>
 ```
 
 Validates required frontmatter fields and directory conventions. Reports clear failures.
@@ -132,11 +141,12 @@ validator does not establish that resource links or runtime dependencies resolve
 
 ## Reference material
 
-Load these only when needed — do not read by default:
+Read `references/skill-format.md` when checking package layout, frontmatter, or
+resource links. Content-authoring practices and script design are outside this
+skill's scope; optionally hand off to `develop-skill` if installed, otherwise
+report the needed authoring work without assuming a companion is available.
 
-- `references/agentskills/docs/specification.mdx` — Agent Skills package structure and frontmatter
-- `references/agentskills/docs/skill-creation/best-practices.mdx` — grounding skills in real expertise
-- `references/agentskills/docs/skill-creation/using-scripts.mdx` — when and how to use scripts
+See `scripts/README.md` for bundle maintenance and third-party license notices.
 
 ## Safety note
 

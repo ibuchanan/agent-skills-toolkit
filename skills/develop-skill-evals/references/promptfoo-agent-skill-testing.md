@@ -448,8 +448,9 @@ it before concluding the skill needs work.
 
 When the same rubric or check repeats across test cases or skills,
 Promptfoo's `defaultTest`/`assertionTemplates`/YAML anchors let you define
-it once — see `promptfoo-evals` for the exact syntax; this reference only
-covers what to assert, not how to avoid retyping it.
+it once. Use `defaultTest.assert` for checks shared by every test; see the bundled
+`references/config-prompt-assertion-reference.md` for the minimal syntax.
+Do not assume a companion skill is available for core artifact authoring.
 
 ## Judging output quality: `llm-rubric` and `search-rubric`
 

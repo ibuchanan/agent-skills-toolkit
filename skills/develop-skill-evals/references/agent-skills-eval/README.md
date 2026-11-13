@@ -331,4 +331,4 @@ Beyond the spec, this SDK adds: per-eval `defaults`, model `params`, tool defini
 
 ## Examples
 
-See [`examples/basic-skill`](examples/basic-skill) for a complete skill folder, and [`examples/agent-skills-eval.yaml`](examples/agent-skills-eval.yaml) for a reference config.
+Optional upstream examples (not bundled runtime inputs): see [`examples/basic-skill`](https://github.com/darkrishabh/agent-skills-eval/tree/b60eebe3c6edaa917a284e13b9b0e9fa00f1c957/examples/basic-skill) for a complete skill folder, and [`examples/agent-skills-eval.yaml`](https://github.com/darkrishabh/agent-skills-eval/blob/b60eebe3c6edaa917a284e13b9b0e9fa00f1c957/examples/agent-skills-eval.yaml) for a reference config.

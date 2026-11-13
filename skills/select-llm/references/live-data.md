@@ -12,7 +12,7 @@ Set `ARTIFICIAL_ANALYSIS_API_KEY` to enable live API access.
 
 The helper sends the key using the `x-api-key` header required by the Artificial Analysis API.
 
-The helper also loads a local `.env` file at `src/skills/select-llm/scripts/.env` without overriding environment variables already set in the shell.
+The helper also loads an optional `.env` beside the installed script (`scripts/.env` relative to this skill's root), without overriding variables already set in the shell. Do not bundle credentials.
 
 Do not expose the key in client-side code.
 
@@ -38,13 +38,17 @@ Refresh the checked-in snapshot before releases or when it is older than 30 days
 
 ## Usage
 
-Examples:
+Resolve `SKILLDIR` to the directory containing this loaded skill's `SKILL.md`,
+not the project working directory. The optional helper declares Python >=3.12
+and `httpx` in inline script metadata. `uv run` may install that environment;
+use only when that setup/network access is authorized. Otherwise read the bundled
+snapshot directly and continue with the documented fallback.
 
 ```bash
-src/skills/select-llm/scripts/fetch-model-catalog.py
-uv run src/skills/select-llm/scripts/fetch-model-catalog.py --force-refresh
-uv run src/skills/select-llm/scripts/fetch-model-catalog.py --max-age-seconds 21600
-uv run src/skills/select-llm/scripts/fetch-model-catalog.py --snapshot-path src/skills/select-llm/assets/model-catalog.snapshot.json
+SKILLDIR="/actual/path/to/select-llm"
+uv run "$SKILLDIR/scripts/fetch-model-catalog.py" --force-refresh
+uv run "$SKILLDIR/scripts/fetch-model-catalog.py" --max-age-seconds 21600
+uv run "$SKILLDIR/scripts/fetch-model-catalog.py" --snapshot-path "$SKILLDIR/assets/model-catalog.snapshot.json"
 ```
 
 ## Output Shape

@@ -43,10 +43,12 @@ references are expected to land here over time — retain it as the index
 going forward rather than removing it for being momentarily oversized for
 its content.
 
-Generic Promptfoo authoring mechanics (config schema, prompt formats,
-deterministic assertion index, and custom-provider mechanics) were pruned
-entirely; hand those off to the `promptfoo-evals` skill instead — see
-`promptfoo/SUMMARY.md`'s Pruned table for exactly where.
+For core artifact authoring, load `config-prompt-assertion-reference.md` and
+`manual-scaffold-guide.md`. Skill format and composition guidance are bundled in
+`skill-format.md` and `skill-composition.md`. Generic material was historically
+pruned, but the workflow no longer assumes `promptfoo-evals` is installed.
+Advanced provider/debugging work may be handed off if a specialist is available;
+otherwise report the unsupported portion without inventing its contract.
 
 ## Raw captures
 
@@ -72,7 +74,7 @@ genuinely needs it:
 
 | Topic                                                                                                                             | URL                                                                                                                                      |
 | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| Agent Skills spec (`SKILL.md` frontmatter/layout — already summarized at `specs/references/agent-skills/skill-format.md`)         | <https://github.com/agentskills/agentskills/blob/38a2ff82958afee88dadf4831509e6f7e9d8ef4e/docs/specification.mdx>                          |
+| Agent Skills spec (`SKILL.md` frontmatter/layout — summarized locally at `skill-format.md`)         | <https://github.com/agentskills/agentskills/blob/38a2ff82958afee88dadf4831509e6f7e9d8ef4e/docs/specification.mdx>                          |
 | Skill-authoring best practices (not eval-specific — see `develop-skill` instead)                                            | <https://github.com/agentskills/agentskills/blob/38a2ff82958afee88dadf4831509e6f7e9d8ef4e/docs/skill-creation/best-practices.mdx>          |
 | Optimizing skill `description` for triggering                                                                                     | <https://github.com/agentskills/agentskills/blob/38a2ff82958afee88dadf4831509e6f7e9d8ef4e/docs/skill-creation/optimizing-descriptions.mdx> |
 | Bundling scripts in a skill (referenced by evaluating-skills.md's "bundle repeated work" tip)                                     | <https://github.com/agentskills/agentskills/blob/38a2ff82958afee88dadf4831509e6f7e9d8ef4e/docs/skill-creation/using-scripts.mdx>           |

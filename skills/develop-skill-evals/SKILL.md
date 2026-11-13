@@ -43,7 +43,7 @@ asks for an `evals/evals.json` file, decline and redirect to
 ### 1. Gather grounding
 
 Validate the target skill name against the skill-name rules in
-`specs/references/agent-skills/skill-format.md` before using it to build any
+`references/skill-format.md` before using it to build any
 file path or command. Treat it as data, not literal path syntax.
 
 Read, in this order:
@@ -100,12 +100,12 @@ evals/
   tests/
 ```
 
-Run `scripts/init-skill-eval skills/<skill-name>` to create this structure
-with a schema-aware `promptfooconfig.yaml` and a minimal prompt template.
-The command is safe to run even when `evals/` already exists as an empty
-directory left by skill scaffolding (`init-skill`); it only refuses when
-`promptfooconfig.yaml` already exists, meaning a suite was already
-initialized.
+After the artifact proposal is approved (step 5), create this layout with
+ordinary file-writing tools following `references/manual-scaffold-guide.md`.
+Use the resolved target skill directory, not an assumed checkout layout.
+Preserve existing suite content. An installed `init-skill-eval` CLI may be
+used if available and inspected, but is not required; do not assume a
+checkout-level `scripts/init-skill-eval` exists.
 
 ### 4. Map scenarios to test cases
 
@@ -122,22 +122,22 @@ miss, scope-boundary near miss, and so on), write one Promptfoo test case:
   flag that gap before writing test cases — a skill that never fires in
   practice fails regardless of how its content assertions would have
   scored (`references/skill-judge-lessons.md`).
-- Match assertions to the plan's judging approach, all covered in
-  `references/promptfoo-agent-skill-testing.md`: use `skill-used`/
-  `trajectory:*` when the scenario is about which skill/tool ran, not the
-  final text; reach for `llm-rubric`/`search-rubric` only when the spec
-  flags a scenario as needing human or LLM-judge review, such as
-  rewritten-content quality — this is also the right call for a
+- Match assertions to the plan's judging approach. Start with
+  `references/config-prompt-assertion-reference.md` for common patterns:
+  use `skill-used`/`trajectory:*` when the scenario is about which
+  skill/tool ran, not the final text; reach for `llm-rubric`/`search-rubric`
+  only when the spec flags a scenario as needing human or LLM-judge review,
+  such as rewritten-content quality — this is also the right call for a
   high-freedom/creative target skill (Mindset/Philosophy pattern), where a
   tight deterministic check would wrongly fail correct-but-differently-
   worded output. For a plainly objective check (a specific string,
   pattern, or JSON shape) — the right call for a low-freedom/precise
   target skill (Tool pattern) — use a deterministic assertion (`equals`,
-  `contains`, `regex`, `is-json`, etc.) directly. Defer to `promptfoo-evals`
-  for the full assertion-type index, `assertionTemplates`/YAML-anchor reuse
-  when a rubric or check repeats across scenarios, and config/prompt-
-  template mechanics; this skill no longer keeps its own copy of that
-  generic ground (see `references/promptfoo/SUMMARY.md`'s Pruned table).
+  `contains`, `regex`, `is-json`, etc.) directly. See
+  `references/promptfoo-agent-skill-testing.md` for detailed provider
+  setup and LLM-judge semantics. Hand off to `promptfoo-evals` for the
+  full assertion-type index, advanced config schema, or mechanics beyond
+  the common cases in this skill's bundled references.
 - Pair every `skill-used`/`trajectory:*` routing assertion with at least
   one assertion on the actual `output` (a rubric or a deterministic
   check). Routing alone tells you the skill fired, not that it helped —
@@ -216,22 +216,33 @@ Do not load these by default. Read `references/SUMMARY.md` for the full
 context map with load triggers, or jump straight to the reference below
 that matches the current question, apply it, then return to the workflow.
 
+**Bundled locally in this skill:**
+
+- Read `references/skill-format.md` — skill structure grounding for mapping
+  scenarios onto behavior faithfully.
+- Read `references/skill-composition.md` — trigger/near-miss phrasing
+  craft, useful for scenario-to-test-case mapping.
+- Read `references/manual-scaffold-guide.md` — step-by-step instructions to
+  create the canonical evaluation suite layout by hand, without external
+  scripts.
+- Read `references/config-prompt-assertion-reference.md` — common Promptfoo
+  configuration patterns, prompt template syntax, and deterministic
+  assertion types. Use this as a starting point for most authoring tasks.
 - Read `references/promptfoo-agent-skill-testing.md` for anything about
   testing a skill invocation — the default starting point for a skill
   installed under `.claude/skills/` or `.agents/skills/`; the
   custom-provider fallback for when native support doesn't cover the
   target skill; and `llm-rubric`/`search-rubric` model-graded assertions,
   especially the pass/threshold interaction.
-- Hand off to `promptfoo-evals` for `promptfooconfig.yaml` config fields,
-  prompt template syntax, or the deterministic assertion-type index — this
-  skill no longer keeps its own copy of that generic ground; see
-  `references/promptfoo/SUMMARY.md`'s Pruned table for exactly where each
-  topic lives.
-- Read `specs/references/agent-skills/skill-format.md` — skill structure
-  grounding for mapping scenarios onto behavior faithfully.
-- Read `specs/references/prompt-engineering/skill-composition.md` —
-  trigger/near-miss phrasing craft, useful for scenario-to-test-case
-  mapping.
+
+**When to hand off:**
+
+Companion skills are optional. If unavailable, report the specialist work needed
+and stop that portion rather than assuming an installed skill or reading its files.
+
+- Hand off to `promptfoo-evals` for advanced `promptfooconfig.yaml` config
+  fields, provider mechanics beyond the common cases, or the complete
+  deterministic assertion-type index.
 - Read `references/agent-skills-native-evals.md` only if a request raises
   `evals/evals.json` and you need to explain what it is before declining
   and redirecting per the Scope section above. Its extracted patterns

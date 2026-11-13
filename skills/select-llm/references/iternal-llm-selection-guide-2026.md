@@ -908,7 +908,7 @@ $750K-$1.5M
 
 Full enterprise AI transformation with ongoing advisory and technology integration
 
-[Explore AI Strategy Consulting](/ai-strategy-consulting)
+[Explore AI Strategy Consulting](https://iternal.ai/ai-strategy-consulting)
 
 FAQ
 

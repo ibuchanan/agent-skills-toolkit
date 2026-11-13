@@ -16,6 +16,13 @@ generated:
 
 # Promptfoo Raw Captures — Context Map
 
+For core authoring, use the bundled
+`references/config-prompt-assertion-reference.md` and
+`references/manual-scaffold-guide.md` (paths relative to the skill root).
+The historical pruning notes below do not require an installed `promptfoo-evals`;
+advanced specialist handoffs are optional, with unsupported work reported if none
+is available.
+
 This subdirectory holds only the raw captures that are specific to
 testing an **agent/skill invocation** — this skill's actual focus, per
 `specs/develop-skill-evals.md`. Generic Promptfoo mechanics (config
