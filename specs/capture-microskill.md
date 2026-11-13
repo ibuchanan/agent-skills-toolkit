@@ -136,12 +136,61 @@ For each microskill:
 It contains no provenance or session narrative. Report created or merged paths
 and any unresolved limitations concisely.
 
+### Fast-path execution contract
+
+Author captured microskills to reach the intended operation directly, not to
+navigate tool setup. Use this consistent shape when applicable:
+
+```markdown
+Requires: `<tool>` installed and callable in the project environment.
+
+<Minimum sufficient invocation for the selected intent.>
+
+Recovery: If unavailable, report the unmet precondition and stop. For a
+compatibility or syntax error, inspect only the relevant version or help.
+```
+
+- **Installation is a precondition, not a workflow.** State availability once.
+  Do not add executable searches, repository-versus-PATH fallback ladders,
+  package installation, or download-on-demand runners. Use an established
+  project invocation when supplied; otherwise name the tool directly. Missing
+  availability is an unmet precondition, not implicit setup authorization.
+  For MCP tools, express the equivalent connection/tool-availability requirement
+  without adding connection setup or tool-catalog exploration.
+- **Put the operation on the fast path.** Do not require `--version`, `--help`,
+  or capability probes before ordinary work. Version constraints may be stated
+  declaratively when relevant; a historically tested version is not a mandatory
+  verification step. Use focused diagnostics only after an availability, syntax,
+  or compatibility failure makes them relevant. Do not treat normal findings,
+  such as spelling errors, as evidence of a broken tool installation.
+- **Use the minimum sufficient invocation.** Every explicit option must serve
+  the selected intent, a necessary safety boundary, or a known project/tool
+  constraint. Prefer established automatic configuration discovery and defaults
+  to spelling out paths or restating defaults. Do not carry incidental config
+  filenames, cache policies, output flags, or working directories out of logs.
+  Explicit overrides belong only where the requested behavior requires them.
+- **Defaults are behavior, not guesses.** Rely on tool defaults only when
+  established by the selected lesson or project guidance. Do not invent flags,
+  default discovery behavior, or required inputs. Ask only for information that
+  actually affects the operation, not values the tool already discovers.
+- **Recovery is conditional and bounded.** Separate it from the main invocation;
+  include only recovery supported by the lesson. Do not turn diagnostics into
+  an installation workflow or weaken safety constraints to get a command to run.
+- **Keep necessary safeguards.** Fast-path guidance does not remove authorization,
+  destructive-operation checks, required scope selection, or authoring-time
+  placement and collision checks. Capture still does not execute the target tool.
+
+For the selected spelling-check lesson, express installed `cspell` as the
+precondition and let its established project configuration discovery operate.
+Do not require a particular configuration filename or copy all flags from a
+historical command. Retain exact syntax only where that syntax is the lesson.
+
 ### Artifact review rubric
 
 Apply this rubric when reviewing captured guidance or an authorized merge. These are local authoring policies, not additional research findings or evidence thresholds. Review the artifact without executing the target tool or creating evaluations.
 
 - **Boundary:** Keep one clear tool-use intent and activation context, state relevant exclusions, and distinguish read-only actions from actions requiring write authorization. Split skills only when intent or activation context differs, not merely because operations read or write.
-- **Economy:** Keep only necessary pre-flight checks; do not skip placement guidance, collision checks, or authorization. Prefer compact templates for exact structured inputs over prose descriptions of schemas, without adding unrelated coverage.
+- **Economy:** Start from declared prerequisites and the minimum sufficient operation, not setup navigation or routine probes. Keep placement, collision, authorization, and necessary safety checks. Prefer compact templates for exact structured inputs without unrelated coverage.
 - **Guardrails:** Block relevant failure modes such as invented flags, arguments, defaults, outcomes, or silent installs. Preserve uncertainty and version or environment limits, not capture provenance artifacts. Preserve operational provenance only when it is part of the selected target-operation contract.
 - **Portability:** Keep essential guidance self-contained. Make optional links and environment-dependent dependencies explicit. Use defaults only when supplied or established by the selected lesson or project guidance; otherwise require the input or ask rather than inventing a default.
 - **Hygiene:** Keep Markdown readable and required schemas easy to find. Avoid accidental non-standard whitespace and formatting hazards while preserving meaningful whitespace in examples; follow the host project's wrapping conventions.
@@ -171,6 +220,10 @@ call may be the correct outcome.
 | --- | --- |
 | Human selects `cspell` configuration and option lessons from several logs. | Produce one focused, single-file package without replaying commands or adding provenance. |
 | Human supplies a lesson without corroborating logs and explicitly requests capture. | Capture it without imposing an evidence threshold. |
+| Logs include executable searches, installs, and routine version/help checks before a successful operation. | Declare installation as a precondition; put the operation first, omit setup navigation, and reserve relevant diagnostics for conditional recovery. |
+| A spelling command pins a session-specific config filename and incidental flags despite established automatic discovery. | Preserve requested scope, rely on discovery, and omit overrides without a task-specific reason; do not invent replacement flags. |
+| Selected lesson requires a non-default config or a safety-critical option. | Retain the necessary override; minimal does not mean dropping required behavior or safeguards. |
+| Tool is unavailable, has incompatible syntax, or reports normal findings. | Encode distinct responses: report unavailable prerequisites without installing, diagnose compatibility only on failure, and handle findings as normal operation output. |
 | Selected lessons concern distinct `forge` operations. | Scope and name packages by the relevant operations, without generating unrelated coverage. |
 | Target name already exists. | Ask merge-or-rename before modifying it. |
 | Destination guidance is missing or ambiguous. | Ask rather than invent a location. |
