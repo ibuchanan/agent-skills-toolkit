@@ -11,7 +11,7 @@ author evaluations, and maintain attribution.
 Use this toolkit when you maintain skills and want a specification-driven
 workflow with traceable references and behavioral checks. It is not an agent
 runtime, and installing it does not make model behavior deterministic.
-The package is private and versioned `0.0.0`; install skills from Git rather
+The package is private and versioned `0.1.0`; install skills from Git rather
 than relying on an npm release.
 
 ## Install and try a skill

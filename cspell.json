@@ -50,6 +50,7 @@
     {
       "filename": [
         "cspell.json",
+        "CHANGELOG.md",
         "specs/capture-microskill.md",
         "specs/develop-skill.md",
         "specs/references/microskills/**/*",

@@ -1,6 +1,6 @@
 {
   "name": "agent-skills-toolkit",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Agent skills for defining, researching, describing, evaluating, and citing skills.",
   "repository": {
@@ -32,7 +32,7 @@
     "bootstrap": "cd vendor/agent-skills-eval && npm install && npm run build",
     "build": "bun run build:scripts",
     "build:scripts": "bun run src/scripts/build.ts",
-    "changelog": "git cliff",
+    "changelog": "git cliff --bump --output CHANGELOG.md",
     "check": "lefthook run pre-push --force",
     "clean": "rm -rf ./node_modules ./dist ./scripts",
     "eval:research-references": "skills/research-references/evals/run.sh",
