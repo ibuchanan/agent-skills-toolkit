@@ -26,7 +26,8 @@ export class FileSystemError extends Error {
 /**
  * Creates a skill directory with all required subdirectories and SKILL.md.
  *
- * Atomicity: If any step fails, removes the skill directory entirely (rollback).
+ * Atomicity: On failure after claiming a new directory, rolls it back.
+ * Existing paths and creation collisions are never removed.
  *
  * @param skillName - Name of the skill (used for directory and frontmatter)
  * @param parentDir - Parent directory where skills/ subdirectory exists
@@ -40,27 +41,22 @@ export async function createSkillDirectory(
   const skillDir = join(parentDir, skillName);
   const requiredSubdirs = ["scripts", "assets", "references", "evals"];
 
+  // Non-recursive mkdir claims the target exclusively, including dangling symlinks.
+  // A failed claim must never enter rollback: the path belongs to someone else.
   try {
-    // Check if skill directory already exists
-    try {
-      await realpath(skillDir);
-      // If we get here, directory exists
+    await mkdir(skillDir, { recursive: false });
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "EEXIST") {
       throw new FileSystemError(
         `Skill directory already exists: ${skillDir}`,
         skillDir,
         "EEXIST",
       );
-    } catch (error) {
-      // If error is not "file not found", re-throw
-      if (error instanceof FileSystemError) throw error;
-      const err = error as NodeJS.ErrnoException;
-      if (err.code !== "ENOENT") throw error;
-      // ENOENT is expected (directory doesn't exist yet)
     }
+    throw error;
+  }
 
-    // Create skill directory
-    await mkdir(skillDir, { recursive: false });
-
+  try {
     // Create subdirectories
     for (const subdir of requiredSubdirs) {
       const subdirPath = join(skillDir, subdir);

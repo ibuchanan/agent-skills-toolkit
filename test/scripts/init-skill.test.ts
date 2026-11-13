@@ -1,17 +1,16 @@
 import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
-import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { parse as parseYaml } from "yaml";
 import { createSkillDirectory } from "../../src/scripts/lib/io.js";
 import { validateSkillName } from "../../src/scripts/lib/validation.js";
+import { createTestTempDir } from "./shared/temp-dir.js";
 
 describe("init-skill script", () => {
   let testDir: string;
 
   beforeEach(async () => {
-    testDir = join(tmpdir(), `test-skill-${Date.now()}`);
-    await mkdir(testDir, { recursive: true });
+    testDir = await createTestTempDir("tmp_rovo_init_skill_");
   });
 
   afterEach(async () => {
@@ -60,9 +59,8 @@ describe("init-skill script", () => {
         // Expected to fail
       }
 
-      // Verify that skill directory was cleaned up entirely (atomic failure)
-      const exists = await stat(skillDir).catch(() => null);
-      expect(exists).toBeNull();
+      expect((await stat(skillDir)).isDirectory()).toBe(true);
+      expect(await readFile(markerFile, "utf8")).toBe("preserved");
     });
   });
 

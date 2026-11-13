@@ -25,7 +25,7 @@ rejects invalid arguments and missing required modes. `find-skills` does not par
 | Command           | Syntax                              | Working-directory / path rule                                     | Mutation                                |
 | ----------------- | ----------------------------------- | ----------------------------------------------------------------- | --------------------------------------- |
 | `find-skills`     | `find-skills`                       | Finds nearest ancestor containing a `.git` file or directory      | None                                    |
-| `init-skill`      | `init-skill <name>`                 | Finds Git root; targets its `skills/`                             | Creates scaffold                        |
+| `init-skill`      | See modes below                     | Finds Git root; targets its `skills/`                             | Creates scaffold                        |
 | `init-skill-eval` | `init-skill-eval <skill-directory>` | Relative paths resolve from current directory                     | Creates eval scaffold                   |
 | `validate-skill`  | `validate-skill <skill-directory>`  | Relative paths resolve from current directory                     | None                                    |
 | `validate-okf`    | `validate-okf <bundle-directory>`   | Relative paths resolve from current directory                     | None                                    |
@@ -47,8 +47,22 @@ errors reject the top-level call; there is no dedicated usage-error handler.
 ### `init-skill`
 
 Creates `skills/<name>/SKILL.md` and empty `scripts/`, `assets/`, `references/`,
-and `evals/` subdirectories. The parent `skills/` directory must already exist.
-The command refuses an existing skill directory; it has no overwrite flag.
+and `evals/` subdirectories. For the positional form, the parent `skills/`
+directory must already exist. The command refuses any existing target path;
+it has no overwrite flag.
+
+`init-skill --specs` scans only root-level `specs/*.md` files in lexicographic
+order. It recognizes a first-level heading `# Skill specification <name>`,
+with an optional colon after `specification` and optional backticks around the
+name. It validates the extracted name and creates the same starter scaffold,
+creating the parent `skills/` directory if needed. Specification content is not
+copied into the skill and specification files are never modified.
+
+Specs mode skips existing targets, including partial directories, files, and
+symlinks. It reports each created, skipped, or failed item with its source path,
+continues after item errors, and exits `1` if any item failed. No matching specs
+(including a missing `specs/` directory) and all-existing targets exit `0`.
+Both forms reject surplus arguments and unsupported options before mutation.
 The generated skill contains placeholder description and body text. It does not
 create a specification, references, citation metadata, or meaningful tests.
 
