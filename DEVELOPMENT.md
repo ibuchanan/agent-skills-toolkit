@@ -26,8 +26,11 @@ bun run setup
 ```
 
 For an existing clone, use `git submodule update --init --recursive` before setup.
-`bun install` may already build helpers through `prepare`; the explicit build
-also covers installs where lifecycle scripts did not run. `setup` installs
+`bun install` may already build helpers and self-install local skills through
+`prepare`. To run both steps explicitly after an install that skipped lifecycle
+scripts, use `bun run prepare`. To refresh links after editing the skill inventory,
+use `bun run link:skills`. Links target this checkout's `.agents/skills/`; conflicts
+are preserved and reported as failures. `setup` installs
 Lefthook hooks and runs `bootstrap`, which uses npm to install and build
 `vendor/agent-skills-eval`. These commands can access the network.
 
@@ -213,8 +216,10 @@ automatically.
   `gitleaks` against staged changes. Review the staged diff after formatting.
 - **Pre-push:** runs formatting checks, lint, and tests. `bun run check` invokes
   this group explicitly; it is different from `check-skill`.
-- **Preparation:** `prepare` only builds helpers. It does not install hooks or
-  bootstrap the vendored runner; `setup` does those explicitly.
+- **Preparation:** `prepare` builds helpers, then links this checkout's local
+  skills into `.agents/skills/` using `link:skills`. Conflicts fail preparation
+  without replacing existing content. It does not install hooks or bootstrap
+  the vendored runner; `setup` does those explicitly.
 - **Dependencies:** use Bun and retain `bun.lock` at the root. The vendored
   runner retains its npm workflow. Keep submodule updates deliberate and pinned.
 - **Package contents:** the private package includes native helpers, skill

@@ -68,13 +68,15 @@ bun add --dev --trust github:ibuchanan/agent-skills-toolkit
 ```
 
 Allow the trusted package's lifecycle script: `prepare` compiles eight native
-helpers for the build machine's OS and architecture. A passing validation checks
+helpers and links package-local skills under that checkout's `.agents/skills/`.
+Helpers target the build machine's OS and architecture. A passing validation checks
 frontmatter, not behavioral correctness. Built archives are platform-specific
 and do not include helper build source.
 
-See the [CLI reference](docs/reference/cli-tools.md) for all commands and limits,
-and the [local installation how-to](docs/how-to/install-local-skill.md) to put
-one local skill into another project. `check-skill` can run live Promptfoo
+See the [CLI reference](docs/reference/cli-tools.md) for all commands and limits.
+Use `link-skills` to expose toolkit, package, or local skills to your agent.
+Use the [local installation how-to](docs/how-to/install-local-skill.md) to put
+one specific skill into another project. `check-skill` can run live Promptfoo
 evaluations, requiring credentials and incurring provider costs; it is not an
 offline-only validation command.
 

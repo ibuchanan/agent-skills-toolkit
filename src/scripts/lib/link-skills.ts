@@ -4,6 +4,7 @@ import {
   mkdir,
   readdir,
   readlink,
+  realpath,
   stat,
   symlink,
   unlink,
@@ -38,6 +39,15 @@ export async function linkSkills(
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return result;
     throw error;
+  }
+
+  // Compare physical roots too, without changing the paths stored in links.
+  const physicalSource = await realpath(sourceRoot);
+  try {
+    if (physicalSource === (await realpath(targetRoot)))
+      throw new Error("Source and target directories must differ");
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }
 
   const skills: string[] = [];

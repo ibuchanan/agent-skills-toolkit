@@ -14,7 +14,7 @@
     "find-skills": "scripts/find-skills",
     "init-skill": "scripts/init-skill",
     "init-skill-eval": "scripts/init-skill-eval",
-    "link-toolkit-skills": "scripts/link-toolkit-skills",
+    "link-skills": "scripts/link-skills",
     "validate-cff": "scripts/validate-cff",
     "validate-okf": "scripts/validate-okf",
     "validate-skill": "scripts/validate-skill"
@@ -43,7 +43,8 @@
     "lint:fix": "biome lint --write",
     "lint:markdown": "markdownlint-cli2",
     "lint:spell": "cspell lint --gitignore",
-    "prepare": "bun run build",
+    "link:skills": "./scripts/link-skills --local",
+    "prepare": "bun run build && bun run link:skills",
     "setup": "lefthook install && bun run bootstrap",
     "test": "bun run bootstrap && bun test test/scripts/*.test.ts",
     "test:coverage": "bun test --coverage",

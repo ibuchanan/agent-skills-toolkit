@@ -19,19 +19,19 @@ build machine's OS and architecture. Installed dependencies expose them under
 The helpers emit human-readable text, not a stable JSON protocol. No shared
 `--help`, `--version`, `--dry-run`, or JSON flag is implemented. Most
 single-argument entry points read only the first positional argument; surplus
-arguments are not consistently rejected. `link-toolkit-skills` explicitly
-rejects arguments. `find-skills` does not parse them.
+arguments are not consistently rejected. `link-skills` explicitly
+rejects invalid arguments and missing required modes. `find-skills` does not parse them.
 
-| Command               | Syntax                              | Working-directory / path rule                                     | Mutation                                |
-| --------------------- | ----------------------------------- | ----------------------------------------------------------------- | --------------------------------------- |
-| `find-skills`         | `find-skills`                       | Finds nearest ancestor containing a `.git` file or directory      | None                                    |
-| `init-skill`          | `init-skill <name>`                 | Finds Git root; targets its `skills/`                             | Creates scaffold                        |
-| `init-skill-eval`     | `init-skill-eval <skill-directory>` | Relative paths resolve from current directory                     | Creates eval scaffold                   |
-| `validate-skill`      | `validate-skill <skill-directory>`  | Relative paths resolve from current directory                     | None                                    |
-| `validate-okf`        | `validate-okf <bundle-directory>`   | Relative paths resolve from current directory                     | None                                    |
-| `validate-cff`        | `validate-cff <directory>`          | Relative paths resolve from current directory                     | None                                    |
-| `check-skill`         | See modes below                     | Requires a Git repository                                         | External tools may write eval artifacts |
-| `link-toolkit-skills` | `link-toolkit-skills`               | Current directory is the consuming project root; no parent search | Creates/removes toolkit symlinks        |
+| Command           | Syntax                              | Working-directory / path rule                                     | Mutation                                |
+| ----------------- | ----------------------------------- | ----------------------------------------------------------------- | --------------------------------------- |
+| `find-skills`     | `find-skills`                       | Finds nearest ancestor containing a `.git` file or directory      | None                                    |
+| `init-skill`      | `init-skill <name>`                 | Finds Git root; targets its `skills/`                             | Creates scaffold                        |
+| `init-skill-eval` | `init-skill-eval <skill-directory>` | Relative paths resolve from current directory                     | Creates eval scaffold                   |
+| `validate-skill`  | `validate-skill <skill-directory>`  | Relative paths resolve from current directory                     | None                                    |
+| `validate-okf`    | `validate-okf <bundle-directory>`   | Relative paths resolve from current directory                     | None                                    |
+| `validate-cff`    | `validate-cff <directory>`          | Relative paths resolve from current directory                     | None                                    |
+| `check-skill`     | See modes below                     | Requires a Git repository                                         | External tools may write eval artifacts |
+| `link-skills`     | See modes below                     | Current directory is the consuming project root; no parent search | Creates/removes source-owned symlinks   |
 
 ### `find-skills`
 
@@ -183,21 +183,106 @@ Output reports each skill and check, failures, and skipped checks. Exit codes:
 or more checks failed; `2` missing arguments, repository lookup, invalid skill
 path, or another top-level error. A zero exit does not establish that evals ran.
 
-### `link-toolkit-skills`
+### `link-skills`
 
-Source: `<cwd>/node_modules/agent-skills-toolkit/skills/`.
-Destination: `<cwd>/.agents/skills/`.
+This replaces `link-toolkit-skills` without a deprecated alias. Migrate old
+invocations to `link-skills --toolkit`; no-argument invocation now exits `2`.
 
-Immediate skill directories containing `SKILL.md` receive relative symlinks.
-Correct existing links are unchanged. Stale same-name links into this toolkit's
-skills directory are removed. Files, directories, and foreign links are
-preserved and reported as conflicts. A missing source directory is a successful
-no-op and does not trigger removal of existing links. There is no global mode
-or ancestor lookup.
+Exposes skills from a selected source by creating relative symlinks under
+`<cwd>/.agents/skills/`. Select exactly one source mode:
 
-Output lists linked, unchanged, removed, and conflicting names, or a no-op
-message. Exit codes: `0` completed/no-op; `1` conflicts or operational error;
-`2` any supplied argument.
+| Mode                           | Source                                                 |
+| ------------------------------ | ------------------------------------------------------ |
+| `link-skills --local`          | `<cwd>/skills/`                                        |
+| `link-skills --toolkit`        | `<cwd>/node_modules/agent-skills-toolkit/skills/`      |
+| `link-skills --package <name>` | `<cwd>/node_modules/<name>/skills/`                    |
+| `link-skills --package=<name>` | `<cwd>/node_modules/<name>/skills/` (alternate syntax) |
+
+Accepts unscoped (`name`) or scoped (`@org/name`) package names. Rejects
+filesystem paths, traversal components, absolute paths, versions, or package
+specifiers. Package mode does not download packages or read custom
+skill-directory settings; packages must ship skills as immediate child
+directories under `skills/` containing `SKILL.md`.
+
+**Link behavior across all modes:**
+
+1. Discover only immediate source child directories containing regular `SKILL.md`.
+2. Create relative directory symlinks in the target for discovered skills.
+3. Leave correct existing symlinks to the selected source unchanged.
+4. Preserve as conflicts: existing files, directories, dangling symlinks, or
+   symlinks to other sources.
+5. Remove stale same-name symlinks only when resolving to the matching immediate
+   child of the selected source and that skill is no longer present.
+6. Never remove links belonging to different sources. Local mode does not prune
+   package links; one package does not prune another's links. `--toolkit` and
+   `--package agent-skills-toolkit` select the same source and may clean up the
+   same stale links.
+7. A missing source directory (including missing package or missing `skills/`
+   subdirectory) remains a successful no-op and does not trigger stale-link
+   cleanup.
+8. If source and target resolve to the same directory, fail with an operational
+   error.
+
+Skills from different sources with the same name contend for a single target path.
+Existing links are preserved; conflicts are reported without replacement.
+
+**Usage examples:**
+
+```sh
+link-skills --toolkit
+link-skills --package @example/developer-tools
+link-skills --package example-tools
+link-skills --local
+```
+
+Each invocation selects one source. Combining sources requires separate invocations.
+
+**Package wrapper scripts:**
+
+A downstream package can expose its own wrapper script or package script that
+invokes `link-skills --package @example/package-name` from the consumer root.
+The toolkit's compiled binary supplies linking logic; the downstream package
+supplies its installed name and must include `skills/` in its published package.
+
+A consuming repository can expose an explicit setup script:
+
+```json
+{
+  "scripts": {
+    "link:provider-skills": "link-skills --package @example/package-name"
+  }
+}
+```
+
+Run this script from the consumer root after installing the provider and toolkit.
+Do not put this command in the provider's `postinstall`: dependency lifecycle
+scripts run in the package directory, not the consuming repository root.
+
+The toolkit itself uses local mode in its own `prepare` script:
+
+```json
+{
+  "scripts": {
+    "link:skills": "./scripts/link-skills --local",
+    "prepare": "bun run build && bun run link:skills"
+  }
+}
+```
+
+Build before invoking the compiled executable; package scripts should not assume
+the binary already exists.
+
+Output lists linked, unchanged, removed, and conflicting skill names, with
+wording that identifies the selected source (e.g., `local` or the package name).
+A no-op with no applicable skills emits a clear message.
+
+Exit codes:
+
+- `0`: Successfully completed, including successful no-op.
+- `1`: Conflicts or operational errors. Self-install conflicts propagate a
+  nonzero exit through package scripts.
+- `2`: Invalid arguments, missing required mode, conflicting modes, unknown
+  arguments, or missing package value.
 
 ## Skill-local utilities
 
@@ -290,7 +375,8 @@ These tasks are defined in `package.json`; they are not additional packaged bins
 | `bun run` task                              | Current effect                                                             |
 | ------------------------------------------- | -------------------------------------------------------------------------- |
 | `build`, `build:scripts`                    | Compile root helper entry points to `scripts/`                             |
-| `prepare`                                   | Run build; dependency lifecycle permission is required                     |
+| `prepare`                                   | Build helpers, then link local skills; requires lifecycle permission       |
+| `link:skills`                               | Link checkout-local skills into `.agents/skills/`                          |
 | `bootstrap`                                 | `npm install` and build inside `vendor/agent-skills-eval`                  |
 | `setup`                                     | Install Lefthook hooks, then bootstrap the vendored evaluator              |
 | `test`                                      | Bootstrap, then run `bun test test/scripts/*.test.ts`                      |

@@ -1,5 +1,13 @@
 import { expect, it } from "bun:test";
-import { cp, mkdir, readdir, rm, symlink, writeFile } from "node:fs/promises";
+import {
+  cp,
+  mkdir,
+  readdir,
+  readlink,
+  rm,
+  symlink,
+  writeFile,
+} from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { createTestTempDir } from "./shared/temp-dir.js";
 
@@ -33,6 +41,31 @@ it("prepares helpers from source and exposes them to a devDependency consumer", 
       { cwd: source },
     );
     expect(pack.exitCode, pack.stderr.toString()).toBe(0);
+    expect(await readlink(join(source, ".agents/skills/toolkit-example"))).toBe(
+      "../../skills/toolkit-example",
+    );
+    const relink = Bun.spawnSync([process.execPath, "run", "link:skills"], {
+      cwd: source,
+    });
+    expect(relink.exitCode, relink.stderr.toString()).toBe(0);
+    expect(relink.stdout.toString()).toContain(
+      "Already linked local skill: toolkit-example",
+    );
+    const listing = Bun.spawnSync(["tar", "-tzf", archive]);
+    expect(listing.exitCode).toBe(0);
+    expect(listing.stdout.toString()).not.toContain(".agents/");
+    await rm(join(source, ".agents/skills/toolkit-example"));
+    await writeFile(
+      join(source, ".agents/skills/toolkit-example"),
+      "preserve me",
+    );
+    const conflict = Bun.spawnSync([process.execPath, "run", "prepare"], {
+      cwd: source,
+    });
+    expect(conflict.exitCode).toBe(1);
+    expect(
+      await Bun.file(join(source, ".agents/skills/toolkit-example")).text(),
+    ).toBe("preserve me");
     expect(
       (await readdir(source)).filter((name) => name.endsWith(".bun-build")),
     ).toEqual([]);
@@ -62,9 +95,7 @@ it("prepares helpers from source and exposes them to a devDependency consumer", 
     await mkdir(join(consumer, ".git"));
     await mkdir(join(consumer, "skills"));
     const binary = (name: string) => join(consumer, "node_modules/.bin", name);
-    for (const name of commands.filter(
-      (name) => !["find-skills", "link-toolkit-skills"].includes(name),
-    )) {
+    for (const name of commands.filter((name) => name !== "find-skills")) {
       const result = Bun.spawnSync([binary(name)], { cwd: consumer });
       expect(result.exitCode, `${name}: ${result.stderr}`).toBe(2);
       expect(result.stderr.toString()).toContain("Usage:");
@@ -82,13 +113,46 @@ it("prepares helpers from source and exposes them to a devDependency consumer", 
     );
     expect(validate.exitCode, validate.stderr.toString()).toBe(0);
     expect(validate.stdout.toString()).toContain("Valid skill: example");
-    for (const expected of ["Linked toolkit skill:", "Already linked:"]) {
-      const link = Bun.spawnSync([binary("link-toolkit-skills")], {
+    for (const expected of ["Linked", "Already linked"]) {
+      const link = Bun.spawnSync([binary("link-skills"), "--toolkit"], {
         cwd: consumer,
       });
       expect(link.exitCode, link.stderr.toString()).toBe(0);
-      expect(link.stdout.toString()).toContain(`${expected} toolkit-example`);
+      expect(link.stdout.toString()).toContain(
+        `${expected} agent-skills-toolkit skill: toolkit-example`,
+      );
     }
+    const local = Bun.spawnSync([binary("link-skills"), "--local"], {
+      cwd: consumer,
+    });
+    expect(local.exitCode, local.stderr.toString()).toBe(0);
+    expect(await readlink(join(consumer, ".agents/skills/example"))).toBe(
+      "../../skills/example",
+    );
+    const provider = join(consumer, "node_modules/@example/developer-tools");
+    await mkdir(join(provider, "skills/provider-example"), { recursive: true });
+    await writeFile(
+      join(provider, "skills/provider-example/SKILL.md"),
+      "# Provider example\n",
+    );
+    await writeFile(
+      join(provider, "link.cjs"),
+      `
+      const { spawnSync } = require("node:child_process");
+      process.exit(spawnSync(${JSON.stringify(binary("link-skills"))},
+        ["--package", "@example/developer-tools"], { stdio: "inherit" }).status);
+    `,
+    );
+    const downstream = Bun.spawnSync(
+      [process.execPath, join(provider, "link.cjs")],
+      { cwd: consumer },
+    );
+    expect(downstream.exitCode, downstream.stderr.toString()).toBe(0);
+    expect(
+      await readlink(join(consumer, ".agents/skills/provider-example")),
+    ).toBe(
+      "../../node_modules/@example/developer-tools/skills/provider-example",
+    );
     expect(
       await Bun.file(
         join(consumer, ".agents/skills/toolkit-example/SKILL.md"),

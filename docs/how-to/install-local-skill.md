@@ -90,8 +90,11 @@ later source edits. Review internal symlinks before relying on portability: the
 copy operation preserves symlinks rather than copying their referents.
 
 Always pass both the explicit target and `--source`. Do not substitute
-`link-toolkit-skills` here; that helper links the installed toolkit collection
-from a consuming project's `node_modules`, not this selected local skill.
+`link-skills` here; that command links entire skill collections from installed
+packages or local sources, not individual skills into specific projects. Use
+`link-skills` only when you want to expose all skills from a source in your
+agent's discovery directory. Use `manage-skills install` when you need one
+specific skill in another project.
 
 ## 4. Verify files and installation mode
 
@@ -144,5 +147,6 @@ verification results. For a copy, also record the source revision when available
 so a later update can be compared deliberately. Leave unrelated target skills
 unchanged.
 
-The [CLI reference](../reference/cli-tools.md) contains the full local install
-contract, defaults, and overwrite behavior.
+The [CLI reference](../reference/cli-tools.md) contains the full contract for both
+individual skill installation (`manage-skills`) and collection-level linking
+(`link-skills`).

@@ -137,7 +137,7 @@ The eight packaged helpers divide the mechanical work into narrow contracts:
 | `validate-okf`        | Structural checks on a reference bundle                     |
 | `validate-cff`        | Structural checks on citation metadata                      |
 | `check-skill`         | Coordination and reporting of applicable checks             |
-| `link-toolkit-skills` | Exposure of installed toolkit skills to a consuming project |
+| `link-skills`         | Exposure of installed package and local skills to agent     |
 
 “Automated” does not mean “offline” or “deterministic end to end.” The three
 validators and scaffolding commands do not ask a model to judge content. `check-skill`
