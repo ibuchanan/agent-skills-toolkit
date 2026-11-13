@@ -19,7 +19,7 @@ generated:
 
 ## Learned skills and reflective memory
 
-**Verified:** 11 November 2026. These primary sources describe related but distinct mechanisms. Neither defines the seed's proposed format for short CLI instruction files.
+**Verified:** 11 November 2026. These primary sources describe related but distinct mechanisms. Neither defines the approved local format for single-file CLI or MCP guidance.
 
 ## Voyager — author-maintained project page
 
@@ -45,15 +45,19 @@ Reflexion agents reflect on task feedback and retain reflective text in an episo
 
 ## Mechanism comparison
 
-| Dimension       | Voyager                                | Reflexion                               | Seed's proposed CLI microskills         |
-| --------------- | -------------------------------------- | --------------------------------------- | --------------------------------------- |
-| Stored artifact | Executable skill program               | Reflective text                         | Short instruction file                  |
-| Selection/use   | Similarity retrieval for a task        | Episodic memory informing later trials  | Proposed tool-specific retrieval        |
-| Learning signal | Environment, errors, self-verification | Task feedback and verbal reflection     | Proposed failure diagnosis              |
-| Verified scope  | Minecraft agent experiments            | Framework described in primary abstract | Not directly evaluated by either source |
+| Dimension | Voyager | Reflexion | Approved local capture design |
+| --- | --- | --- | --- |
+| Stored artifact | Executable skill program | Reflective text | Standard Agent Skill containing only `SKILL.md` |
+| Selection/use | Similarity retrieval for a task | Episodic memory informing later trials | Standard skill activation for a coherent tool-use intent and context |
+| Lesson input | Environment, errors, self-verification | Task feedback and verbal reflection | Human-provided or human-selected CLI or MCP lessons; logs optional |
+| Evidence scope | Minecraft agent experiments | Framework described in primary abstract | Local specification; not directly evaluated by either source |
 
 ## Credibility and limits
 
 Both sources are primary accounts of their own systems, not independent validation of the proposed local design. Voyager's author page provides concrete mechanisms and experimental summaries but is also a presentation of the project's successes. Reflexion supplies a closer precedent for textual learning, with limited methodological detail in the inspected abstract. Their 2023 results should not be presented as contemporary CLI benchmarks or evidence of historical priority for all skill-learning architectures.
 
-**Local design proposal, not a source finding:** Durable failure-derived instructions would need validation, scope boundaries, and maintenance beyond merely storing reflective text.
+**Local design decision, not a source finding:** Under the approved [capture-microskill specification](../../capture-microskill.md), the human selects lessons and owns evidence sufficiency. Capture faithfully distills those lessons without requiring successful execution, corroboration, multiple sessions, or another evidence threshold. This authorization policy is distinct from an empirical claim that the resulting guidance is correct or effective. The capture workflow reviews metadata, scope, fidelity, and safety without executing the target tool; evaluation authoring and execution are separate tasks.
+
+## Review update — 12 November 2026
+
+The Voyager author-maintained project page and Reflexion v4 bibliographic record and abstract were rechecked for the mechanisms summarized here. The local-design comparison now reflects the approved human-selected capture workflow rather than the earlier failure-driven seed proposal. This update is not a fresh review of either full paper's experimental methods or an independent reproduction; the original source provenance and evidence limits remain unchanged.

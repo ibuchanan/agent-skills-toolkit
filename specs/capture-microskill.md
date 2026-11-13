@@ -136,6 +136,18 @@ For each microskill:
 It contains no provenance or session narrative. Report created or merged paths
 and any unresolved limitations concisely.
 
+### Artifact review rubric
+
+Apply this rubric when reviewing captured guidance or an authorized merge. These are local authoring policies, not additional research findings or evidence thresholds. Review the artifact without executing the target tool or creating evaluations.
+
+- **Boundary:** Keep one clear tool-use intent and activation context, state relevant exclusions, and distinguish read-only actions from actions requiring write authorization. Split skills only when intent or activation context differs, not merely because operations read or write.
+- **Economy:** Keep only necessary pre-flight checks; do not skip placement guidance, collision checks, or authorization. Prefer compact templates for exact structured inputs over prose descriptions of schemas, without adding unrelated coverage.
+- **Guardrails:** Block relevant failure modes such as invented flags, arguments, defaults, outcomes, or silent installs. Preserve uncertainty and version or environment limits, not capture provenance artifacts. Preserve operational provenance only when it is part of the selected target-operation contract.
+- **Portability:** Keep essential guidance self-contained. Make optional links and environment-dependent dependencies explicit. Use defaults only when supplied or established by the selected lesson or project guidance; otherwise require the input or ask rather than inventing a default.
+- **Hygiene:** Keep Markdown readable and required schemas easy to find. Avoid accidental non-standard whitespace and formatting hazards while preserving meaningful whitespace in examples; follow the host project's wrapping conventions.
+
+When human-selected lessons come from a larger skill, extract one coherent tool-use intent and activation context rather than merely compressing the whole workflow. Retain the necessary syntax and safety constraints, and leave unrelated workflow behind. The human selects or approves the lessons to extract; discovering or ranking candidates remains an adjacent task. Do not delete or refactor the source skill without separate authorization.
+
 ### Evaluation plan
 
 #### Captured microskills

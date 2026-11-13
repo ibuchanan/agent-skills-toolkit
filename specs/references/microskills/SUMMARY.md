@@ -78,8 +78,18 @@ The MicroSkill paper supplies the closest direct definition but only a limited a
 - Search-result summaries and mirror sites were used for discovery only, not as substitutes for original sources.
 - No standalone citation ledger or research report is required for this five-file reference set; per-document frontmatter records provenance.
 
-## Unresolved design questions
+## Approved local design
 
-The reviewed sources do not establish an optimal instruction size, decomposition boundary, retrieval policy, automatic capture threshold, or pruning schedule for CLI microskills. They also do not establish that narrower units outperform a well-designed progressive-disclosure skill on this repository's tasks.
+The approved [capture-microskill specification](../../capture-microskill.md) defines a microskill as a standard skill directory containing only `SKILL.md`, scoped to one coherent tool-use intent and activation context. The human selects the lessons and judges whether their evidence is sufficient; a human-stated lesson is sufficient input, and supporting logs are optional.
 
-**Local design proposals, not research findings:** A future spec could define “microskill” operationally, require validated reusable lessons before durable capture, and compare narrow units against existing skills for routing accuracy, task success, repeated errors, tokens, and latency. These choices remain outside the evidence captured here.
+Single-file output, tool-first naming, grouping by intent, and provenance-free captured guidance are deliberate local decisions, not research findings. Capture does not require successful execution, authoritative corroboration, multiple sessions, or another evidence threshold. The references here inform authoring the capture skill; they are not artifacts to embed in generated microskills.
+
+## Unresolved empirical questions
+
+The reviewed sources do not establish an optimal instruction size or decomposition boundary, or show that narrower units outperform a well-designed progressive-disclosure skill on this repository's tasks. Retrieval policies, automatic capture thresholds, and pruning schedules are not established by these sources and are outside the approved capture workflow.
+
+Comparisons of routing accuracy, task success, repeated errors, tokens, or latency would require separate evaluation. They are not prerequisites for capturing human-selected lessons.
+
+## Review update — 12 November 2026
+
+This update aligns the reference map with the approved local specification while preserving the historical seed-claim assessments above. The live Agent Skills, OpenHands, and Cursor documentation, the Voyager project page, and the Reflexion v4 record and abstract were rechecked for the claims relevant to that specification. The MicroSkill v1 bibliographic record was also rechecked; this update does not constitute a fresh full-paper review or independent reproduction of any research results.

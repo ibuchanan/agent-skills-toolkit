@@ -1,0 +1,34 @@
+[
+  {
+    "id": "cspell",
+    "expected": ["cspell"]
+  },
+  {
+    "id": "human-lesson",
+    "expected": ["widget-inspect"]
+  },
+  {
+    "id": "forge",
+    "expected": ["forge-install", "forge-lint"]
+  },
+  {
+    "id": "collision",
+    "expected": []
+  },
+  {
+    "id": "placement",
+    "expected": []
+  },
+  {
+    "id": "unsafe-log",
+    "expected": ["widget-inspect"]
+  },
+  {
+    "id": "discovery",
+    "expected": []
+  },
+  {
+    "id": "discussion",
+    "expected": []
+  }
+]

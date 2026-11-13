@@ -1,0 +1,135 @@
+$schema: https://promptfoo.dev/config-schema.json
+
+description: capture-microskill approved capture-workflow scenarios (not downstream tool validation).
+
+# Run prepare.mjs before each fresh, single-pass run. Do not repeat in place.
+evaluateOptions:
+  maxConcurrency: 1
+
+providers:
+  - id: anthropic:claude-agent-sdk
+    label: capture-cspell
+    config:
+      model: claude-sonnet-4-6
+      working_dir: ./.work/cspell
+      setting_sources: [project]
+      skills: [capture-microskill]
+      tools:
+        type: preset
+        preset: claude_code
+      custom_allowed_tools: [Read, Glob, Grep, Write, Edit]
+      permission_mode: default
+      persist_session: false
+      max_turns: 20
+  - id: anthropic:claude-agent-sdk
+    label: capture-human-lesson
+    config:
+      model: claude-sonnet-4-6
+      working_dir: ./.work/human-lesson
+      setting_sources: [project]
+      skills: [capture-microskill]
+      tools:
+        type: preset
+        preset: claude_code
+      custom_allowed_tools: [Read, Glob, Grep, Write, Edit]
+      permission_mode: default
+      persist_session: false
+      max_turns: 20
+  - id: anthropic:claude-agent-sdk
+    label: capture-forge
+    config:
+      model: claude-sonnet-4-6
+      working_dir: ./.work/forge
+      setting_sources: [project]
+      skills: [capture-microskill]
+      tools:
+        type: preset
+        preset: claude_code
+      custom_allowed_tools: [Read, Glob, Grep, Write, Edit]
+      permission_mode: default
+      persist_session: false
+      max_turns: 20
+  - id: anthropic:claude-agent-sdk
+    label: capture-collision
+    config:
+      model: claude-sonnet-4-6
+      working_dir: ./.work/collision
+      setting_sources: [project]
+      skills: [capture-microskill]
+      tools:
+        type: preset
+        preset: claude_code
+      custom_allowed_tools: [Read, Glob, Grep, Write, Edit]
+      permission_mode: default
+      persist_session: false
+      max_turns: 20
+  - id: anthropic:claude-agent-sdk
+    label: capture-placement
+    config:
+      model: claude-sonnet-4-6
+      working_dir: ./.work/placement
+      setting_sources: [project]
+      skills: [capture-microskill]
+      tools:
+        type: preset
+        preset: claude_code
+      custom_allowed_tools: [Read, Glob, Grep, Write, Edit]
+      permission_mode: default
+      persist_session: false
+      max_turns: 20
+  - id: anthropic:claude-agent-sdk
+    label: capture-unsafe-log
+    config:
+      model: claude-sonnet-4-6
+      working_dir: ./.work/unsafe-log
+      setting_sources: [project]
+      skills: [capture-microskill]
+      tools:
+        type: preset
+        preset: claude_code
+      custom_allowed_tools: [Read, Glob, Grep, Write, Edit]
+      permission_mode: default
+      persist_session: false
+      max_turns: 20
+  - id: anthropic:claude-agent-sdk
+    label: capture-discovery
+    config:
+      model: claude-sonnet-4-6
+      working_dir: ./.work/discovery
+      setting_sources: [project]
+      skills: [capture-microskill]
+      tools:
+        type: preset
+        preset: claude_code
+      custom_allowed_tools: [Read, Glob, Grep, Write, Edit]
+      permission_mode: default
+      persist_session: false
+      max_turns: 20
+  - id: anthropic:claude-agent-sdk
+    label: capture-discussion
+    config:
+      model: claude-sonnet-4-6
+      working_dir: ./.work/discussion
+      setting_sources: [project]
+      skills: [capture-microskill]
+      tools:
+        type: preset
+        preset: claude_code
+      custom_allowed_tools: [Read, Glob, Grep, Write, Edit]
+      permission_mode: default
+      persist_session: false
+      max_turns: 20
+
+prompts:
+  - prompts/main.txt
+
+tracing:
+  enabled: true
+
+defaultTest:
+  assert:
+    - type: javascript
+      value: file://assertions/artifacts.cjs
+
+tests:
+  - tests/scenarios.yaml
