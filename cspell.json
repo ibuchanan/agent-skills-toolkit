@@ -53,7 +53,8 @@
         "specs/capture-microskill.md",
         "specs/develop-skill.md",
         "specs/references/microskills/**/*",
-        "skills/capture-microskill/**/*"
+        "skills/capture-microskill/**/*",
+        "skills/develop-skill/SKILL.md"
       ],
       "dictionaries": ["microskills"]
     },
@@ -82,6 +83,7 @@
   ],
   "words": [
     "AAID",
+    "SKILLDIR",
     "bunx",
     "Docling",
     "duplicative",

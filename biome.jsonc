@@ -28,6 +28,8 @@
   },
   "linter": {
     "enabled": true,
+    // Generated third-party bundle; lint the editable skills-source.mjs instead.
+    "includes": ["**", "!skills/manage-skills/scripts/skills.mjs"],
     "rules": {
       "preset": "recommended",
       "complexity": {

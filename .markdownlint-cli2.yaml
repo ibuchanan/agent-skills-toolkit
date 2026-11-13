@@ -1,6 +1,7 @@
 globs:
   - "**/*.md"
 ignores:
+  - ".scratch/**"
   - "vendor/**"
   - "node_modules/**"
   - ".agents/**"
