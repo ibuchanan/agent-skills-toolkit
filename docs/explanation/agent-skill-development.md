@@ -98,7 +98,7 @@ The roles overlap at handoff points, but have different centers of responsibilit
 | ------------------------------------ | ----------------------------------------- | ---------------------------------------------------------- |
 | Agree on intended behavior           | `grill-this-skill`                        | Approved `specs/<name>.md`, including an evaluation plan   |
 | Establish supporting evidence        | `research-references`, `ingest-reference` | Curated, provenance-backed references                      |
-| Improve an existing implementation   | `develop-skill`                     | Focused changes to `SKILL.md` and supporting files         |
+| Improve an existing implementation   | `develop-skill`                           | Focused changes to `SKILL.md` and supporting files         |
 | Improve selection behavior           | `describe-skill`                          | A more discriminating trigger description                  |
 | Express the approved evaluation plan | `develop-skill-evals`                     | Promptfoo configuration, prompts, and test cases           |
 | Attribute existing evidence          | `write-citations`                         | `CITATION.cff`                                             |
@@ -128,16 +128,16 @@ output adds variability without adding useful judgment.
 
 The eight packaged helpers divide the mechanical work into narrow contracts:
 
-| Helper                | Place in the loop                                           |
-| --------------------- | ----------------------------------------------------------- |
-| `find-skills`         | Inventory of skill files in a Git repository                |
-| `init-skill`          | Creation of a skill directory and initial template          |
-| `init-skill-eval`     | Creation of the Promptfoo suite skeleton                    |
-| `validate-skill`      | Repository-specific skill frontmatter checks                |
-| `validate-okf`        | Structural checks on a reference bundle                     |
-| `validate-cff`        | Structural checks on citation metadata                      |
-| `check-skill`         | Coordination and reporting of applicable checks             |
-| `link-skills`         | Exposure of installed package and local skills to agent     |
+| Helper            | Place in the loop                                       |
+| ----------------- | ------------------------------------------------------- |
+| `find-skills`     | Inventory of skill files in a Git repository            |
+| `init-skill`      | Creation of a skill directory and initial template      |
+| `init-skill-eval` | Creation of the Promptfoo suite skeleton                |
+| `validate-skill`  | Repository-specific skill frontmatter checks            |
+| `validate-okf`    | Structural checks on a reference bundle                 |
+| `validate-cff`    | Structural checks on citation metadata                  |
+| `check-skill`     | Coordination and reporting of applicable checks         |
+| `link-skills`     | Exposure of installed package and local skills to agent |
 
 “Automated” does not mean “offline” or “deterministic end to end.” The three
 validators and scaffolding commands do not ask a model to judge content. `check-skill`

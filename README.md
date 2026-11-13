@@ -49,7 +49,7 @@ candidate descriptions, not an unapproved edit. See the
 | Define or revise intended behavior                  | [`grill-this-skill`](skills/grill-this-skill/SKILL.md)       |
 | Find and assess authoritative sources               | [`research-references`](skills/research-references/SKILL.md) |
 | Capture and maintain supporting knowledge           | [`ingest-reference`](skills/ingest-reference/SKILL.md)       |
-| Improve an existing skill's instructions            | [`develop-skill`](skills/develop-skill/SKILL.md) |
+| Improve an existing skill's instructions            | [`develop-skill`](skills/develop-skill/SKILL.md)             |
 | Repair missed or incorrect activation               | [`describe-skill`](skills/describe-skill/SKILL.md)           |
 | Turn an approved evaluation plan into tests         | [`develop-skill-evals`](skills/develop-skill-evals/SKILL.md) |
 | Attribute existing reference material               | [`write-citations`](skills/write-citations/SKILL.md)         |

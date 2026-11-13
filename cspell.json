@@ -51,6 +51,7 @@
       "filename": [
         "cspell.json",
         "specs/capture-microskill.md",
+        "specs/develop-skill.md",
         "specs/references/microskills/**/*",
         "skills/capture-microskill/**/*"
       ],

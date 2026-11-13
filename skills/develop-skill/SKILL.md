@@ -88,14 +88,14 @@ an authoring task, identify the need and recommend a handoff while continuing
 independent in-scope work where possible. Do not assume companions are installed;
 if unavailable, describe the required work rather than claiming to invoke them.
 
-| Responsibility | Owner |
-| --- | --- |
-| Define or reconsider intended behavior | `grill-this-skill` |
-| Repair trigger-description behavior | `describe-skill` |
-| Find and assess sources | `research-references` |
-| Acquire and structure reference material | `ingest-reference` |
-| Maintain citation metadata | `write-citations` |
-| Author evaluation artifacts from an approved plan | `develop-skill-evals` |
+| Responsibility                                                         | Owner                                  |
+| ---------------------------------------------------------------------- | -------------------------------------- |
+| Define or reconsider intended behavior                                 | `grill-this-skill`                     |
+| Repair trigger-description behavior                                    | `describe-skill`                       |
+| Find and assess sources                                                | `research-references`                  |
+| Acquire and structure reference material                               | `ingest-reference`                     |
+| Maintain citation metadata                                             | `write-citations`                      |
+| Author evaluation artifacts from an approved plan                      | `develop-skill-evals`                  |
 | Scaffold, install, import, or perform standalone mechanical validation | `manage-skills` and applicable helpers |
 
 New research, reference ingestion, citation metadata, and evaluation artifacts

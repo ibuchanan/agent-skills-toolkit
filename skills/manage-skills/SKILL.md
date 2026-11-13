@@ -96,13 +96,13 @@ Validates required frontmatter fields and directory conventions. Reports clear f
 
 ## Decision guide
 
-| User intent                                   | Subcommand                                   |
-| --------------------------------------------- | -------------------------------------------- |
-| See what skills exist                         | `list`                                       |
-| Create a new skill folder                     | `new`                                        |
-| Make a skill available under `.agents/skills` | `install`                                    |
-| Bring an external skill into this repo        | `import`                                     |
-| Check a skill is structurally valid           | `validate`                                   |
+| User intent                                   | Subcommand                             |
+| --------------------------------------------- | -------------------------------------- |
+| See what skills exist                         | `list`                                 |
+| Create a new skill folder                     | `new`                                  |
+| Make a skill available under `.agents/skills` | `install`                              |
+| Bring an external skill into this repo        | `import`                               |
+| Check a skill is structurally valid           | `validate`                             |
 | Author or improve skill content               | use `skill-creator` or `develop-skill` |
 
 ## Reference material
