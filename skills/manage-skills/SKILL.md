@@ -8,7 +8,7 @@ compatibility: Requires the manage-skills CLI usually installed to `~/.agents/sk
 
 > Paths like `references/...`, `scripts/...`, and `assets/...` in this file are relative to this `SKILL.md`'s directory.
 
-Use this skill to manage local skill definitions, especially when listing, scaffolding, installing, importing, or validating skills. This skill is about creating and managing skill definitions; not about designing a skill's behavior. If the user needs help authoring or iterating on a skill's content after scaffolding, use `develop-agent-skill`.
+Use this skill to manage local skill definitions, especially when listing, scaffolding, installing, importing, or validating skills. This skill is about creating and managing skill definitions; not about designing a skill's behavior. If the user needs help authoring or iterating on a skill's content after scaffolding, use `develop-skill`.
 
 ## Invocation — use the global script with bun
 
@@ -22,7 +22,7 @@ The script defaults `--source` to `packages/agents/src/skills`, so no `--source`
 
 This skill covers operational management of skills under `packages/agents/src/skills`. Supported subcommands: `list`, `new`, `install`, `import`, `validate`.
 
-Not for: writing high-quality skill content from scratch, improving existing skill instructions, or eval design. For those, use `develop-agent-skill`.
+Not for: writing high-quality skill content from scratch, improving existing skill instructions, or eval design. For those, use `develop-skill`.
 
 ## Core workflow
 
@@ -103,7 +103,7 @@ Validates required frontmatter fields and directory conventions. Reports clear f
 | Make a skill available under `.agents/skills` | `install`                                    |
 | Bring an external skill into this repo        | `import`                                     |
 | Check a skill is structurally valid           | `validate`                                   |
-| Author or improve skill content               | use `skill-creator` or `develop-agent-skill` |
+| Author or improve skill content               | use `skill-creator` or `develop-skill` |
 
 ## Reference material
 

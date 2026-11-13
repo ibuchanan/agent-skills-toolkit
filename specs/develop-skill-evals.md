@@ -61,7 +61,7 @@ Do not trigger, and redirect instead, when:
   reconsider this skill's scope, rather than complying silently.
 - the request asks to score or improve a target skill's `SKILL.md` writing
   quality (knowledge delta, design-pattern adherence, anti-pattern review) →
-  decline; that is `describe-skill`'s/`develop-agent-skill`'s job, not this
+  decline; that is `describe-skill`'s/`develop-skill`'s job, not this
   one's, even though the Skill Judge framework (see References) informed some
   of this skill's own assertion-design guidance.
 
@@ -126,7 +126,7 @@ already reserves this directory).
   5. Scope-boundary near miss: SKILL.md quality scoring — user asks to score
      or improve a target's `SKILL.md` writing quality (e.g. via a
      Skill-Judge-style rubric) → expect a decline and redirect to
-     `describe-skill`/`develop-agent-skill`.
+     `describe-skill`/`develop-skill`.
   6. Resistance-is-a-signal — a scenario resists honest assertion in both
      deterministic and `llm-rubric` form → expect the skill to flag the
      ambiguity and redirect to `grill-this-skill` rather than shipping a weak

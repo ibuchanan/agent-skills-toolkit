@@ -89,7 +89,7 @@ have one, rather than treating it as optional coverage.
 
 Everything else in Skill Judge is about judging the quality of a
 `SKILL.md` as _written knowledge_, which is `describe-skill`'s or
-`develop-agent-skill`'s job, not this skill's:
+`develop-skill`'s job, not this skill's:
 
 - The knowledge-delta scan (Expert/Activation/Redundant classification of
   each section) and its core formula ("Good Skill = Expert-only Knowledge

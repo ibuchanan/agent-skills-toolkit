@@ -9,11 +9,11 @@
     "coverage/**",
     ".agents/**",
     ".claude/**",
-    "skills/develop-agent-skill/references/agent-skills-architecture-acquisition-security-path-forward.md",
-    "skills/develop-agent-skill/references/agent-skills-security-vulnerabilities-at-scale.md",
-    "skills/develop-agent-skill/references/skillject-stealthy-skill-prompt-injection.md",
-    "skills/develop-agent-skill/references/skills-are-new-apps-skill-os.md",
-    "skills/develop-agent-skill/references/skillsbench-agent-skills-benchmark.md",
+    "skills/develop-skill/references/agent-skills-architecture-acquisition-security-path-forward.md",
+    "skills/develop-skill/references/agent-skills-security-vulnerabilities-at-scale.md",
+    "skills/develop-skill/references/skillject-stealthy-skill-prompt-injection.md",
+    "skills/develop-skill/references/skills-are-new-apps-skill-os.md",
+    "skills/develop-skill/references/skillsbench-agent-skills-benchmark.md",
     "skills/select-llm/assets/model-catalog.snapshot.json"
   ],
   "dictionaryDefinitions": [

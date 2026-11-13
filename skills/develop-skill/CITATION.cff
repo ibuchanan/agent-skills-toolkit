@@ -1,0 +1,113 @@
+cff-version: 1.2.0
+message: "If you use this skill or its bundled reference materials, please cite it as below."
+title: "Develop Skill"
+type: software
+license: Apache-2.0
+authors:
+  - name: "Ranch Forge contributors"
+abstract: >-
+  A reusable agent skill for improving existing agent skills through inspection,
+  focused revision, validation, and evidence-based iteration.
+keywords:
+  - agent-skills
+  - skill-development
+  - skill-authoring
+  - evaluation
+  - prompt-engineering
+references:
+  - type: software
+    title: "Agent Skills"
+    authors:
+      - name: "Anthropic"
+    repository-code: "https://github.com/agentskills/agentskills"
+    url: "https://agentskills.io"
+    license: "Apache-2.0 AND CC-BY-4.0"
+    notes: >-
+      The develop-skill skill vendors Agent Skills documentation and follows the
+      Agent Skills package model and authoring guidance.
+  - type: article
+    title: "SkillJect: Automating Stealthy Skill-Based Prompt Injection for Coding Agents with Trace-Driven Closed-Loop Refinement"
+    authors:
+      - name: "Xiaojun Jia"
+      - name: "Jie Liao"
+      - name: "Simeng Qin"
+      - name: "Jindong Gu"
+      - name: "Wenqi Ren"
+      - name: "Xiaochun Cao"
+      - name: "Yang Liu"
+      - name: "Philip Torr"
+    year: 2026
+    notes: >-
+      Bundled as references/18_SkillJect_Automating_Stealt.pdf and converted with
+      Docling to references/skillject-stealthy-skill-prompt-injection.md.
+  - type: article
+    title: "Agent Skills in the Wild: An Empirical Study of Security Vulnerabilities at Scale"
+    authors:
+      - name: "Yi Liu"
+      - name: "Weizhe Wang"
+      - name: "Ruitao Feng"
+      - name: "Yao Zhang"
+      - name: "Guangquan Xu"
+      - name: "Gelei Deng"
+      - name: "Yuekang Li"
+      - name: "Leo Zhang"
+    year: 2026
+    doi: "10.48550/arXiv.2601.10338"
+    url: "https://arxiv.org/abs/2601.10338v1"
+    license: CC-BY-4.0
+    notes: >-
+      Bundled as references/2601.10338v1.pdf and converted with Docling to
+      references/agent-skills-security-vulnerabilities-at-scale.md.
+  - type: article
+    title: "Agent Skills for Large Language Models: Architecture, Acquisition, Security, and the Path Forward"
+    authors:
+      - name: "Renjun Xu"
+      - name: "Yang Yan"
+    year: 2026
+    doi: "10.48550/arXiv.2602.12430"
+    url: "https://arxiv.org/abs/2602.12430v3"
+    license: CC-BY-NC-ND-4.0
+    notes: >-
+      Bundled as references/2602.12430v3.pdf and converted with Docling to
+      references/agent-skills-architecture-acquisition-security-path-forward.md.
+  - type: article
+    title: "SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks"
+    authors:
+      - name: "Xiangyi Li"
+      - name: "Wenbo Chen"
+      - name: "Yimin Liu"
+      - name: "Shenghan Zheng"
+      - name: "Xiaokun Chen"
+      - name: "Yifeng He"
+      - name: "Yubo Li"
+      - name: "Bingran You"
+      - name: "Haotian Shen"
+      - name: "Jiankai Sun"
+      - name: "Shuyi Wang"
+      - name: "and others"
+    year: 2026
+    doi: "10.48550/arXiv.2602.12670"
+    url: "https://arxiv.org/abs/2602.12670v3"
+    license: CC-BY-4.0
+    notes: >-
+      Bundled as references/2602.12670v3.pdf and converted with Docling to
+      references/skillsbench-agent-skills-benchmark.md. The PDF metadata contains
+      a longer author list; this citation lists the leading authors and indicates
+      additional coauthors.
+  - type: article
+    title: "Skills Are the New Apps - Now It's Time for Skill OS"
+    authors:
+      - name: "Le Chen"
+      - name: "Zichang Wang"
+      - name: "Wenxin Zheng"
+      - name: "Erhu Feng"
+      - name: "Dong Du"
+      - name: "Yubin Xia"
+      - name: "Haibo Chen"
+    year: 2026
+    doi: "10.20944/preprints202602.1096.v1"
+    url: "https://doi.org/10.20944/preprints202602.1096.v1"
+    license: CC-BY-4.0
+    notes: >-
+      Bundled as references/preprints202602.1096.v1.pdf and converted with
+      Docling to references/skills-are-new-apps-skill-os.md.

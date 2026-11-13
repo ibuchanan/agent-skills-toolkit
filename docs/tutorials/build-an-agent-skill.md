@@ -106,7 +106,7 @@ rather than a copied page with no origin.
 
 Send:
 
-> Read `skills/develop-agent-skill/SKILL.md` and use it to replace the
+> Read `skills/develop-skill/SKILL.md` and use it to replace the
 > placeholders in `skills/draft-change-note/SKILL.md`. Implement the approved
 > `specs/draft-change-note.md`, preserve the reference loading trigger, and
 > keep the instructions focused on drafting from supplied facts. Do not change

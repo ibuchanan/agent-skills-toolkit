@@ -175,7 +175,7 @@ Live runs can use credentials, contact model providers, incur charges, and
 write artifacts. There is no static-only flag.
 
 `check-skill`'s PromptLint invocation is not the same as the `score` and
-`security` subcommands prescribed by `develop-agent-skill`; compatibility
+`security` subcommands prescribed by `develop-skill`; compatibility
 depends on the installed tool interface.
 
 Output reports each skill and check, failures, and skipped checks. Exit codes:
@@ -354,16 +354,16 @@ parsing errors return `2`; uncaught runtime failures are not normalized.
 
 ## Third-party tools at the boundaries
 
-| Tool                                              | Role / local integration                                                                | Contract source                                                                            |
-| ------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| External Skills CLI (`npx skills`, `bunx skills`) | Git-based skill discovery and installation; unrelated to the local `skills.mjs` command | [Skills CLI](https://github.com/vercel-labs/skills)                                        |
-| PromptLint                                        | Static prompt scoring/security feedback; also invoked by `check-skill`                  | Installed command help; [`develop-agent-skill`](../../skills/develop-agent-skill/SKILL.md) |
-| Promptfoo                                         | Executes configured model evaluations; not installed by root dependencies               | [Promptfoo](https://www.promptfoo.dev/docs/intro/)                                         |
-| Vendored `agent-skills-eval`                      | Separate evaluator for existing skill-named YAML suites                                 | [Vendored README](../../vendor/agent-skills-eval/README.md)                                |
-| Firecrawl                                         | External web acquisition used by ingestion guidance                                     | [`ingest-reference`](../../skills/ingest-reference/SKILL.md)                               |
-| Docling                                           | External document extraction used by ingestion guidance                                 | [`ingest-reference`](../../skills/ingest-reference/SKILL.md)                               |
-| Git                                               | Repository identity, version history, submodule pinning                                 | [Git documentation](https://git-scm.com/docs)                                              |
-| Bun                                               | Dependency installation, TypeScript execution, native helper compilation, tests         | [`package.json`](../../package.json)                                                       |
+| Tool                                              | Role / local integration                                                                | Contract source                                                                |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| External Skills CLI (`npx skills`, `bunx skills`) | Git-based skill discovery and installation; unrelated to the local `skills.mjs` command | [Skills CLI](https://github.com/vercel-labs/skills)                            |
+| PromptLint                                        | Static prompt scoring/security feedback; also invoked by `check-skill`                  | Installed command help; [`develop-skill`](../../skills/develop-skill/SKILL.md) |
+| Promptfoo                                         | Executes configured model evaluations; not installed by root dependencies               | [Promptfoo](https://www.promptfoo.dev/docs/intro/)                             |
+| Vendored `agent-skills-eval`                      | Separate evaluator for existing skill-named YAML suites                                 | [Vendored README](../../vendor/agent-skills-eval/README.md)                    |
+| Firecrawl                                         | External web acquisition used by ingestion guidance                                     | [`ingest-reference`](../../skills/ingest-reference/SKILL.md)                   |
+| Docling                                           | External document extraction used by ingestion guidance                                 | [`ingest-reference`](../../skills/ingest-reference/SKILL.md)                   |
+| Git                                               | Repository identity, version history, submodule pinning                                 | [Git documentation](https://git-scm.com/docs)                                  |
+| Bun                                               | Dependency installation, TypeScript execution, native helper compilation, tests         | [`package.json`](../../package.json)                                           |
 
 Third-party option sets and provider credentials are governed by their installed
 versions, not by the toolkit helper contract.

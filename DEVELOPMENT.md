@@ -81,7 +81,7 @@ of silently broadening the implementation.
 
 ### 3. Make a focused edit
 
-Use `develop-agent-skill` for existing instruction changes, `describe-skill` for
+Use `develop-skill` for existing instruction changes, `describe-skill` for
 a description-only repair, and `write-citations` for metadata derived from
 existing references. Preserve each skill's approval boundaries.
 

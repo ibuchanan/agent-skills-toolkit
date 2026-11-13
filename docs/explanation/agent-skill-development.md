@@ -98,7 +98,7 @@ The roles overlap at handoff points, but have different centers of responsibilit
 | ------------------------------------ | ----------------------------------------- | ---------------------------------------------------------- |
 | Agree on intended behavior           | `grill-this-skill`                        | Approved `specs/<name>.md`, including an evaluation plan   |
 | Establish supporting evidence        | `research-references`, `ingest-reference` | Curated, provenance-backed references                      |
-| Improve an existing implementation   | `develop-agent-skill`                     | Focused changes to `SKILL.md` and supporting files         |
+| Improve an existing implementation   | `develop-skill`                     | Focused changes to `SKILL.md` and supporting files         |
 | Improve selection behavior           | `describe-skill`                          | A more discriminating trigger description                  |
 | Express the approved evaluation plan | `develop-skill-evals`                     | Promptfoo configuration, prompts, and test cases           |
 | Attribute existing evidence          | `write-citations`                         | `CITATION.cff`                                             |
